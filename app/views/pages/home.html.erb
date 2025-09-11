@@ -1,0 +1,606 @@
+    <!-- Header -->
+    <header class="header">
+        <nav class="navbar navbar-expand-lg navbar-light bg-white fixed-top shadow-sm" data-controller="navbar">
+            <div class="container">
+                <a class="navbar-brand d-flex align-items-center" href="#">
+                    <%= image_tag "logo.png", alt: "MailerAction Logo", width: "40", height: "40", class: "me-2" %>
+                    <%= image_tag "texto_logo.png", alt: "MailerAction", width: "150" %>           
+                </a>
+                
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation" data-navbar-target="toggler">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                
+                <div class="collapse navbar-collapse" id="navbarNav" data-navbar-target="collapse">
+                    <ul class="navbar-nav ms-auto">
+                        <li class="nav-item">
+                            <a class="nav-link fw-semibold" href="#features" data-action="click->navbar#handleNavClick">Características</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link fw-semibold" href="#process" data-action="click->navbar#handleNavClick">Proceso</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link fw-semibold" href="#results" data-action="click->navbar#handleNavClick">Resultados</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link fw-semibold" href="#contact" data-action="click->navbar#handleNavClick">Contacto</a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </nav>
+    </header>
+
+    <!-- Hero Section - Nuevo diseño -->
+    <section class="hero">
+        <div class="hero-content">
+            <div class="hero-text">
+                <h1>Tu campaña<span> en la bandeja correcta</span></h1>
+                <p>MailerAction utiliza inteligencia artificial para identificar clientes interesados en tu producto y enviar campañas personalizadas según sus intereses, preferencias y estado de ánimo.</p>
+                <div class="hero-buttons">
+                    <a href="#contact" class="btn btn-primary">Comenzar Ahora</a>
+                    <a href="#how-it-works" class="btn btn-accent">Saber Más</a>
+                </div>
+            </div>
+            <div class="hero-image">
+                <%= image_tag "campana_bandeja_correcta_sofisticada_rectangular_sin_texto_refinada.png", alt: "MailerAction - Email Marketing Inteligente" %>
+                
+                <div class="floating-card">
+                    <i class="fas fa-smile"></i>
+                    <div>
+                        <p>Análisis de estado de ánimo</p>
+                        <small>Precisión del 92%</small>
+                    </div>
+                </div>
+                <div class="floating-card">
+                    <i class="fas fa-chart-line"></i>
+                    <div>
+                        <p>+65% conversiones</p>
+                        <small>Clientes satisfechos</small>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Features Section -->
+    <section id="features" class="features">
+        <div class="container">
+            <div class="section-header">
+                <h2 class="section-title">¿Qué nos hace diferentes?</h2>
+                <p class="section-description">
+                    Más que informar, buscamos generar conexión. Cada campaña se adapta dinámicamente 
+                    al contexto emocional del destinatario.
+                </p>
+            </div>
+            <div class="features-grid">
+                <div class="feature-card">
+                    <div class="feature-icon">
+<lord-icon
+    src="https://cdn.lordicon.com/ifyskbjd.json"
+    trigger="loop"
+    delay="2000"
+    stroke="bold"
+    style="width:55px;height:55px">
+</lord-icon>
+                    </div>
+                    <h3 class="feature-title">Segmentación Inteligente</h3>
+                    <p class="feature-description">
+                        Identificamos audiencias con alta intención de conversión mediante análisis avanzado 
+                        de intereses, patrones de compra y señales contextuales.
+                    </p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <lord-icon
+                            src="https://cdn.lordicon.com/wyaqzesp.json"
+                            trigger="loop"
+                            delay="2000"
+                            stroke="bold"
+                            state="hover-roll"
+                            style="width:55px;height:55px">
+                        </lord-icon>
+                    </div>
+                    <h3 class="feature-title">Inteligencia Comercial Predictiva</h3>
+                    <p class="feature-description">
+                        Clasificamos leads automáticamente, enriquecemos tu CRM y generamos contenido 
+                        personalizado que evoluciona con cada interacción.
+                    </p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <lord-icon
+                            src="https://cdn.lordicon.com/qgsvakyp.json"
+                            trigger="loop"
+                            state="loop-cycle"
+                            style="width:55px;height:55px">
+                        </lord-icon>
+                    </div>
+                    <h3 class="feature-title">Análisis de Sentimiento Previo</h3>
+                    <p class="feature-description">
+                        Evaluamos el estado emocional del destinatario antes del envío, ajustando tono, 
+                        mensaje y timing para maximizar conexión y engagement.
+                    </p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <lord-icon
+                            src="https://cdn.lordicon.com/zvamcipt.json"
+                            trigger="loop"
+                            delay="2000"
+                            stroke="bold"
+                            style="width:55px;height:55px">
+                        </lord-icon>
+                    </div>
+                    <h3 class="feature-title">Donde la IA Encuentra el Momento Perfecto</h3>
+                    <p class="feature-description">
+                        Analizamos el estado emocional de  
+cada cliente antes de enviar cualquier 
+email. Nuestra IA detecta el momento 
+exacto donde están más receptivos a 
+tu mensaje. 
+                    </p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <lord-icon
+                            src="https://cdn.lordicon.com/vbmknakc.json"
+                            trigger="loop"
+                            delay="2000"
+                            stroke="bold"
+                            style="width:55px;height:55px">
+                        </lord-icon>
+                    </div>
+                    <h3 class="feature-title">Optimización Continua</h3>
+                    <p class="feature-description">
+                        Medimos impacto emocional y retorno de inversión en tiempo real. Nuestra IA 
+                        aprende de cada campaña y mejora automáticamente la siguiente.
+                    </p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">
+<lord-icon
+    src="https://cdn.lordicon.com/wepoiyzv.json"
+    trigger="loop"
+    delay="2000"
+    stroke="bold"
+    style="width:55px;height:55px">
+</lord-icon>
+                    </div>
+                    <h3 class="feature-title">500M+ Perfiles Analizados</h3>
+                    <p class="feature-description">
+                        Nuestra tecnología ha procesado más de 500 millones de perfiles mediante 
+                        agentes autónomos, garantizando precisión y escalabilidad.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Process Section -->
+    <section id="process" class="process">
+        <div class="container">
+            <div class="section-header">
+                <h2 class="section-title">Proceso Inteligente</h2>
+                <p class="section-description">Un flujo optimizado que convierte datos en decisiones y emociones en resultados</p>
+            </div>
+            <div class="process-timeline">
+                <div class="process-step">
+                    <div class="step-number">1</div>
+                    <div class="step-content">
+                        <h3 class="step-title">Captación</h3>
+                        <p class="step-description">
+                            Recopilamos y organizamos datos relevantes para construir audiencias 
+                            segmentadas con alta intención de conversión.
+                        </p>
+                    </div>
+                </div>
+                <div class="process-step">
+                    <div class="step-number">2</div>
+                    <div class="step-content">
+                        <h3 class="step-title">Enriquecimiento</h3>
+                        <p class="step-description">
+                            Analizamos intereses, patrones de compra y señales contextuales para 
+                            crear perfiles dinámicos y predictivos.
+                        </p>
+                    </div>
+                </div>
+                <div class="process-step">
+                    <div class="step-number">3</div>
+                    <div class="step-content">
+                        <h3 class="step-title">Análisis Emocional Previo</h3>
+                        <p class="step-description">
+                            Evaluamos el estado emocional de cada segmento antes del envío, ajustando 
+                            contenido, tono y timing para lograr mayor conexión.
+                        </p>
+                    </div>
+                </div>
+                <div class="process-step">
+                    <div class="step-number">4</div>
+                    <div class="step-content">
+                        <h3 class="step-title">Activación</h3>
+                        <p class="step-description">
+                            Ejecutamos campañas personalizadas que se adaptan al perfil y contexto 
+                            emocional de cada destinatario.
+                        </p>
+                    </div>
+                </div>
+                <div class="process-step">
+                    <div class="step-number">5</div>
+                    <div class="step-content">
+                        <h3 class="step-title">Optimización</h3>
+                        <p class="step-description">
+                            Medimos impacto y ROI, ajustando automáticamente las estrategias para 
+                            mejorar resultados en cada iteración.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    <!-- Results Section -->
+    <section id="results" class="results">
+        <div class="container">
+            <div class="section-header">
+                <h2 class="section-title">Resultados que Hablan</h2>
+                <p class="section-description">
+                    MailerAction no solo envía correos. Conecta, interpreta y transforma cada 
+                    interacción en una oportunidad de conversión.
+                </p>
+            </div>
+            <div class="results-grid">
+                <div class="result-card">
+                    <div class="result-icon">
+<lord-icon
+    src="https://cdn.lordicon.com/zcpmxjfa.json"
+    trigger="loop"
+    delay="2000"
+    stroke="bold"
+    style="width:60px;height:60px">
+</lord-icon>
+                    </div>
+                    <div class="result-number">+89%</div>
+                    <div class="result-label">Tasa de Engagement</div>
+                    <p class="result-description">
+                        Incremento promedio en la tasa de engagement gracias al análisis 
+                        emocional y timing optimizado.
+                    </p>
+                </div>
+                <div class="result-card">
+                    <div class="result-icon">
+<lord-icon
+    src="https://cdn.lordicon.com/ckdooote.json"
+    trigger="loop"
+    delay="2000"
+    stroke="bold"
+    style="width:60px;height:60px">
+</lord-icon>
+                    </div>
+                    <div class="result-number">+63%</div>
+                    <div class="result-label">Conversiones</div>
+                    <p class="result-description">
+                        Aumento en conversiones mediante segmentación inteligente y 
+                        personalización predictiva.
+                    </p>
+                </div>
+                <div class="result-card">
+                    <div class="result-icon">
+<lord-icon
+    src="https://cdn.lordicon.com/zluevvdn.json"
+    trigger="loop"
+    delay="2000"
+    stroke="bold"
+    style="width:60px;height:60px">
+</lord-icon>
+                    </div>
+                    <div class="result-number">-75%</div>
+                    <div class="result-label">Costos de Adquisición</div>
+                    <p class="result-description">
+                        Reducción significativa en costos gracias a la automatización 
+                        inteligente y targeting preciso.
+                    </p>
+                </div>
+                <div class="result-card">
+                    <div class="result-icon">
+<lord-icon
+    src="https://cdn.lordicon.com/wepoiyzv.json"
+    trigger="loop"
+    delay="2000"
+    stroke="bold"
+    style="width:60px;height:60px">
+</lord-icon>
+                    </div>
+                    <div class="result-number">500M+</div>
+                    <div class="result-label">Perfiles Analizados</div>
+                    <p class="result-description">
+                        Más de 500 millones de perfiles procesados por nuestros 
+                        agentes autónomos de IA.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Testimonials Section -->
+    <section id="testimonials" class="testimonials">
+        <div class="container">
+            <div class="section-header">
+                <h2 class="section-title">Lo que dicen nuestros clientes</h2>
+                <p class="section-description">Muchas empresas confían en nuestras soluciones.</p>
+            </div>
+            <div class="testimonials-grid">
+                <div class="testimonial-card">
+                    <p class="testimonial-quote">
+                        <i class="fas fa-quote-left"></i>
+                        "MailerAction transformó completamente nuestra estrategia de marketing. Hemos aumentado nuestras conversiones en un 40% en solo tres meses."
+                    </p>
+                    <div class="testimonial-user">
+                        <div class="testimonial-avatar">MC</div>
+                        <div class="testimonial-meta">
+                            <span class="testimonial-name">María Cortez</span>
+                            <span class="testimonial-role">Directora de Marketing, TechSolutions</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="testimonial-card">
+                    <p class="testimonial-quote">
+                        <i class="fas fa-quote-left"></i>
+                        "La segmentación predictiva es brillante. Disminuimos el CAC y elevamos el LTV sin incrementar el presupuesto."
+                    </p>
+                    <div class="testimonial-user">
+                        <div class="testimonial-avatar">JA</div>
+                        <div class="testimonial-meta">
+                            <span class="testimonial-name">Javier Andrade</span>
+                            <span class="testimonial-role">CEO, RetailNova</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="testimonial-card">
+                    <p class="testimonial-quote">
+                        <i class="fas fa-quote-left"></i>
+                        "El análisis emocional previo cambió el juego. Ahora enviamos el mensaje correcto en el momento perfecto."
+                    </p>
+                    <div class="testimonial-user">
+                        <div class="testimonial-avatar">LG</div>
+                        <div class="testimonial-meta">
+                            <span class="testimonial-name">Laura Gómez</span>
+                            <span class="testimonial-role">Head of Growth, FinTechPro</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- FAQ Section -->
+    <section class="faq" id="faq">
+        <div class="container">
+
+            <div class="section-title">
+                <h2>Preguntas Frecuentes</h2>
+                <p style="font-size: 1.125rem !important; font-weight: 400; color: var(--text-secondary);
+    ">Resolvemos tus dudas más comunes</p>
+            </div>
+            <div class="accordion" id="faqAccordion">
+                <div class="accordion-item">
+                    <h2 class="accordion-header" id="headingOne">
+                        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne" aria-expanded="false" aria-controls="collapseOne">
+                            ¿Cómo funciona el análisis emocional de los clientes?
+                        </button>
+                    </h2>
+                    <div id="collapseOne" class="accordion-collapse collapse" aria-labelledby="headingOne" data-bs-parent="#faqAccordion">
+                        <div class="accordion-body">
+                            Nuestra IA analiza el estado de ánimo, contexto y comportamiento de cada cliente en tiempo real. Utilizamos algoritmos avanzados de procesamiento de lenguaje natural y análisis de patrones para determinar el momento óptimo de envío, garantizando que cada email llegue cuando el cliente esté más receptivo.
+                        </div>
+                    </div>
+                </div>
+                <div class="accordion-item">
+                    <h2 class="accordion-header" id="headingTwo">
+                        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
+                            ¿Qué tan precisa es la predicción de timing?
+                        </button>
+                    </h2>
+                    <div id="collapseTwo" class="accordion-collapse collapse" aria-labelledby="headingTwo" data-bs-parent="#faqAccordion">
+                        <div class="accordion-body">
+                            Nuestro sistema tiene una precisión del 92% en la predicción del momento óptimo de envío. La IA aprende continuamente de cada campaña, mejorando automáticamente las predicciones futuras. Esto se traduce en un aumento promedio del 40% en las tasas de conversión.
+                        </div>
+                    </div>
+                </div>
+                <div class="accordion-item">
+                    <h2 class="accordion-header" id="headingThree">
+                        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
+                            ¿Qué tipos de datos analiza la IA para predecir el timing?
+                        </button>
+                    </h2>
+                    <div id="collapseThree" class="accordion-collapse collapse" aria-labelledby="headingThree" data-bs-parent="#faqAccordion">
+                        <div class="accordion-body">
+                            <h4>Datos de Comportamiento Digital:</h4>
+                            <ul>
+                                <li><strong>Patrones de navegación web:</strong> Páginas visitadas, tiempo en sitio, rutas de navegación</li>
+                                <li><strong>Interacciones con emails:</strong> Aperturas, clics, tiempo de lectura, dispositivos utilizados</li>
+                                <li><strong>Actividad en redes sociales:</strong> Engagement, horarios de mayor actividad, tipos de contenido consumido</li>
+                                <li><strong>Comportamiento en aplicaciones:</strong> Uso de apps móviles, notificaciones abiertas, patrones de uso</li>
+                            </ul>
+
+                            <h4>Datos Contextuales y Temporales:</h4>
+                            <ul>
+                                <li><strong>Zona horaria y ubicación geográfica:</strong> Para enviar en horarios óptimos locales</li>
+                                <li><strong>Día de la semana y hora:</strong> Patrones de receptividad según el momento</li>
+                                <li><strong>Estacionalidad:</strong> Comportamientos específicos por temporadas o eventos</li>
+                                <li><strong>Ciclos de trabajo:</strong> Horarios laborales, días festivos, vacaciones</li>
+                            </ul>
+
+                            <h4>Datos de Engagement Histórico:</h4>
+                            <ul>
+                                <li><strong>Respuesta a campañas anteriores:</strong> Qué tipo de contenido genera más interacción</li>
+                                <li><strong>Frecuencia de apertura:</strong> Patrones de cuándo abren emails</li>
+                                <li><strong>Tiempo de respuesta:</strong> Velocidad de respuesta a diferentes tipos de mensajes</li>
+                                <li><strong>Preferencias de contenido:</strong> Temas, formatos y tonos que más resuenan</li>
+                            </ul>
+
+                            <h4>Indicadores Emocionales:</h4>
+                            <ul>
+                                <li><strong>Tono de respuestas:</strong> Análisis de sentimientos en interacciones previas</li>
+                                <li><strong>Nivel de urgencia:</strong> Cómo reaccionan a diferentes tipos de llamadas a la acción</li>
+                                <li><strong>Estado de ánimo digital:</strong> Patrones de actividad que indican receptividad</li>
+                                <li><strong>Nivel de estrés:</strong> Basado en patrones de comportamiento y respuesta</li>
+                            </ul>
+
+                            <h4>Datos de Contexto Empresarial:</h4>
+                            <ul>
+                                <li><strong>Ciclos de compra:</strong> Dónde se encuentra en el proceso de decisión</li>
+                                <li><strong>Eventos corporativos:</strong> Fusiones, adquisiciones, cambios de liderazgo</li>
+                                <li><strong>Temporadas de presupuesto:</strong> Cuándo las empresas están más abiertas a inversiones</li>
+                                <li><strong>Indicadores de crecimiento:</strong> Expansión, contrataciones, nuevos proyectos</li>
+                            </ul>
+
+                            <h4>Datos Predictivos Avanzados:</h4>
+                            <ul>
+                                <li><strong>Probabilidad de apertura:</strong> Basada en patrones históricos y contexto actual</li>
+                                <li><strong>Momento óptimo de seguimiento:</strong> Cuándo es más probable que respondan</li>
+                                <li><strong>Tipo de mensaje ideal:</strong> Formato, longitud y tono más efectivo</li>
+                                <li><strong>Canal preferido:</strong> Email, SMS, llamada, o reunión virtual</li>
+                            </ul>
+
+                            <h4>Ventajas sobre Herramientas Tradicionales:</h4>
+                            <ul>
+                                <li><strong>Análisis en tiempo real:</strong> No solo datos históricos, sino estado actual</li>
+                                <li><strong>Aprendizaje continuo:</strong> La IA mejora con cada interacción</li>
+                                <li><strong>Predicción emocional:</strong> Va más allá de datos demográficos básicos</li>
+                                <li><strong>Personalización extrema:</strong> Cada cliente tiene su perfil único de timing</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                <div class="accordion-item">
+                    <h2 class="accordion-header" id="headingFour">
+                        <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapseFour" aria-expanded="true" aria-controls="collapseFour">
+                            ¿Puedo cancelar en cualquier momento?
+                        </button>
+                    </h2>
+                    <div id="collapseFour" class="accordion-collapse collapse show" aria-labelledby="headingFour" data-bs-parent="#faqAccordion">
+                        <div class="accordion-body">
+                            Sí, puedes cancelar tu suscripción en cualquier momento sin cargos por cancelación. Tendrás acceso hasta el final del periodo facturado. No hay compromisos a largo plazo ni cargos ocultos.
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA Section -->
+    <section class="cta">
+        <div class="container">
+            <div class="cta-content">
+                <h2 class="cta-title">
+                    Transforma tu Email Marketing con IA Emocional
+                </h2>
+                <p class="cta-description">
+                    Únete a las empresas que ya están revolucionando sus campañas con 
+                    MailerAction. Convierte datos en decisiones y emociones en resultados.
+                </p>
+                <div class="cta-buttons">
+                    <button class="btn-primary">Comenzar Prueba Gratuita</button>
+                    <button class="btn-secondary">Solicitar Demo</button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer id="contact" class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-brand">
+                    <div class="footer-logo">
+                        <%= image_tag "logo.png", alt: "MailerAction Logo", width: "40", height: "40" %>
+                        <%= image_tag "blanco2_texto_logo.png", alt: "MailerAction", width: "150" %>  
+
+                    </div>
+                    <p class="footer-description">
+                        Email Marketing Inteligente con IA Predictiva y Emocional. 
+                        Conectamos marcas con personas a través de la tecnología más avanzada.
+                    </p>
+                </div>
+                <div class="footer-links">
+                    <div class="footer-column">
+                        <h4>Producto</h4>
+                        <a href="#features">Características</a>
+                        <a href="#process">Proceso</a>
+                        <a href="#results">Resultados</a>
+                        <a href="#">Precios</a>
+                    </div>
+                    <div class="footer-column">
+                        <h4>Empresa</h4>
+                        <a href="#">Acerca de</a>
+                        <a href="#">Blog</a>
+                        <a href="#">Carreras</a>
+                        <a href="#">Contacto</a>
+                    </div>
+                    <div class="footer-column">
+                        <h4>Soporte</h4>
+                        <a href="#">Centro de Ayuda</a>
+                        <a href="#">Documentación</a>
+                        <a href="#">API</a>
+                        <a href="#">Estado del Servicio</a>
+                    </div>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2025 MailerAction. Todos los derechos reservados.</p>
+                <div class="footer-social">
+                    <a href="#">
+                        <lord-icon
+                            src="https://cdn.lordicon.com/mfgntcqv.json"
+                            trigger="loop"
+                            delay="2000"
+                            stroke="bold"
+                            style="width:25px;height:25px">
+                        </lord-icon>
+                    </a>
+                    <a href="#">
+                        <lord-icon
+                            src="https://cdn.lordicon.com/yxpgekdi.json"
+                            trigger="loop"
+                            delay="2000"
+                            stroke="bold"
+                            style="width:25px;height:25px">
+                        </lord-icon>
+                    </a>
+                    <a href="#">
+                        <lord-icon
+                            src="https://cdn.lordicon.com/bnzbstbp.json"
+                            trigger="loop"
+                            delay="2000"
+                            stroke="bold"
+                            style="width:25px;height:25px">
+                        </lord-icon>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </footer>
