@@ -9,6 +9,10 @@ Rails.application.routes.draw do
   
   # Test email route
   get "test_email" => "test#send_test_email"
+  
+  # Contact form routes
+  get "contact" => "pages#contact"
+  post "contact" => "pages#submit_contact"
 
   # Render dynamic PWA files from app/views/pwa/* (remember to link manifest in application.html.erb)
   # get "manifest" => "rails/pwa#manifest", as: :pwa_manifest

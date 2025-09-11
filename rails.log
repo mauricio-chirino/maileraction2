@@ -1,0 +1,37 @@
+nohup: ignoring input
+=> Booting Puma
+=> Rails 8.0.2.1 application starting in production 
+=> Run `bin/rails server --help` for more startup options
+Puma starting in single mode...
+* Puma version: 7.0.1 ("Romantic Warrior")
+* Ruby version: ruby 3.2.3 (2024-01-18 revision 52bb2ac0a6) [x86_64-linux]
+*  Min threads: 3
+*  Max threads: 3
+*  Environment: production
+*          PID: 1185507
+* Listening on http://0.0.0.0:3002
+Use Ctrl-C to stop
+[e721c95e-bb00-4c8a-a4b6-8ae4dc188494] Started GET "/" for 127.0.0.1 at 2025-09-11 02:04:37 -0300
+[e721c95e-bb00-4c8a-a4b6-8ae4dc188494] Processing by PagesController#home as HTML
+[e721c95e-bb00-4c8a-a4b6-8ae4dc188494]   Rendered layout layouts/application.html.erb (Duration: 12.7ms | GC: 0.9ms)
+[e721c95e-bb00-4c8a-a4b6-8ae4dc188494] Completed 200 OK in 25ms (Views: 13.9ms | ActiveRecord: 0.0ms (0 queries, 0 cached) | GC: 6.9ms)
+[8be3c895-c538-44b1-9a6d-40df37f8de8c] Started GET "/assets/controllers/navbar_controller" for 127.0.0.1 at 2025-09-11 02:04:37 -0300
+[8be3c895-c538-44b1-9a6d-40df37f8de8c]   
+[8be3c895-c538-44b1-9a6d-40df37f8de8c] ActionController::RoutingError (No route matches [GET] "/assets/controllers/navbar_controller"):
+[8be3c895-c538-44b1-9a6d-40df37f8de8c]   
+[1469eaea-0176-423c-a812-0afee8b27a43] Started HEAD "/" for 178.156.153.157 at 2025-09-11 02:04:39 -0300
+[1469eaea-0176-423c-a812-0afee8b27a43] Processing by PagesController#home as */*
+[1469eaea-0176-423c-a812-0afee8b27a43]   Rendered layout layouts/application.html.erb (Duration: 2.1ms | GC: 0.0ms)
+[1469eaea-0176-423c-a812-0afee8b27a43] Completed 200 OK in 4ms (Views: 2.9ms | ActiveRecord: 0.0ms (0 queries, 0 cached) | GC: 0.0ms)
+[cba130d1-004b-46a0-8d4d-45914fc7c2f5] Started GET "/" for 191.112.127.231 at 2025-09-11 02:04:47 -0300
+[cba130d1-004b-46a0-8d4d-45914fc7c2f5] Processing by PagesController#home as HTML
+[cba130d1-004b-46a0-8d4d-45914fc7c2f5]   Rendered layout layouts/application.html.erb (Duration: 1.9ms | GC: 0.0ms)
+[cba130d1-004b-46a0-8d4d-45914fc7c2f5] Completed 200 OK in 4ms (Views: 2.5ms | ActiveRecord: 0.0ms (0 queries, 0 cached) | GC: 0.3ms)
+[066847b5-978b-43c8-a6a6-c133ed626a31] Started GET "/assets/controllers/navbar_controller" for 191.112.127.231 at 2025-09-11 02:04:48 -0300
+[066847b5-978b-43c8-a6a6-c133ed626a31]   
+[066847b5-978b-43c8-a6a6-c133ed626a31] ActionController::RoutingError (No route matches [GET] "/assets/controllers/navbar_controller"):
+[066847b5-978b-43c8-a6a6-c133ed626a31]   
+- Gracefully stopping, waiting for requests to finish
+=== puma shutdown: 2025-09-11 02:05:08 -0300 ===
+- Goodbye!
+Exiting
