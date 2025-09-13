@@ -7,32 +7,52 @@
     
     <div class="contact-content">
       <div class="contact-form-container">
-        <form action="<%= contact_path %>" method="post" class="contact-form">
-          <%= csrf_meta_tags %>
+        <form action="<%= contact_path %>" method="post" class="contact-form" id="contactForm">
+          <%= hidden_field_tag :authenticity_token, form_authenticity_token %>
           
           <div class="form-group">
             <label for="name">Nombre completo *</label>
-            <input type="text" id="name" name="name" required>
+            <div class="input-container">
+              <input type="text" id="name" name="name" maxlength="50" required placeholder="Ingresa tu nombre completo">
+              <span class="help-text" id="name-help">Ingresa tu nombre completo</span>
+            </div>
+            <span class="error-message" id="name-error"></span>
           </div>
           
           <div class="form-group">
             <label for="email">Correo electrónico *</label>
-            <input type="email" id="email" name="email" required>
+            <div class="input-container">
+              <input type="email" id="email" name="email" maxlength="50" required placeholder="ejemplo@correo.com">
+              <span class="help-text" id="email-help">ejemplo@correo.com</span>
+            </div>
+            <span class="error-message" id="email-error"></span>
           </div>
           
           <div class="form-group">
-            <label for="phone">Teléfono</label>
-            <input type="tel" id="phone" name="phone">
+            <label for="phone">Teléfono *</label>
+            <div class="input-container">
+              <input type="tel" id="phone" name="phone" maxlength="12" required placeholder="+56912345678">
+              <span class="help-text" id="phone-help">+56912345678</span>
+            </div>
+            <span class="error-message" id="phone-error"></span>
           </div>
           
           <div class="form-group">
-            <label for="company">Empresa</label>
-            <input type="text" id="company" name="company">
+            <label for="company">Empresa *</label>
+            <div class="input-container">
+              <input type="text" id="company" name="company" maxlength="50" required placeholder="Nombre de tu empresa">
+              <span class="help-text" id="company-help">Nombre de tu empresa</span>
+            </div>
+            <span class="error-message" id="company-error"></span>
           </div>
           
           <div class="form-group">
             <label for="message">Mensaje *</label>
-            <textarea id="message" name="message" rows="5" required placeholder="Cuéntanos cómo podemos ayudarte..."></textarea>
+            <div class="input-container">
+              <textarea id="message" name="message" rows="5" required placeholder="Cuéntanos cómo podemos ayudarte... (mínimo 20 caracteres)"></textarea>
+              <span class="help-text" id="message-help">Cuéntanos cómo podemos ayudarte... (mínimo 20 caracteres)</span>
+            </div>
+            <span class="error-message" id="message-error"></span>
           </div>
           
           <button type="submit" class="btn-submit">
@@ -87,6 +107,53 @@
   margin: 0 auto;
 }
 
+.services-preview {
+  text-align: center;
+  margin-bottom: 4rem;
+}
+
+.services-preview h2 {
+  font-size: 2.5rem;
+  font-weight: 700;
+  color: #6366f1;
+  margin-bottom: 3rem;
+}
+
+.services-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 2rem;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.service-card {
+  background: #ffffff;
+  padding: 2.5rem 2rem;
+  border-radius: 12px;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+  transition: all 0.3s ease;
+  text-align: center;
+}
+
+.service-card:hover {
+  transform: translateY(-10px);
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+}
+
+.service-card h3 {
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: #6366f1;
+  margin: 1.5rem 0 1rem;
+}
+
+.service-card p {
+  color: #6b7280;
+  line-height: 1.6;
+  font-size: 1rem;
+}
+
 .contact-content {
   display: grid;
   grid-template-columns: 2fr 1fr;
@@ -114,6 +181,10 @@
   gap: 0.5rem;
 }
 
+.input-container {
+  position: relative;
+}
+
 .form-group label {
   font-weight: 600;
   color: var(--text-primary);
@@ -123,23 +194,101 @@
 .form-group input,
 .form-group textarea {
   padding: 0.875rem 1rem;
-  border: 2px solid var(--color-border);
-  border-radius: var(--radius);
+  border: 2px solid #e5e7eb;
+  border-radius: 8px;
   font-size: 1rem;
   transition: all 0.3s ease;
-  background: var(--color-white);
+  background: #ffffff;
 }
 
 .form-group input:focus,
 .form-group textarea:focus {
   outline: none;
-  border-color: var(--color-primary);
+  border-color: #6366f1;
   box-shadow: 0 0 0 3px rgba(99, 102, 241, 0.1);
+}
+
+.form-group input::placeholder,
+.form-group textarea::placeholder {
+  color: #9ca3af !important;
+  opacity: 1 !important;
+  font-style: italic !important;
+  font-size: 1rem !important;
+  line-height: 1.5 !important;
+}
+
+.form-group input::-webkit-input-placeholder,
+.form-group textarea::-webkit-input-placeholder {
+  color: #9ca3af !important;
+  opacity: 1 !important;
+  font-style: italic !important;
+}
+
+.form-group input::-moz-placeholder,
+.form-group textarea::-moz-placeholder {
+  color: #9ca3af !important;
+  opacity: 1 !important;
+  font-style: italic !important;
+}
+
+.form-group input:-ms-input-placeholder,
+.form-group textarea:-ms-input-placeholder {
+  color: #9ca3af !important;
+  opacity: 1 !important;
+  font-style: italic !important;
+}
+
+.help-text {
+  position: absolute;
+  top: 50%;
+  left: 1rem;
+  transform: translateY(-50%);
+  color: #9ca3af;
+  font-style: italic;
+  font-size: 1rem;
+  pointer-events: none;
+  transition: all 0.3s ease;
+  z-index: 1;
+}
+
+.input-container input:focus + .help-text,
+.input-container textarea:focus + .help-text,
+.input-container input:not(:placeholder-shown) + .help-text,
+.input-container textarea:not(:placeholder-shown) + .help-text {
+  opacity: 0;
+  transform: translateY(-50%) scale(0.9);
+}
+
+.input-container textarea + .help-text {
+  top: 1rem;
+  transform: none;
+}
+
+.input-container textarea:focus + .help-text,
+.input-container textarea:not(:placeholder-shown) + .help-text {
+  transform: scale(0.9);
 }
 
 .form-group textarea {
   resize: vertical;
   min-height: 120px;
+}
+
+.error-message {
+  color: #ef4444;
+  font-size: 0.875rem;
+  margin-top: 0.25rem;
+  display: none;
+}
+
+.form-group.error input,
+.form-group.error textarea {
+  border-color: #ef4444;
+  box-shadow: 0 0 0 3px rgba(239, 68, 68, 0.1);
+}
+
+.form-group.error .error-message {
+  display: block;
 }
 
 .btn-submit {
@@ -212,9 +361,207 @@
     font-size: 2.5rem;
   }
   
+  .services-preview h2 {
+    font-size: 2rem;
+  }
+  
+  .services-grid {
+    grid-template-columns: 1fr;
+    gap: 1.5rem;
+  }
+  
+  .service-card {
+    padding: 2rem 1.5rem;
+  }
+  
   .contact-form-container,
   .contact-info {
     padding: 2rem;
   }
 }
 </style>
+
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+  const form = document.getElementById('contactForm');
+  
+  // Handle help text visibility
+  const inputs = document.querySelectorAll('input, textarea');
+  inputs.forEach(input => {
+    const helpText = input.nextElementSibling;
+    if (helpText && helpText.classList.contains('help-text')) {
+      // Show help text when field is empty
+      function updateHelpText() {
+        if (input.value.trim() === '') {
+          helpText.style.opacity = '1';
+        } else {
+          helpText.style.opacity = '0';
+        }
+      }
+      
+      // Initial state
+      updateHelpText();
+      
+      // Update on input
+      input.addEventListener('input', updateHelpText);
+      input.addEventListener('blur', updateHelpText);
+      input.addEventListener('focus', updateHelpText);
+    }
+  });
+  
+  // Regex patterns
+  const emailRegex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
+  const phoneRegex = /^\+569\d{8}$/;
+  
+  // Validation functions
+  function validateName(name) {
+    return name.trim().length >= 2;
+  }
+  
+  function validateEmail(email) {
+    return emailRegex.test(email);
+  }
+  
+  function validatePhone(phone) {
+    return phoneRegex.test(phone);
+  }
+  
+  function validateCompany(company) {
+    return company.trim().length >= 2;
+  }
+  
+  function validateMessage(message) {
+    return message.trim().length >= 20;
+  }
+  
+  // Show error function
+  function showError(fieldId, message) {
+    const field = document.getElementById(fieldId);
+    const errorElement = document.getElementById(fieldId + '-error');
+    const formGroup = field.closest('.form-group');
+    
+    formGroup.classList.add('error');
+    errorElement.textContent = message;
+  }
+  
+  // Clear error function
+  function clearError(fieldId) {
+    const field = document.getElementById(fieldId);
+    const errorElement = document.getElementById(fieldId + '-error');
+    const formGroup = field.closest('.form-group');
+    
+    formGroup.classList.remove('error');
+    errorElement.textContent = '';
+  }
+  
+  // Real-time validation
+  document.getElementById('name').addEventListener('blur', function() {
+    const value = this.value.trim();
+    if (value && !validateName(value)) {
+      showError('name', 'El nombre debe tener al menos 2 caracteres');
+    } else {
+      clearError('name');
+    }
+  });
+  
+  document.getElementById('email').addEventListener('blur', function() {
+    const value = this.value.trim();
+    if (value && !validateEmail(value)) {
+      showError('email', 'Ingresa un correo electrónico válido');
+    } else {
+      clearError('email');
+    }
+  });
+  
+  document.getElementById('phone').addEventListener('blur', function() {
+    const value = this.value.trim();
+    if (value && !validatePhone(value)) {
+      showError('phone', 'El teléfono debe comenzar con +569 seguido de 8 números');
+    } else {
+      clearError('phone');
+    }
+  });
+  
+  document.getElementById('company').addEventListener('blur', function() {
+    const value = this.value.trim();
+    if (value && !validateCompany(value)) {
+      showError('company', 'El nombre de la empresa debe tener al menos 2 caracteres');
+    } else {
+      clearError('company');
+    }
+  });
+  
+  document.getElementById('message').addEventListener('blur', function() {
+    const value = this.value.trim();
+    if (value && !validateMessage(value)) {
+      showError('message', 'El mensaje debe tener al menos 20 caracteres');
+    } else {
+      clearError('message');
+    }
+  });
+  
+  // Form submission validation
+  form.addEventListener('submit', function(e) {
+    e.preventDefault();
+    
+    let isValid = true;
+    
+    // Clear all errors first
+    ['name', 'email', 'phone', 'company', 'message'].forEach(fieldId => {
+      clearError(fieldId);
+    });
+    
+    // Validate each field
+    const name = document.getElementById('name').value.trim();
+    const email = document.getElementById('email').value.trim();
+    const phone = document.getElementById('phone').value.trim();
+    const company = document.getElementById('company').value.trim();
+    const message = document.getElementById('message').value.trim();
+    
+    if (!name) {
+      showError('name', 'El nombre es obligatorio');
+      isValid = false;
+    } else if (!validateName(name)) {
+      showError('name', 'El nombre debe tener al menos 2 caracteres');
+      isValid = false;
+    }
+    
+    if (!email) {
+      showError('email', 'El correo electrónico es obligatorio');
+      isValid = false;
+    } else if (!validateEmail(email)) {
+      showError('email', 'Ingresa un correo electrónico válido');
+      isValid = false;
+    }
+    
+    if (!phone) {
+      showError('phone', 'El teléfono es obligatorio');
+      isValid = false;
+    } else if (!validatePhone(phone)) {
+      showError('phone', 'El teléfono debe comenzar con +569 seguido de 8 números');
+      isValid = false;
+    }
+    
+    if (!company) {
+      showError('company', 'El nombre de la empresa es obligatorio');
+      isValid = false;
+    } else if (!validateCompany(company)) {
+      showError('company', 'El nombre de la empresa debe tener al menos 2 caracteres');
+      isValid = false;
+    }
+    
+    if (!message) {
+      showError('message', 'El mensaje es obligatorio');
+      isValid = false;
+    } else if (!validateMessage(message)) {
+      showError('message', 'El mensaje debe tener al menos 20 caracteres');
+      isValid = false;
+    }
+    
+    if (isValid) {
+      // Submit the form
+      form.submit();
+    }
+  });
+});
+</script>

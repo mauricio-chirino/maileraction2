@@ -23,7 +23,7 @@
                             <a class="nav-link fw-semibold" href="#results" data-action="click->navbar#handleNavClick">Resultados</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link fw-semibold" href="<%= contact_path %>">Contacto</a>
+                            <a class="nav-link fw-semibold" href="#" data-bs-toggle="modal" data-bs-target="#contactModal">Contacto</a>
                         </li>
                     </ul>
                 </div>
@@ -38,7 +38,7 @@
                 <h1>Tu campaña<span> en la bandeja correcta</span></h1>
                 <p>MailerAction utiliza inteligencia artificial para identificar clientes interesados en tu producto y enviar campañas personalizadas según sus intereses, preferencias y estado de ánimo.</p>
                 <div class="hero-buttons">
-                    <a href="#contact" class="btn btn-primary">Comenzar Ahora</a>
+                    <a href="#" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#contactModal">Comenzar Ahora</a>
                     <a href="#how-it-works" class="btn btn-accent">Saber Más</a>
                 </div>
             </div>
@@ -62,6 +62,7 @@
             </div>
         </div>
     </section>
+
 
     <!-- Features Section -->
     <section id="features" class="features">
@@ -259,6 +260,33 @@ tu mensaje.
 
 
 
+
+    <!-- Services Preview Section -->
+    <section class="services-preview">
+        <div class="container">
+            <div class="section-header">
+                <h2 class="section-title">Nuestros Servicios</h2>
+                <p class="section-description">Estas son algunas de las cosas que podemos hacer por tu empresa</p>
+            </div>
+            <div class="services-grid">
+                <div class="service-card">
+                    <lord-icon src="https://cdn.lordicon.com/ggihhudh.json" trigger="loop" delay="2000" stroke="light" style="width:50px;height:50px"></lord-icon>
+                    <h3>Radar Inteligente de Prospección</h3>
+                    <p>Podemos identificar automáticamente clientes potenciales<br>con alta probabilidad de conversión<br>usando nuestro modelo de IA.</p>
+                </div>
+                <div class="service-card">
+                    <lord-icon src="https://cdn.lordicon.com/ggihhudh.json" trigger="loop" delay="2000" stroke="light" style="width:50px;height:50px"></lord-icon>
+                    <h3>Cazador de Oportunidades</h3>
+                    <p>Detecta el momento perfecto para contactar a tus prospectos basándose en su comportamiento digital.</p>
+                </div>
+                <div class="service-card">
+                    <lord-icon src="https://cdn.lordicon.com/ggihhudh.json" trigger="loop" delay="2000" stroke="light" style="width:50px;height:50px"></lord-icon>
+                    <h3>Email que piensa antes de hablar</h3>
+                    <p>Campañas de email marketing que se adaptan emocionalmente a cada receptor para maximizar engagement.</p>
+                </div>
+            </div>
+        </div>
+    </section>
 
     <!-- Results Section -->
     <section id="results" class="results">
@@ -524,8 +552,8 @@ tu mensaje.
                     MailerAction. Convierte datos en decisiones y emociones en resultados.
                 </p>
                 <div class="cta-buttons">
-                    <button class="btn-primary">Comenzar Prueba Gratuita</button>
-                    <button class="btn-secondary">Solicitar Demo</button>
+                    <button class="btn-primary" data-bs-toggle="modal" data-bs-target="#contactModal">Comenzar Prueba Gratuita</button>
+                    <button class="btn-secondary" data-bs-toggle="modal" data-bs-target="#contactModal">Solicitar Demo</button>
                 </div>
             </div>
         </div>
@@ -559,7 +587,7 @@ tu mensaje.
                         <a href="#">Acerca de</a>
                         <a href="#">Blog</a>
                         <a href="#">Carreras</a>
-                        <a href="#">Contacto</a>
+                        <a href="#" data-bs-toggle="modal" data-bs-target="#contactModal">Contacto</a>
                     </div>
                     <div class="footer-column">
                         <h4>Soporte</h4>
@@ -604,3 +632,269 @@ tu mensaje.
             </div>
         </div>
     </footer>
+
+    <!-- Contact Modal -->
+    <div class="modal fade" id="contactModal" tabindex="-1" aria-labelledby="contactModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-lg modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="contactModalLabel">
+                        <lord-icon src="https://cdn.lordicon.com/mfgntcqv.json" trigger="hover" stroke="light" style="width:25px;height:25px"></lord-icon>
+                        Contacto
+                    </h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <div class="row">
+                        <div class="col-md-8">
+                            <form action="<%= contact_path %>" method="post" class="contact-form">
+                                <%= hidden_field_tag :authenticity_token, form_authenticity_token %>
+                                
+                                <div class="form-group">
+                                    <label for="name">Nombre completo *</label>
+                                    <input type="text" id="name" name="name" maxlength="35" required>
+                                </div>
+                                
+                                <div class="form-group">
+                                    <label for="email">Correo electrónico *</label>
+                                    <input type="email" id="email" name="email" maxlength="35" required>
+                                </div>
+                                
+                                <div class="form-group">
+                                    <label for="phone">Teléfono</label>
+                                    <input type="tel" id="phone" name="phone" maxlength="35">
+                                </div>
+                                
+                                <div class="form-group">
+                                    <label for="company">Empresa</label>
+                                    <input type="text" id="company" name="company" maxlength="35">
+                                </div>
+                                
+                                <div class="form-group">
+                                    <label for="message">Mensaje *</label>
+                                    <textarea id="message" name="message" rows="4" required placeholder="Cuéntanos cómo podemos ayudarte..."></textarea>
+                                </div>
+                                
+                                <button type="submit" class="btn-submit">
+                                    <lord-icon src="https://cdn.lordicon.com/mfgntcqv.json" trigger="hover" stroke="light" style="width:20px;height:20px"></lord-icon>
+                                    Enviar mensaje
+                                </button>
+                            </form>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="contact-info">
+                                <h6>Información de contacto</h6>
+                                <div class="contact-item">
+                                    <lord-icon src="https://cdn.lordicon.com/mfgntcqv.json" trigger="loop" delay="2000" stroke="light" style="width:20px;height:20px"></lord-icon>
+                                    <span>admin@maileraction.com</span>
+                                </div>
+                                <div class="contact-item">
+                                    <lord-icon src="https://cdn.lordicon.com/yxpgekdi.json" trigger="loop" delay="2000" stroke="light" style="width:20px;height:20px"></lord-icon>
+                                    <span>+1 (555) 123-4567</span>
+                                </div>
+                                <div class="contact-item">
+                                    <lord-icon src="https://cdn.lordicon.com/bnzbstbp.json" trigger="loop" delay="2000" stroke="light" style="width:20px;height:20px"></lord-icon>
+                                    <span>Lunes a Viernes, 9:00 - 18:00</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <style>
+    .modal-content {
+        border: none;
+        border-radius: 15px;
+        box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+    }
+
+    .modal-header {
+        background: linear-gradient(135deg, #6366f1 0%, #8b5cf6 100%);
+        color: white;
+        border-radius: 15px 15px 0 0;
+        border: none;
+        padding: 1.5rem;
+    }
+
+    .modal-title {
+        display: flex;
+        align-items: center;
+        gap: 0.5rem;
+        font-weight: 600;
+        font-size: 1.25rem;
+    }
+
+    .btn-close {
+        filter: invert(1);
+    }
+
+    .modal-body {
+        padding: 2rem;
+    }
+
+    .contact-form {
+        display: flex;
+        flex-direction: column;
+        gap: 1rem;
+    }
+
+    .form-group {
+        display: flex;
+        flex-direction: column;
+        gap: 0.5rem;
+    }
+
+    .form-group label {
+        font-weight: 600;
+        color: #374151;
+        font-size: 0.9rem;
+    }
+
+    .form-group input,
+    .form-group textarea {
+        padding: 0.75rem 1rem;
+        border: 2px solid #e5e7eb;
+        border-radius: 8px;
+        font-size: 0.95rem;
+        transition: all 0.3s ease;
+        background: #ffffff;
+    }
+
+    .form-group input:focus,
+    .form-group textarea:focus {
+        outline: none;
+        border-color: #6366f1;
+        box-shadow: 0 0 0 3px rgba(99, 102, 241, 0.1);
+    }
+
+    .form-group textarea {
+        resize: vertical;
+        min-height: 100px;
+    }
+
+    .btn-submit {
+        background: linear-gradient(135deg, #6366f1 0%, #8b5cf6 100%);
+        color: white;
+        border: none;
+        padding: 0.875rem 1.5rem;
+        border-radius: 8px;
+        font-size: 1rem;
+        font-weight: 600;
+        cursor: pointer;
+        transition: all 0.3s ease;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 0.5rem;
+        margin-top: 0.5rem;
+    }
+
+    .btn-submit:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 10px 20px rgba(99, 102, 241, 0.3);
+    }
+
+    .contact-info {
+        background: #f8fafc;
+        padding: 1.5rem;
+        border-radius: 10px;
+        height: fit-content;
+    }
+
+    .contact-info h6 {
+        font-size: 1.1rem;
+        font-weight: 700;
+        color: #6366f1;
+        margin-bottom: 1rem;
+    }
+
+    .contact-item {
+        display: flex;
+        align-items: center;
+        gap: 0.75rem;
+        margin-bottom: 1rem;
+        padding: 0.75rem;
+        background: white;
+        border-radius: 8px;
+        transition: all 0.3s ease;
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+    }
+
+    .contact-item:hover {
+        transform: translateX(5px);
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    }
+
+    .contact-item span {
+        font-weight: 500;
+        color: #374151;
+        font-size: 0.9rem;
+    }
+
+    @media (max-width: 768px) {
+        .modal-body {
+            padding: 1.5rem;
+        }
+        
+        .contact-info {
+            margin-top: 1.5rem;
+        }
+    }
+
+    /* Services Preview Section */
+    .services-preview {
+        padding: 80px 0;
+        background: #ffffff;
+    }
+
+    .services-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+        gap: 2rem;
+        max-width: 1200px;
+        margin: 0 auto;
+    }
+
+    .service-card {
+        background: #ffffff;
+        padding: 2.5rem 2rem;
+        border-radius: 15px;
+        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+        transition: all 0.3s ease;
+        text-align: center;
+        border: 1px solid #f1f5f9;
+    }
+
+    .service-card:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 20px 40px rgba(0, 0, 0, 0.15);
+    }
+
+    .service-card h3 {
+        font-size: 1.5rem;
+        font-weight: 600;
+        color: #1e293b;
+        margin: 1.5rem 0 1rem;
+    }
+
+    .service-card p {
+        color: #64748b;
+        line-height: 1.6;
+        font-size: 1rem;
+    }
+
+    /* Responsive */
+    @media (max-width: 768px) {
+        .services-grid {
+            grid-template-columns: 1fr;
+            gap: 1.5rem;
+        }
+        
+        .service-card {
+            padding: 2rem 1.5rem;
+        }
+    }
+    </style>
