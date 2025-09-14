@@ -262,28 +262,89 @@ tu mensaje.
 
 
     <!-- Services Preview Section -->
-    <section class="services-preview">
+    <section class="services-preview" data-controller="landing">
         <div class="container">
             <div class="section-header">
                 <h2 class="section-title">Nuestros Servicios</h2>
                 <p class="section-description">Estas son algunas de las cosas que podemos hacer por tu empresa</p>
             </div>
             <div class="services-grid">
-                <div class="service-card">
-                    <lord-icon src="https://cdn.lordicon.com/ggihhudh.json" trigger="loop" delay="2000" stroke="light" style="width:50px;height:50px"></lord-icon>
+                <div class="service-card" data-controller="effects" data-effects-target="card" data-action="click->radar#startScan">
+                    <lord-icon src="https://cdn.lordicon.com/ggihhudh.json" trigger="loop" delay="2000" stroke="light" style="width:50px;height:50px" data-effects-target="icon"></lord-icon>
                     <h3>Radar Inteligente de Prospección</h3>
                     <p>Podemos identificar automáticamente clientes potenciales<br>con alta probabilidad de conversión<br>usando nuestro modelo de IA.</p>
+                    <button class="btn btn-primary mt-3" data-effects-target="button">
+                        <lord-icon src="https://cdn.lordicon.com/ggihhudh.json" trigger="loop" delay="2000" stroke="light" style="width:20px;height:20px"></lord-icon>
+                        Probar Demo
+                    </button>
                 </div>
-                <div class="service-card">
-                    <lord-icon src="https://cdn.lordicon.com/ggihhudh.json" trigger="loop" delay="2000" stroke="light" style="width:50px;height:50px"></lord-icon>
+                <div class="service-card" data-controller="effects" data-effects-target="card">
+                    <lord-icon src="https://cdn.lordicon.com/ggihhudh.json" trigger="loop" delay="2000" stroke="light" style="width:50px;height:50px" data-effects-target="icon"></lord-icon>
                     <h3>Cazador de Oportunidades</h3>
                     <p>Detecta el momento perfecto para contactar a tus prospectos basándose en su comportamiento digital.</p>
+                    <button class="btn btn-secondary mt-3" data-effects-target="button">
+                        <lord-icon src="https://cdn.lordicon.com/ggihhudh.json" trigger="loop" delay="2000" stroke="light" style="width:20px;height:20px"></lord-icon>
+                        Saber Más
+                    </button>
                 </div>
-                <div class="service-card">
-                    <lord-icon src="https://cdn.lordicon.com/ggihhudh.json" trigger="loop" delay="2000" stroke="light" style="width:50px;height:50px"></lord-icon>
+                <div class="service-card" data-controller="effects" data-effects-target="card">
+                    <lord-icon src="https://cdn.lordicon.com/ggihhudh.json" trigger="loop" delay="2000" stroke="light" style="width:50px;height:50px" data-effects-target="icon"></lord-icon>
                     <h3>Email que piensa antes de hablar</h3>
                     <p>Campañas de email marketing que se adaptan emocionalmente a cada receptor para maximizar engagement.</p>
+                    <button class="btn btn-secondary mt-3" data-effects-target="button">
+                        <lord-icon src="https://cdn.lordicon.com/ggihhudh.json" trigger="loop" delay="2000" stroke="light" style="width:20px;height:20px"></lord-icon>
+                        Saber Más
+                    </button>
                 </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Radar Demo Section -->
+    <section class="radar-demo" data-controller="radar" data-radar-demo-mode-value="true">
+        <div class="container">
+            <div class="section-header">
+                <h2 class="section-title">Radar Inteligente en Acción</h2>
+                <p class="section-description">Ve cómo nuestro sistema identifica prospectos ideales en tiempo real</p>
+            </div>
+            
+            <div class="radar-container">
+                <div class="radar-scanner-container">
+                    <div class="radar-scanner" data-radar-target="scanner">
+                        <div class="scanner-circle">
+                            <div class="scanner-line"></div>
+                            <div class="scanner-dot"></div>
+                        </div>
+                        <div class="scanner-progress">
+                            <div class="progress-bar" data-radar-target="progress"></div>
+                        </div>
+                        <div class="scanner-text">
+                            <h3>Escaneando prospectos...</h3>
+                            <p>Analizando datos de Apollo.io, Tavily y Apify</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="radar-results" data-radar-target="result">
+                    <div class="results-header">
+                        <h3>Prospecto Identificado</h3>
+                        <p>Perfil enriquecido con datos contextuales</p>
+                    </div>
+                    <div class="profile-data" data-radar-target="data">
+                        <!-- Profile data will be populated here -->
+                    </div>
+                </div>
+            </div>
+            
+            <div class="radar-actions">
+                <button class="btn btn-primary btn-lg" data-action="click->radar#startScan">
+                    <lord-icon src="https://cdn.lordicon.com/ggihhudh.json" trigger="loop" delay="2000" stroke="light" style="width:24px;height:24px"></lord-icon>
+                    Iniciar Escaneo
+                </button>
+                <button class="btn btn-outline-secondary btn-lg" data-bs-toggle="modal" data-bs-target="#contactModal">
+                    <lord-icon src="https://cdn.lordicon.com/ggihhudh.json" trigger="loop" delay="2000" stroke="light" style="width:24px;height:24px"></lord-icon>
+                    Solicitar Demo Personalizada
+                </button>
             </div>
         </div>
     </section>

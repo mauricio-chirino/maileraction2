@@ -9,6 +9,15 @@ window.Stimulus   = application
 // Import and register all your controllers from the importmap under controllers/*
 
 import NavbarController from "./navbar_controller"
+import LandingController from "./landing_controller"
+import RadarController from "./radar_controller"
+import EffectsController from "./effects_controller"
+import ContactController from "./contact_controller"
+
 application.register("navbar", NavbarController)
+application.register("landing", LandingController)
+application.register("radar", RadarController)
+application.register("effects", EffectsController)
+application.register("contact", ContactController)
 
 export { application }

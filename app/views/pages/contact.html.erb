@@ -7,13 +7,17 @@
     
     <div class="contact-content">
       <div class="contact-form-container">
-        <form action="<%= contact_path %>" method="post" class="contact-form" id="contactForm">
+        <form action="<%= contact_path %>" method="post" class="contact-form" id="contactForm" data-controller="contact" data-contact-target="form">
           <%= hidden_field_tag :authenticity_token, form_authenticity_token %>
+          
+          <!-- Success/Error Messages -->
+          <div class="alert alert-success d-none" data-contact-target="success" role="alert"></div>
+          <div class="alert alert-danger d-none" data-contact-target="error" role="alert"></div>
           
           <div class="form-group">
             <label for="name">Nombre completo *</label>
             <div class="input-container">
-              <input type="text" id="name" name="name" maxlength="50" required placeholder="Ingresa tu nombre completo">
+              <input type="text" id="name" name="name" maxlength="50" required placeholder="Ingresa tu nombre completo" class="form-control" data-contact-target="name">
               <span class="help-text" id="name-help">Ingresa tu nombre completo</span>
             </div>
             <span class="error-message" id="name-error"></span>
@@ -22,7 +26,7 @@
           <div class="form-group">
             <label for="email">Correo electrónico *</label>
             <div class="input-container">
-              <input type="email" id="email" name="email" maxlength="50" required placeholder="ejemplo@correo.com">
+              <input type="email" id="email" name="email" maxlength="50" required placeholder="ejemplo@correo.com" class="form-control" data-contact-target="email">
               <span class="help-text" id="email-help">ejemplo@correo.com</span>
             </div>
             <span class="error-message" id="email-error"></span>
@@ -31,7 +35,7 @@
           <div class="form-group">
             <label for="phone">Teléfono *</label>
             <div class="input-container">
-              <input type="tel" id="phone" name="phone" maxlength="12" required placeholder="+56912345678">
+              <input type="tel" id="phone" name="phone" maxlength="12" required placeholder="+56912345678" class="form-control" data-contact-target="phone">
               <span class="help-text" id="phone-help">+56912345678</span>
             </div>
             <span class="error-message" id="phone-error"></span>
@@ -40,7 +44,7 @@
           <div class="form-group">
             <label for="company">Empresa *</label>
             <div class="input-container">
-              <input type="text" id="company" name="company" maxlength="50" required placeholder="Nombre de tu empresa">
+              <input type="text" id="company" name="company" maxlength="50" required placeholder="Nombre de tu empresa" class="form-control" data-contact-target="company">
               <span class="help-text" id="company-help">Nombre de tu empresa</span>
             </div>
             <span class="error-message" id="company-error"></span>
@@ -49,13 +53,13 @@
           <div class="form-group">
             <label for="message">Mensaje *</label>
             <div class="input-container">
-              <textarea id="message" name="message" rows="5" required placeholder="Cuéntanos cómo podemos ayudarte... (mínimo 20 caracteres)"></textarea>
+              <textarea id="message" name="message" rows="5" required placeholder="Cuéntanos cómo podemos ayudarte... (mínimo 20 caracteres)" class="form-control" data-contact-target="message"></textarea>
               <span class="help-text" id="message-help">Cuéntanos cómo podemos ayudarte... (mínimo 20 caracteres)</span>
             </div>
             <span class="error-message" id="message-error"></span>
           </div>
           
-          <button type="submit" class="btn-submit">
+          <button type="submit" class="btn-submit" data-contact-target="submit">
             <lord-icon src="https://cdn.lordicon.com/mfgntcqv.json" trigger="hover" stroke="light" style="width:20px;height:20px"></lord-icon>
             Enviar mensaje
           </button>
