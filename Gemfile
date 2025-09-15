@@ -63,3 +63,5 @@ group :development do
   gem "web-console"
 end
 gem "sendgrid-ruby"
+
+gem "devise", "~> 4.9"

@@ -25,6 +25,25 @@
                         <li class="nav-item">
                             <a class="nav-link fw-semibold" href="#" data-bs-toggle="modal" data-bs-target="#contactModal">Contacto</a>
                         </li>
+                        <% if user_signed_in? %>
+                            <li class="nav-item dropdown">
+                                <a class="nav-link dropdown-toggle fw-semibold" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                    <%= current_user.email %>
+                                </a>
+                                <ul class="dropdown-menu">
+                                    <li><%= link_to "Mi Perfil", edit_user_registration_path, class: "dropdown-item" %></li>
+                                    <li><hr class="dropdown-divider"></li>
+                                    <li><%= link_to "Cerrar Sesión", destroy_user_session_path, method: :delete, class: "dropdown-item" %></li>
+                                </ul>
+                            </li>
+                        <% else %>
+                            <li class="nav-item">
+                                <%= link_to "Iniciar Sesión", new_user_session_path, class: "nav-link fw-semibold" %>
+                            </li>
+                            <li class="nav-item">
+                                <%= link_to "Crear Cuenta", new_user_registration_path, class: "btn btn-primary btn-sm ms-2" %>
+                            </li>
+                        <% end %>
                     </ul>
                 </div>
             </div>
@@ -274,9 +293,15 @@ tu mensaje.
                     <h3>Radar Inteligente de Prospección</h3>
                     <p>Podemos identificar automáticamente clientes potenciales<br>con alta probabilidad de conversión<br>usando nuestro modelo de IA.</p>
                     <div class="radar-buttons">
-                        <button onclick="testRadar()" class="radar-btn radar-btn-primary">
-                            Probar Demo
-                        </button>
+                        <% if user_signed_in? %>
+                            <button onclick="testRadar()" class="radar-btn radar-btn-primary">
+                                Probar Demo
+                            </button>
+                        <% else %>
+                            <button onclick="showAuthModal()" class="radar-btn radar-btn-primary">
+                                Crear Cuenta para Acceder
+                            </button>
+                        <% end %>
                     </div>
                 </div>
                 <div class="service-card" data-controller="effects" data-effects-target="card">
@@ -1083,6 +1108,11 @@ tu mensaje.
         }
         
         console.log('=== FIN TEST DIRECTO ===')
+    }
+    
+    function showAuthModal() {
+        // Redirigir a la página de registro
+        window.location.href = '/users/sign_up'
     }
     
     function initializeInputValidation() {
