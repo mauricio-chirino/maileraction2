@@ -9,6 +9,9 @@ export default class extends Controller {
 
   connect() {
     console.log('Radar controller connected')
+    console.log('Targets available:', this.targets)
+    console.log('Industry input target:', this.hasIndustryInputTarget ? this.industryInputTarget : 'NOT FOUND')
+    console.log('Search btn target:', this.hasSearchBtnTarget ? this.searchBtnTarget : 'NOT FOUND')
     this.setupDemoData()
     this.currentIndustry = ""
     this.currentStep = 0
@@ -27,7 +30,12 @@ export default class extends Controller {
     if (demoSection) {
       console.log('Demo section found, showing...')
       demoSection.style.display = 'block'
-      demoSection.style.backgroundColor = 'red' // Temporary visual indicator
+      
+      // Initialize the demo section controller
+      setTimeout(() => {
+        console.log('Initializing demo section controller...')
+        this.initializeDemoSection()
+      }, 100)
       
       // Scroll to demo section
       demoSection.scrollIntoView({ 
@@ -42,23 +50,54 @@ export default class extends Controller {
     
     console.log('=== END RADAR CONTROLLER DEBUG ===')
   }
+  
+  initializeDemoSection() {
+    console.log('Initializing demo section...')
+    console.log('Industry input target:', this.hasIndustryInputTarget ? this.industryInputTarget : 'NOT FOUND')
+    console.log('Search btn target:', this.hasSearchBtnTarget ? this.searchBtnTarget : 'NOT FOUND')
+    
+    if (this.hasIndustryInputTarget && this.hasSearchBtnTarget) {
+      // Initialize button state
+      this.searchBtnTarget.disabled = true
+      this.searchBtnTarget.classList.add('btn-secondary')
+      console.log('Button initialized as disabled')
+    }
+  }
 
   disconnect() {
     this.clearTimers()
   }
 
   validateInput() {
+    console.log('validateInput called')
+    
+    if (!this.hasIndustryInputTarget) {
+      console.error('Industry input target not found!')
+      return
+    }
+    
+    if (!this.hasSearchBtnTarget) {
+      console.error('Search button target not found!')
+      return
+    }
+    
     const input = this.industryInputTarget.value.trim()
     const isValid = input.length >= 3
+    
+    console.log('Input value:', input)
+    console.log('Input length:', input.length)
+    console.log('Is valid:', isValid)
     
     if (isValid) {
       this.searchBtnTarget.disabled = false
       this.searchBtnTarget.classList.remove('btn-secondary')
       this.searchBtnTarget.classList.add('btn-primary')
+      console.log('Button enabled')
     } else {
       this.searchBtnTarget.disabled = true
       this.searchBtnTarget.classList.remove('btn-primary')
       this.searchBtnTarget.classList.add('btn-secondary')
+      console.log('Button disabled')
     }
   }
 
