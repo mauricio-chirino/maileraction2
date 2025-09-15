@@ -11,6 +11,12 @@ class User < ApplicationRecord
     with: URI::regexp(%w[http https]), 
     message: "debe ser una URL válida" 
   }
+  
+  # Validación explícita de unicidad de email
+  validates :email, uniqueness: { 
+    case_sensitive: false, 
+    message: "ya está registrado en el sistema" 
+  }
 
   # Validación personalizada para verificar que el email pertenece al dominio del sitio web
   validate :email_matches_domain

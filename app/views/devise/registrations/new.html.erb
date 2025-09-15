@@ -431,6 +431,11 @@ function validateEmailWithDomain(input) {
     return false;
   }
   
+  // Verificar unicidad del email (solo si es válido)
+  if (emailRegex.test(email)) {
+    checkEmailUniqueness(email, input, errorElement);
+  }
+  
   // Validar que el email pertenezca al dominio del sitio web
   if (website) {
     try {
@@ -565,5 +570,39 @@ function togglePassword(inputId) {
     passwordInput.type = 'password';
     eyeIcon.className = 'fas fa-eye eye-icon';
   }
+}
+
+// Función para verificar unicidad del email
+function checkEmailUniqueness(email, input, errorElement) {
+  // Hacer una petición AJAX para verificar si el email ya existe
+  fetch('/users/check_email', {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+      'X-CSRF-Token': document.querySelector('meta[name="csrf-token"]').getAttribute('content')
+    },
+    body: JSON.stringify({ email: email })
+  })
+  .then(response => response.json())
+  .then(data => {
+    if (data.exists) {
+      input.classList.remove('success');
+      input.classList.add('error');
+      errorElement.textContent = 'Este email ya está registrado en el sistema';
+      errorElement.className = 'validation-message error';
+    } else {
+      // Solo mostrar éxito si no hay otros errores
+      if (!input.classList.contains('error')) {
+        input.classList.remove('error');
+        input.classList.add('success');
+        errorElement.textContent = '✓ Email disponible';
+        errorElement.className = 'validation-message success';
+      }
+    }
+  })
+  .catch(error => {
+    console.error('Error verificando unicidad del email:', error);
+    // No mostrar error de red, solo log
+  });
 }
 </script>

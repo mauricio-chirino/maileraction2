@@ -1,5 +1,8 @@
 Rails.application.routes.draw do
   devise_for :users
+  
+  # Ruta para verificar unicidad de email
+  post 'users/check_email', to: 'users#check_email'
   root "pages#home"
   
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
