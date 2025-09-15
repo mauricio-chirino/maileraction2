@@ -408,10 +408,10 @@ document.addEventListener('DOMContentLoaded', function() {
   // Verificar si hay errores de validación del servidor
   const emailField = document.getElementById('user_email');
   const emailError = document.getElementById('email_error');
-  const websiteField = document.getElementById('user_website');
+  const errorExplanation = document.getElementById('error_explanation');
   
   // Buscar mensajes de error específicos en la página
-  const errorMessages = document.querySelectorAll('.error-messages ul li');
+  const errorMessages = document.querySelectorAll('#error_explanation ul li');
   
   errorMessages.forEach(function(errorMsg) {
     const errorText = errorMsg.textContent.trim();
@@ -438,9 +438,8 @@ document.addEventListener('DOMContentLoaded', function() {
       }, 7000);
       
       // Ocultar el mensaje de error genérico
-      const errorContainer = errorMsg.closest('.error-messages');
-      if (errorContainer) {
-        errorContainer.style.display = 'none';
+      if (errorExplanation) {
+        errorExplanation.style.display = 'none';
       }
     }
   });
