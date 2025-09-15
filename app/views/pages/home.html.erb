@@ -305,42 +305,99 @@ tu mensaje.
         <div class="container">
             <div class="section-header">
                 <h2 class="section-title">Radar Inteligente en Acción</h2>
-                <p class="section-description">Ve cómo nuestro sistema identifica prospectos ideales en tiempo real</p>
+                <p class="section-description">Ingresa el rubro de tu empresa y descubre prospectos ideales en tiempo real</p>
             </div>
             
-            <div class="radar-container">
-                <div class="radar-scanner-container">
-                    <div class="radar-scanner" data-radar-target="scanner">
-                        <div class="scanner-circle">
-                            <div class="scanner-line"></div>
-                            <div class="scanner-dot"></div>
+            <!-- Radar Input Section -->
+            <div class="radar-input-section" data-radar-target="inputSection">
+                <div class="input-container">
+                    <div class="input-group">
+                        <lord-icon src="https://cdn.lordicon.com/ggihhudh.json" trigger="loop" delay="2000" stroke="light" style="width:30px;height:30px"></lord-icon>
+                        <input type="text" 
+                               class="form-control radar-input" 
+                               placeholder="Ej: Tecnología, Salud, Finanzas, Retail, Educación..."
+                               data-radar-target="industryInput"
+                               data-action="keyup->radar#validateInput">
+                        <button class="btn btn-primary radar-search-btn" 
+                                data-action="click->radar#startScan"
+                                data-radar-target="searchBtn"
+                                disabled>
+                            <lord-icon src="https://cdn.lordicon.com/ggihhudh.json" trigger="loop" delay="2000" stroke="light" style="width:20px;height:20px"></lord-icon>
+                            Buscar Prospectos
+                        </button>
+                    </div>
+                    <div class="input-help">
+                        <p>Ingresa el rubro o industria donde deseas encontrar clientes potenciales</p>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Radar Progress Section -->
+            <div class="radar-progress-section" data-radar-target="progressSection" style="display: none;">
+                <div class="progress-container">
+                    <div class="progress-header">
+                        <h3>Escaneando prospectos en <span data-radar-target="industryDisplay"></span>...</h3>
+                        <p>Analizando datos de Apollo.io, Tavily y Apify</p>
+                    </div>
+                    
+                    <div class="progress-steps">
+                        <div class="progress-step" data-radar-target="step1">
+                            <div class="step-icon">
+                                <lord-icon src="https://cdn.lordicon.com/ggihhudh.json" trigger="loop" delay="2000" stroke="light" style="width:24px;height:24px"></lord-icon>
+                            </div>
+                            <div class="step-text">
+                                <h4>Apollo.io</h4>
+                                <p>Extrayendo perfiles B2B</p>
+                            </div>
+                            <div class="step-status" data-radar-target="status1"></div>
                         </div>
-                        <div class="scanner-progress">
+                        
+                        <div class="progress-step" data-radar-target="step2">
+                            <div class="step-icon">
+                                <lord-icon src="https://cdn.lordicon.com/ggihhudh.json" trigger="loop" delay="2000" stroke="light" style="width:24px;height:24px"></lord-icon>
+                            </div>
+                            <div class="step-text">
+                                <h4>Tavily</h4>
+                                <p>Analizando contexto digital</p>
+                            </div>
+                            <div class="step-status" data-radar-target="status2"></div>
+                        </div>
+                        
+                        <div class="progress-step" data-radar-target="step3">
+                            <div class="step-icon">
+                                <lord-icon src="https://cdn.lordicon.com/ggihhudh.json" trigger="loop" delay="2000" stroke="light" style="width:24px;height:24px"></lord-icon>
+                            </div>
+                            <div class="step-text">
+                                <h4>Apify</h4>
+                                <p>Enriqueciendo datos</p>
+                            </div>
+                            <div class="step-status" data-radar-target="status3"></div>
+                        </div>
+                    </div>
+                    
+                    <div class="overall-progress">
+                        <div class="progress-bar-container">
                             <div class="progress-bar" data-radar-target="progress"></div>
                         </div>
-                        <div class="scanner-text">
-                            <h3>Escaneando prospectos...</h3>
-                            <p>Analizando datos de Apollo.io, Tavily y Apify</p>
+                        <div class="progress-text">
+                            <span data-radar-target="progressText">0%</span>
                         </div>
                     </div>
                 </div>
-                
-                <div class="radar-results" data-radar-target="result">
-                    <div class="results-header">
-                        <h3>Prospecto Identificado</h3>
-                        <p>Perfil enriquecido con datos contextuales</p>
-                    </div>
-                    <div class="profile-data" data-radar-target="data">
-                        <!-- Profile data will be populated here -->
-                    </div>
+            </div>
+            
+            <!-- Radar Results Section -->
+            <div class="radar-results" data-radar-target="result" style="display: none;">
+                <div class="results-header">
+                    <h3>Prospectos Identificados</h3>
+                    <p>Perfiles enriquecidos con datos contextuales</p>
+                </div>
+                <div class="profile-data" data-radar-target="data">
+                    <!-- Profile data will be populated here -->
                 </div>
             </div>
             
             <div class="radar-actions">
-                <button class="btn btn-primary btn-lg" data-action="click->radar#startScan">
-                    <lord-icon src="https://cdn.lordicon.com/ggihhudh.json" trigger="loop" delay="2000" stroke="light" style="width:24px;height:24px"></lord-icon>
-                    Iniciar Escaneo
-                </button>
                 <button class="btn btn-outline-secondary btn-lg" data-bs-toggle="modal" data-bs-target="#contactModal">
                     <lord-icon src="https://cdn.lordicon.com/ggihhudh.json" trigger="loop" delay="2000" stroke="light" style="width:24px;height:24px"></lord-icon>
                     Solicitar Demo Personalizada

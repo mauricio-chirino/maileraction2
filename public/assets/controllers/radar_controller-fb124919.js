@@ -1,35 +1,27 @@
 import { Controller } from "@hotwired/stimulus"
 
 export default class extends Controller {
-  static targets = ["industryInput", "searchBtn", "inputSection", "progressSection", "industryDisplay", "step1", "step2", "step3", "status1", "status2", "status3", "progress", "progressText", "result", "data"]
+  static targets = ["scanner", "profile", "data", "progress", "result"]
   static values = { 
     demoMode: { type: Boolean, default: true },
-    scanDuration: { type: Number, default: 5000 }
+    scanDuration: { type: Number, default: 3000 }
   }
 
   connect() {
     console.log('Radar controller connected')
+    this.setupScanner()
     this.setupDemoData()
-    this.currentIndustry = ""
   }
 
   disconnect() {
     this.clearTimers()
   }
 
-  validateInput() {
-    const input = this.industryInputTarget.value.trim()
-    const isValid = input.length >= 3
+  setupScanner() {
+    if (!this.hasScannerTarget) return
     
-    if (isValid) {
-      this.searchBtnTarget.disabled = false
-      this.searchBtnTarget.classList.remove('btn-secondary')
-      this.searchBtnTarget.classList.add('btn-primary')
-    } else {
-      this.searchBtnTarget.disabled = true
-      this.searchBtnTarget.classList.remove('btn-primary')
-      this.searchBtnTarget.classList.add('btn-secondary')
-    }
+    // Add scanner animation classes
+    this.scannerTarget.classList.add('radar-scanner')
   }
 
   setupDemoData() {
@@ -82,103 +74,45 @@ export default class extends Controller {
   }
 
   startScan() {
-    if (!this.hasIndustryInputTarget || !this.hasProgressTarget) return
+    if (!this.hasScannerTarget || !this.hasProgressTarget) return
 
-    const industry = this.industryInputTarget.value.trim()
-    if (industry.length < 3) return
-
-    console.log('Starting radar scan for industry:', industry)
+    console.log('Starting radar scan...')
     
-    this.currentIndustry = industry
+    // Reset UI
+    this.resetScanUI()
     
-    // Hide input section and show progress section
-    this.inputSectionTarget.style.display = 'none'
-    this.progressSectionTarget.style.display = 'block'
-    
-    // Update industry display
-    this.industryDisplayTarget.textContent = industry
-    
-    // Reset progress
-    this.resetProgress()
-    
-    // Start scanning process
-    this.startProgressSteps()
-  }
-
-  resetProgress() {
-    // Reset all steps
-    this.step1Target.classList.remove('active', 'completed')
-    this.step2Target.classList.remove('active', 'completed')
-    this.step3Target.classList.remove('active', 'completed')
-    
-    // Reset status indicators
-    this.status1Target.innerHTML = ''
-    this.status2Target.innerHTML = ''
-    this.status3Target.innerHTML = ''
-    
-    // Reset progress bar
+    // Start scanning animation
+    this.scannerTarget.classList.add('scanning')
     this.progressTarget.style.width = '0%'
-    this.progressTextTarget.textContent = '0%'
-  }
-
-  startProgressSteps() {
-    // Step 1: Apollo.io
-    setTimeout(() => {
-      this.activateStep(1)
-      this.updateProgress(33)
-    }, 500)
     
-    // Step 2: Tavily
-    setTimeout(() => {
-      this.completeStep(1)
-      this.activateStep(2)
-      this.updateProgress(66)
-    }, 2000)
-    
-    // Step 3: Apify
-    setTimeout(() => {
-      this.completeStep(2)
-      this.activateStep(3)
-      this.updateProgress(100)
-    }, 3500)
-    
-    // Complete scan
-    setTimeout(() => {
-      this.completeStep(3)
-      this.completeScan()
-    }, 4500)
-  }
-
-  activateStep(stepNumber) {
-    const stepTarget = this[`step${stepNumber}Target`]
-    const statusTarget = this[`status${stepNumber}Target`]
-    
-    stepTarget.classList.add('active')
-    statusTarget.innerHTML = '<lord-icon src="https://cdn.lordicon.com/ggihhudh.json" trigger="loop" delay="2000" stroke="light" style="width:20px;height:20px"></lord-icon>'
-  }
-
-  completeStep(stepNumber) {
-    const stepTarget = this[`step${stepNumber}Target`]
-    const statusTarget = this[`status${stepNumber}Target`]
-    
-    stepTarget.classList.remove('active')
-    stepTarget.classList.add('completed')
-    statusTarget.innerHTML = '<lord-icon src="https://cdn.lordicon.com/mfgntcqv.json" trigger="hover" stroke="light" style="width:20px;height:20px"></lord-icon>'
-  }
-
-  updateProgress(percentage) {
-    this.progressTarget.style.width = percentage + '%'
-    this.progressTextTarget.textContent = percentage + '%'
+    // Simulate scanning progress
+    this.scanProgress = 0
+    this.scanInterval = setInterval(() => {
+      this.scanProgress += 2
+      this.progressTarget.style.width = this.scanProgress + '%'
+      
+      if (this.scanProgress >= 100) {
+        this.completeScan()
+      }
+    }, this.scanDurationValue / 50)
   }
 
   completeScan() {
     console.log('Scan completed!')
     
-    // Hide progress section and show results
+    // Clear scanning animation
+    this.scannerTarget.classList.remove('scanning')
+    this.scannerTarget.classList.add('completed')
+    
+    // Clear progress interval
+    if (this.scanInterval) {
+      clearInterval(this.scanInterval)
+    }
+    
+    // Show results after a brief delay
     setTimeout(() => {
-      this.progressSectionTarget.style.display = 'none'
       this.showResults()
-    }, 1000)
+    }, 500)
   }
 
   showResults() {
@@ -289,16 +223,12 @@ export default class extends Controller {
   }
 
   resetScanUI() {
-    // Show input section and hide others
-    this.inputSectionTarget.style.display = 'block'
-    this.progressSectionTarget.style.display = 'none'
-    this.resultTarget.style.display = 'none'
-    
-    // Clear input
-    this.industryInputTarget.value = ''
-    this.validateInput()
-    
-    // Clear results
+    if (this.hasScannerTarget) {
+      this.scannerTarget.classList.remove('scanning', 'completed')
+    }
+    if (this.hasResultTarget) {
+      this.resultTarget.classList.remove('show')
+    }
     if (this.hasDataTarget) {
       this.dataTarget.innerHTML = ''
     }
