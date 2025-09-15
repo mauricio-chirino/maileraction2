@@ -96,7 +96,11 @@ class DeviseN8nService
           Rails.logger.info "#{action_type} enviado exitosamente a n8n"
           {
             success: true,
-            data: JSON.parse(response.body) rescue response.body,
+            data: begin
+              JSON.parse(response.body)
+            rescue
+              response.body
+            end,
             status: response.code
           }
         else
