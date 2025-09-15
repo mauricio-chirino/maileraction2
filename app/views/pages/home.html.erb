@@ -338,135 +338,45 @@ tu mensaje.
                     </div>
                 </div>
                 
-                <!-- Right Panel: Wizard Steps -->
+                <!-- Right Panel: Progress Bar -->
                 <div class="wizard-steps-panel" data-radar-target="stepsPanel" style="display: none;">
                     <div class="wizard-header">
                         <h3>Proceso de Construcción del Perfil</h3>
                         <p>Escaneando prospectos en <span data-radar-target="industryDisplay"></span></p>
                     </div>
                     
-                    <div class="wizard-steps">
-                        <!-- Paso 1: Perfil inicial -->
-                        <div class="wizard-step" data-radar-target="wizardStep1">
-                            <div class="step-indicator-circle" data-radar-target="stepCircle1">
-                                <lord-icon src="https://cdn.lordicon.com/dxjqoygy.json" trigger="loop" delay="2000" stroke="light" style="width:24px;height:24px"></lord-icon>
+                    <div class="wizard-progress-container">
+                        <!-- Progress Bar -->
+                        <div class="progress mb-4" role="progressbar" aria-label="Progreso del Radar" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100" data-radar-target="progressBar">
+                            <div class="progress-bar progress-bar-striped progress-bar-animated" style="width: 0%" data-radar-target="progressFill"></div>
+                        </div>
+                        
+                        <!-- Current Step Info -->
+                        <div class="current-step-info" data-radar-target="currentStepInfo">
+                            <div class="step-icon" data-radar-target="stepIcon">
+                                <lord-icon src="https://cdn.lordicon.com/dxjqoygy.json" trigger="loop" delay="2000" stroke="light" style="width:40px;height:40px"></lord-icon>
                             </div>
-                            <div class="step-content">
-                                <div class="step-title">
-                                    <span class="step-number">Paso 1</span>
-                                    <span class="step-name">Perfil inicial</span>
-                                </div>
-                                <div class="step-description">Se selecciona un perfil B2B desde Apollo con datos enriquecidos</div>
-                                <div class="step-visual" data-radar-target="visual1">
-                                    <div class="profile-preview">
-                                        <div class="avatar-placeholder"></div>
-                                        <div class="profile-info">
-                                            <div class="name-placeholder"></div>
-                                            <div class="title-placeholder"></div>
-                                            <div class="company-placeholder"></div>
-                                        </div>
-                                    </div>
-                                </div>
+                            <div class="step-details">
+                                <h4 class="step-title" data-radar-target="stepTitle">Iniciando proceso...</h4>
+                                <p class="step-description" data-radar-target="stepDescription">Preparando el análisis de prospectos</p>
                             </div>
                         </div>
                         
-                        <!-- Paso 2: Contexto inteligente -->
-                        <div class="wizard-step" data-radar-target="wizardStep2">
-                            <div class="step-indicator-circle" data-radar-target="stepCircle2">
-                                <lord-icon src="https://cdn.lordicon.com/ggihhudh.json" trigger="loop" delay="2000" stroke="light" style="width:24px;height:24px"></lord-icon>
-                            </div>
-                            <div class="step-content">
-                                <div class="step-title">
-                                    <span class="step-number">Paso 2</span>
-                                    <span class="step-name">Contexto inteligente</span>
-                                </div>
-                                <div class="step-description">Tavily analiza noticias, redes y actividad reciente del prospecto</div>
-                                <div class="step-visual" data-radar-target="visual2">
-                                    <div class="context-radar">
-                                        <div class="radar-center"></div>
-                                        <div class="radar-ring"></div>
-                                        <div class="context-icons">
-                                            <lord-icon src="https://cdn.lordicon.com/ggihhudh.json" trigger="loop" delay="2000" stroke="light" style="width:16px;height:16px"></lord-icon>
-                                            <lord-icon src="https://cdn.lordicon.com/ggihhudh.json" trigger="loop" delay="2000" stroke="light" style="width:16px;height:16px"></lord-icon>
-                                            <lord-icon src="https://cdn.lordicon.com/ggihhudh.json" trigger="loop" delay="2000" stroke="light" style="width:16px;height:16px"></lord-icon>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
+                        <!-- Step Labels -->
+                        <div class="step-labels">
+                            <div class="step-label" data-radar-target="stepLabel1">Perfil inicial</div>
+                            <div class="step-label" data-radar-target="stepLabel2">Contexto inteligente</div>
+                            <div class="step-label" data-radar-target="stepLabel3">Personalización emocional</div>
+                            <div class="step-label" data-radar-target="stepLabel4">Validación</div>
+                            <div class="step-label" data-radar-target="stepLabel5">Listo para contactar</div>
                         </div>
                         
-                        <!-- Paso 3: Personalización emocional -->
-                        <div class="wizard-step" data-radar-target="wizardStep3">
-                            <div class="step-indicator-circle" data-radar-target="stepCircle3">
-                                <lord-icon src="https://cdn.lordicon.com/ggihhudh.json" trigger="loop" delay="2000" stroke="light" style="width:24px;height:24px"></lord-icon>
-                            </div>
-                            <div class="step-content">
-                                <div class="step-title">
-                                    <span class="step-number">Paso 3</span>
-                                    <span class="step-name">Personalización emocional</span>
-                                </div>
-                                <div class="step-description">Se construye una ficha con tono, intereses y motivadores clave</div>
-                                <div class="step-visual" data-radar-target="visual3">
-                                    <div class="emotional-card">
-                                        <div class="emoji-section">😊 🎯 💼</div>
-                                        <div class="tone-indicator">
-                                            <span class="tone-label">Tono:</span>
-                                            <span class="tone-value">Profesional</span>
-                                        </div>
-                                        <div class="cta-preview">CTA Sugerido</div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        
-                        <!-- Paso 4: Validación -->
-                        <div class="wizard-step" data-radar-target="wizardStep4">
-                            <div class="step-indicator-circle" data-radar-target="stepCircle4">
-                                <lord-icon src="https://cdn.lordicon.com/ggihhudh.json" trigger="loop" delay="2000" stroke="light" style="width:24px;height:24px"></lord-icon>
-                            </div>
-                            <div class="step-content">
-                                <div class="step-title">
-                                    <span class="step-number">Paso 4</span>
-                                    <span class="step-name">Validación</span>
-                                </div>
-                                <div class="step-description">Se muestra cómo el perfil cumple con criterios ideales para outreach</div>
-                                <div class="step-visual" data-radar-target="visual4">
-                                    <div class="validation-panel">
-                                        <div class="checkmarks">
-                                            <lord-icon src="https://cdn.lordicon.com/mfgntcqv.json" trigger="hover" stroke="light" style="width:20px;height:20px"></lord-icon>
-                                            <lord-icon src="https://cdn.lordicon.com/mfgntcqv.json" trigger="hover" stroke="light" style="width:20px;height:20px"></lord-icon>
-                                            <lord-icon src="https://cdn.lordicon.com/mfgntcqv.json" trigger="hover" stroke="light" style="width:20px;height:20px"></lord-icon>
-                                        </div>
-                                        <div class="affinity-bar">
-                                            <div class="affinity-fill" data-radar-target="affinityBar"></div>
-                                        </div>
-                                        <div class="affinity-score">92% Afinidad</div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        
-                        <!-- Paso 5: Listo para contactar -->
-                        <div class="wizard-step" data-radar-target="wizardStep5">
-                            <div class="step-indicator-circle" data-radar-target="stepCircle5">
-                                <lord-icon src="https://cdn.lordicon.com/ggihhudh.json" trigger="loop" delay="2000" stroke="light" style="width:24px;height:24px"></lord-icon>
-                            </div>
-                            <div class="step-content">
-                                <div class="step-title">
-                                    <span class="step-number">Paso 5</span>
-                                    <span class="step-name">Listo para contactar</span>
-                                </div>
-                                <div class="step-description">El prospecto está listo para recibir un mensaje emocionalmente resonante</div>
-                                <div class="step-visual" data-radar-target="visual5">
-                                    <div class="ready-panel">
-                                        <button class="outreach-btn" data-action="click->radar#initiateOutreach">
-                                            <lord-icon src="https://cdn.lordicon.com/ggihhudh.json" trigger="loop" delay="2000" stroke="light" style="width:20px;height:20px"></lord-icon>
-                                            Iniciar outreach
-                                        </button>
-                                        <div class="send-animation" data-radar-target="sendAnimation"></div>
-                                    </div>
-                                </div>
-                            </div>
+                        <!-- Action Button -->
+                        <div class="wizard-action" data-radar-target="wizardAction" style="display: none;">
+                            <button class="btn btn-success btn-lg" onclick="initiateOutreach()">
+                                <lord-icon src="https://cdn.lordicon.com/ggihhudh.json" trigger="loop" delay="2000" stroke="light" style="width:20px;height:20px"></lord-icon>
+                                Iniciar outreach
+                            </button>
                         </div>
                     </div>
                 </div>
@@ -1246,9 +1156,148 @@ tu mensaje.
             // Update industry display
             industryDisplay.textContent = industry
             
+            // Start progress animation
+            startProgressAnimation()
+            
             console.log('Wizard started successfully')
         } else {
             console.error('Wizard panels not found!')
         }
+    }
+    
+    function startProgressAnimation() {
+        const progressFill = document.querySelector('[data-radar-target="progressFill"]')
+        const progressBar = document.querySelector('[data-radar-target="progressBar"]')
+        const stepTitle = document.querySelector('[data-radar-target="stepTitle"]')
+        const stepDescription = document.querySelector('[data-radar-target="stepDescription"]')
+        const stepIcon = document.querySelector('[data-radar-target="stepIcon"]')
+        const wizardAction = document.querySelector('[data-radar-target="wizardAction"]')
+        
+        const steps = [
+            {
+                title: "Perfil inicial",
+                description: "Se selecciona un perfil B2B desde Apollo con datos enriquecidos",
+                icon: "https://cdn.lordicon.com/dxjqoygy.json",
+                progress: 20
+            },
+            {
+                title: "Contexto inteligente", 
+                description: "Tavily analiza noticias, redes y actividad reciente del prospecto",
+                icon: "https://cdn.lordicon.com/ggihhudh.json",
+                progress: 40
+            },
+            {
+                title: "Personalización emocional",
+                description: "Se construye una ficha con tono, intereses y motivadores clave",
+                icon: "https://cdn.lordicon.com/ggihhudh.json",
+                progress: 60
+            },
+            {
+                title: "Validación",
+                description: "Se muestra cómo el perfil cumple con criterios ideales para outreach",
+                icon: "https://cdn.lordicon.com/mfgntcqv.json",
+                progress: 80
+            },
+            {
+                title: "Listo para contactar",
+                description: "El prospecto está listo para recibir un mensaje emocionalmente resonante",
+                icon: "https://cdn.lordicon.com/ggihhudh.json",
+                progress: 100
+            }
+        ]
+        
+        let currentStep = 0
+        
+        function updateStep() {
+            if (currentStep < steps.length) {
+                const step = steps[currentStep]
+                
+                // Update progress bar
+                if (progressFill) {
+                    progressFill.style.width = step.progress + '%'
+                }
+                if (progressBar) {
+                    progressBar.setAttribute('aria-valuenow', step.progress)
+                }
+                
+                // Update step info
+                if (stepTitle) stepTitle.textContent = step.title
+                if (stepDescription) stepDescription.textContent = step.description
+                if (stepIcon) {
+                    stepIcon.innerHTML = `<lord-icon src="${step.icon}" trigger="loop" delay="2000" stroke="light" style="width:40px;height:40px"></lord-icon>`
+                }
+                
+                // Update step labels
+                updateStepLabels(currentStep)
+                
+                currentStep++
+                
+                if (currentStep < steps.length) {
+                    setTimeout(updateStep, 2000) // 2 seconds per step
+                } else {
+                    // Show action button when complete
+                    if (wizardAction) {
+                        wizardAction.style.display = 'block'
+                    }
+                }
+            }
+        }
+        
+        // Start animation
+        setTimeout(updateStep, 500)
+    }
+    
+    function updateStepLabels(activeIndex) {
+        for (let i = 1; i <= 5; i++) {
+            const label = document.querySelector(`[data-radar-target="stepLabel${i}"]`)
+            if (label) {
+                label.classList.remove('active', 'completed')
+                if (i < activeIndex + 1) {
+                    label.classList.add('completed')
+                } else if (i === activeIndex + 1) {
+                    label.classList.add('active')
+                }
+            }
+        }
+    }
+    
+    function initiateOutreach() {
+        console.log('Initiating outreach...')
+        alert('¡Outreach iniciado! El mensaje emocionalmente resonante ha sido enviado al prospecto.')
+        
+        // Reset wizard
+        resetWizard()
+    }
+    
+    function resetWizard() {
+        const inputPanel = document.querySelector('[data-radar-target="inputPanel"]')
+        const stepsPanel = document.querySelector('[data-radar-target="stepsPanel"]')
+        const industryInput = document.querySelector('[data-radar-target="industryInput"]')
+        const progressFill = document.querySelector('[data-radar-target="progressFill"]')
+        const progressBar = document.querySelector('[data-radar-target="progressBar"]')
+        const wizardAction = document.querySelector('[data-radar-target="wizardAction"]')
+        
+        // Show input panel and hide steps panel
+        if (inputPanel) inputPanel.style.display = 'block'
+        if (stepsPanel) stepsPanel.style.display = 'none'
+        
+        // Clear input
+        if (industryInput) industryInput.value = ''
+        
+        // Reset progress
+        if (progressFill) progressFill.style.width = '0%'
+        if (progressBar) progressBar.setAttribute('aria-valuenow', '0')
+        if (wizardAction) wizardAction.style.display = 'none'
+        
+        // Reset step labels
+        for (let i = 1; i <= 5; i++) {
+            const label = document.querySelector(`[data-radar-target="stepLabel${i}"]`)
+            if (label) {
+                label.classList.remove('active', 'completed')
+            }
+        }
+        
+        // Re-initialize input validation
+        initializeInputValidation()
     }
     </script>
