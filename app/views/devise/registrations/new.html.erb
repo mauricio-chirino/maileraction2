@@ -423,11 +423,15 @@ function validateEmailWithDomain(input) {
   const websiteInput = document.getElementById('user_website');
   const website = websiteInput ? websiteInput.value.trim() : '';
   
+  console.log('validateEmailWithDomain llamado con:', { email, website, inputId: input.id });
+  
   // Verificar que el elemento de error existe
   if (!errorElement) {
     console.error('Elemento de error no encontrado para:', input.id);
     return false;
   }
+  
+  console.log('Elemento de error encontrado:', errorElement);
   
   // Regex para validar email
   const emailRegex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
