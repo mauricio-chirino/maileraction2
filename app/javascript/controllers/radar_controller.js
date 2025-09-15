@@ -16,17 +16,24 @@ export default class extends Controller {
 
   showDemo() {
     console.log('Showing radar demo...')
+    console.log('Radar controller connected:', this.element)
     
     // Show the demo section
     const demoSection = document.getElementById('demo-servicios')
+    console.log('Demo section found:', demoSection)
+    
     if (demoSection) {
       demoSection.style.display = 'block'
+      console.log('Demo section displayed')
       
       // Scroll to demo section
       demoSection.scrollIntoView({ 
         behavior: 'smooth',
         block: 'start'
       })
+      console.log('Scrolled to demo section')
+    } else {
+      console.error('Demo section not found!')
     }
   }
 
