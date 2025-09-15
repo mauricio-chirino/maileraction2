@@ -293,9 +293,13 @@ tu mensaje.
                     <h3>Radar Inteligente de Prospección</h3>
                     <p>Podemos identificar automáticamente clientes potenciales<br>con alta probabilidad de conversión<br>usando nuestro modelo de IA.</p>
                     <div class="radar-buttons">
-                        <% if user_signed_in? %>
+                        <% if user_signed_in? && current_user.confirmed? %>
                             <button onclick="testRadar()" class="radar-btn radar-btn-primary">
                                 Probar Demo
+                            </button>
+                        <% elsif user_signed_in? && !current_user.confirmed? %>
+                            <button onclick="showEmailConfirmationAlert()" class="radar-btn radar-btn-warning">
+                                Confirmar Email para Acceder
                             </button>
                         <% else %>
                             <button onclick="showAuthModal()" class="radar-btn radar-btn-primary">
@@ -308,19 +312,43 @@ tu mensaje.
                     <lord-icon src="https://cdn.lordicon.com/ggihhudh.json" trigger="loop" delay="2000" stroke="light" style="width:50px;height:50px" data-effects-target="icon"></lord-icon>
                     <h3>Cazador de Oportunidades</h3>
                     <p>Detecta el momento perfecto para contactar a tus prospectos basándose en su comportamiento digital.</p>
-                    <button class="btn btn-secondary mt-3" data-effects-target="button">
-                        <lord-icon src="https://cdn.lordicon.com/ggihhudh.json" trigger="loop" delay="2000" stroke="light" style="width:20px;height:20px"></lord-icon>
-                        Saber Más
-                    </button>
+                    <% if user_signed_in? && current_user.confirmed? %>
+                        <button class="btn btn-primary mt-3" data-effects-target="button">
+                            <lord-icon src="https://cdn.lordicon.com/ggihhudh.json" trigger="loop" delay="2000" stroke="light" style="width:20px;height:20px"></lord-icon>
+                            Acceder al Servicio
+                        </button>
+                    <% elsif user_signed_in? && !current_user.confirmed? %>
+                        <button onclick="showEmailConfirmationAlert()" class="btn btn-warning mt-3" data-effects-target="button">
+                            <lord-icon src="https://cdn.lordicon.com/ggihhudh.json" trigger="loop" delay="2000" stroke="light" style="width:20px;height:20px"></lord-icon>
+                            Confirmar Email para Acceder
+                        </button>
+                    <% else %>
+                        <button onclick="showAuthModal()" class="btn btn-secondary mt-3" data-effects-target="button">
+                            <lord-icon src="https://cdn.lordicon.com/ggihhudh.json" trigger="loop" delay="2000" stroke="light" style="width:20px;height:20px"></lord-icon>
+                            Crear Cuenta para Acceder
+                        </button>
+                    <% end %>
                 </div>
                 <div class="service-card" data-controller="effects" data-effects-target="card">
                     <lord-icon src="https://cdn.lordicon.com/ggihhudh.json" trigger="loop" delay="2000" stroke="light" style="width:50px;height:50px" data-effects-target="icon"></lord-icon>
                     <h3>Email que piensa antes de hablar</h3>
                     <p>Campañas de email marketing que se adaptan emocionalmente a cada receptor para maximizar engagement.</p>
-                    <button class="btn btn-secondary mt-3" data-effects-target="button">
-                        <lord-icon src="https://cdn.lordicon.com/ggihhudh.json" trigger="loop" delay="2000" stroke="light" style="width:20px;height:20px"></lord-icon>
-                        Saber Más
-                    </button>
+                    <% if user_signed_in? && current_user.confirmed? %>
+                        <button class="btn btn-primary mt-3" data-effects-target="button">
+                            <lord-icon src="https://cdn.lordicon.com/ggihhudh.json" trigger="loop" delay="2000" stroke="light" style="width:20px;height:20px"></lord-icon>
+                            Acceder al Servicio
+                        </button>
+                    <% elsif user_signed_in? && !current_user.confirmed? %>
+                        <button onclick="showEmailConfirmationAlert()" class="btn btn-warning mt-3" data-effects-target="button">
+                            <lord-icon src="https://cdn.lordicon.com/ggihhudh.json" trigger="loop" delay="2000" stroke="light" style="width:20px;height:20px"></lord-icon>
+                            Confirmar Email para Acceder
+                        </button>
+                    <% else %>
+                        <button onclick="showAuthModal()" class="btn btn-secondary mt-3" data-effects-target="button">
+                            <lord-icon src="https://cdn.lordicon.com/ggihhudh.json" trigger="loop" delay="2000" stroke="light" style="width:20px;height:20px"></lord-icon>
+                            Crear Cuenta para Acceder
+                        </button>
+                    <% end %>
                 </div>
             </div>
         </div>
@@ -1062,6 +1090,15 @@ tu mensaje.
         box-shadow: 0 4px 12px rgba(99, 102, 241, 0.3);
     }
     
+    .radar-btn-warning {
+        background: #f59e0b;
+    }
+    
+    .radar-btn-warning:hover {
+        background: #d97706;
+        box-shadow: 0 4px 12px rgba(245, 158, 11, 0.3);
+    }
+    
     @media (max-width: 768px) {
         .radar-buttons {
             flex-direction: column;
@@ -1113,6 +1150,10 @@ tu mensaje.
     function showAuthModal() {
         // Redirigir a la página de registro
         window.location.href = '/users/sign_up'
+    }
+    
+    function showEmailConfirmationAlert() {
+        alert('Por favor confirma tu email para acceder a nuestros servicios. Revisa tu bandeja de entrada y spam.')
     }
     
     function initializeInputValidation() {
