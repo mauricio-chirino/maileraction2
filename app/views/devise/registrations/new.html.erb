@@ -448,6 +448,8 @@ document.addEventListener('DOMContentLoaded', function() {
   // Verificar si hay errores de validación del servidor
   const emailField = document.getElementById('user_email');
   const emailError = document.getElementById('email_error');
+  const websiteField = document.getElementById('user_website');
+  const websiteError = document.getElementById('website_error');
   const errorExplanation = document.getElementById('error_explanation');
   
   // Buscar mensajes de error específicos en la página
@@ -476,13 +478,61 @@ document.addEventListener('DOMContentLoaded', function() {
         emailError.className = 'validation-message';
         emailField.classList.remove('error');
       }, 7000);
+    }
+    
+    // Si es un error de email en blanco
+    else if (errorText.includes('Email no puede estar en blanco') || errorText.includes('Email can\'t be blank')) {
+      emailField.classList.add('error');
+      emailError.textContent = 'El correo electrónico es obligatorio';
+      emailError.className = 'validation-message error';
       
-      // Ocultar el mensaje de error genérico
-      if (errorExplanation) {
-        errorExplanation.style.display = 'none';
+      // Enfocar el campo de email
+      emailField.focus();
+      
+      // Ocultar el mensaje después de 7 segundos
+      setTimeout(function() {
+        emailError.textContent = '';
+        emailError.className = 'validation-message';
+        emailField.classList.remove('error');
+      }, 7000);
+    }
+    
+    // Si es un error de sitio web en blanco
+    else if (errorText.includes('Website no puede estar en blanco') || errorText.includes('Website can\'t be blank')) {
+      websiteField.classList.add('error');
+      websiteError.textContent = 'El sitio web es obligatorio';
+      websiteError.className = 'validation-message error';
+      
+      // Enfocar el campo de sitio web
+      websiteField.focus();
+      
+      // Ocultar el mensaje después de 7 segundos
+      setTimeout(function() {
+        websiteError.textContent = '';
+        websiteError.className = 'validation-message';
+        websiteField.classList.remove('error');
+      }, 7000);
+    }
+    
+    // Si es un error de contraseña
+    else if (errorText.includes('Password') || errorText.includes('Contraseña')) {
+      const passwordField = document.getElementById('user_password');
+      if (passwordField) {
+        passwordField.classList.add('error');
+        passwordField.focus();
+        
+        // Ocultar el mensaje después de 7 segundos
+        setTimeout(function() {
+          passwordField.classList.remove('error');
+        }, 7000);
       }
     }
   });
+  
+  // Ocultar el mensaje de error genérico si hay errores específicos
+  if (errorMessages.length > 0 && errorExplanation) {
+    errorExplanation.style.display = 'none';
+  }
 });
 
 // Función para alternar visibilidad de contraseña
