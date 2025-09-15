@@ -1,0 +1,50 @@
+¡BIENVENIDO A MAILERACTION!
+=====================================
+
+Hola {{user_name}},
+
+Gracias por registrarte en MailerAction. Para completar tu registro y acceder a todas nuestras funcionalidades de prospección inteligente, necesitas confirmar tu dirección de correo electrónico.
+
+📋 INFORMACIÓN DE TU CUENTA
+----------------------------
+Email: {{user_email}}
+Sitio web: {{user_website}}
+Fecha de registro: {{registration_date}}
+ID de usuario: {{user_uuid}}
+
+✅ CONFIRMAR MI CUENTA
+----------------------
+Haz clic en el siguiente enlace para confirmar tu cuenta:
+{{confirmation_url}}
+
+🔒 INFORMACIÓN DE SEGURIDAD
+----------------------------
+Este enlace es válido por 24 horas y solo puede ser usado una vez. 
+Si no solicitaste esta cuenta, puedes ignorar este email de forma segura.
+
+🚀 FUNCIONALIDADES DISPONIBLES
+-------------------------------
+Una vez confirmada tu cuenta, podrás acceder a:
+
+• Radar Inteligente de Prospección
+  Identifica clientes potenciales con alta probabilidad de conversión
+
+• Cazador de Oportunidades  
+  Detecta el momento perfecto para contactar prospectos
+
+• Email que piensa antes de hablar
+  Campañas adaptativas emocionalmente
+
+📞 SOPORTE
+----------
+Si tienes alguna pregunta o necesitas ayuda, no dudes en contactarnos.
+
+---
+MailerAction - Prospección Inteligente para tu Negocio
+
+Este email fue enviado automáticamente. Por favor no respondas a este mensaje.
+
+© 2025 MailerAction. Todos los derechos reservados.
+
+Si no puedes hacer clic en el enlace, copia y pega esta URL en tu navegador:
+{{confirmation_url}}
