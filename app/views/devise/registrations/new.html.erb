@@ -20,7 +20,7 @@
       <div class="form-group">
         <%= f.label :email, "Correo Electrónico", class: "form-label" %>
         <%= f.email_field :email, autocomplete: "email", class: "form-input", placeholder: "nombre@empresa.dominio", id: "user_email", onblur: "validateEmailWithDomain(this)" %>
-        <div class="validation-message" id="email_error"></div>
+        <div class="validation-message" id="user_email_error"></div>
       </div>
 
       <div class="form-group">
@@ -486,7 +486,7 @@ function validateEmailWithDomain(input) {
 document.addEventListener('DOMContentLoaded', function() {
   // Verificar si hay errores de validación del servidor
   const emailField = document.getElementById('user_email');
-  const emailError = document.getElementById('email_error');
+  const emailError = document.getElementById('user_email_error');
   const websiteField = document.getElementById('user_website');
   const websiteError = document.getElementById('user_website_error');
   const errorExplanation = document.getElementById('error_explanation');
@@ -601,17 +601,22 @@ function checkEmailUniqueness(email, input, errorElement, website) {
   })
   .then(response => response.json())
   .then(data => {
+    console.log('Respuesta del servidor:', data);
+    console.log('Elemento de error:', errorElement);
+    
     if (data.exists) {
       input.classList.remove('success');
       input.classList.add('error');
       
       // Mostrar mensaje específico según el estado del usuario
       if (data.confirmed === false) {
+        console.log('Usuario no confirmado, mostrando mensaje de advertencia');
         errorElement.textContent = 'Usuario ya creado, pero aún no has validado tu correo';
         errorElement.className = 'validation-message warning';
         input.classList.remove('error');
         input.classList.add('warning');
       } else {
+        console.log('Usuario confirmado, mostrando mensaje de error');
         errorElement.textContent = 'Este email ya está registrado en el sistema';
         errorElement.className = 'validation-message error';
       }
