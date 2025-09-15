@@ -1149,6 +1149,12 @@ tu mensaje.
     </style>
 
     <script>
+    // Initialize when page loads
+    document.addEventListener('DOMContentLoaded', function() {
+        console.log('DOM loaded, initializing input validation...')
+        initializeInputValidation()
+    })
+    
     function testRadar() {
         console.log('=== TEST DIRECTO ===')
         console.log('Función testRadar llamada')
@@ -1159,7 +1165,6 @@ tu mensaje.
         if (demoSection) {
             console.log('Mostrando sección demo...')
             demoSection.style.display = 'block'
-            demoSection.style.backgroundColor = 'yellow'
             demoSection.scrollIntoView({ behavior: 'smooth' })
             console.log('Sección demo mostrada')
         } else {
@@ -1168,5 +1173,82 @@ tu mensaje.
         }
         
         console.log('=== FIN TEST DIRECTO ===')
+    }
+    
+    function initializeInputValidation() {
+        const industryInput = document.querySelector('[data-radar-target="industryInput"]')
+        const searchBtn = document.querySelector('[data-radar-target="searchBtn"]')
+        
+        console.log('=== INITIALIZING INPUT VALIDATION ===')
+        console.log('Industry input:', industryInput)
+        console.log('Search button:', searchBtn)
+        
+        if (industryInput && searchBtn) {
+            // Initialize button as disabled
+            searchBtn.disabled = true
+            searchBtn.classList.add('btn-secondary')
+            console.log('Button initialized as disabled')
+            
+            // Add event listener for input validation
+            industryInput.addEventListener('input', function() {
+                const value = this.value.trim()
+                const isValid = value.length >= 3
+                
+                console.log('Input changed - value:', value, 'length:', value.length, 'isValid:', isValid)
+                
+                if (isValid) {
+                    searchBtn.disabled = false
+                    searchBtn.classList.remove('btn-secondary')
+                    searchBtn.classList.add('btn-primary')
+                    console.log('Button ENABLED')
+                } else {
+                    searchBtn.disabled = true
+                    searchBtn.classList.remove('btn-primary')
+                    searchBtn.classList.add('btn-secondary')
+                    console.log('Button DISABLED')
+                }
+            })
+            
+            // Add event listener for search button
+            searchBtn.addEventListener('click', function() {
+                const industry = industryInput.value.trim()
+                console.log('Search button clicked, industry:', industry)
+                if (industry.length >= 3) {
+                    console.log('Starting wizard for industry:', industry)
+                    startWizardSteps(industry)
+                } else {
+                    console.log('Industry too short, not starting wizard')
+                }
+            })
+            
+            console.log('Input validation initialized successfully')
+        } else {
+            console.error('Input or button not found!')
+            console.log('Retrying in 1 second...')
+            setTimeout(initializeInputValidation, 1000)
+        }
+    }
+    
+    function startWizardSteps(industry) {
+        console.log('Starting wizard steps for:', industry)
+        
+        const inputPanel = document.querySelector('[data-radar-target="inputPanel"]')
+        const stepsPanel = document.querySelector('[data-radar-target="stepsPanel"]')
+        const industryDisplay = document.querySelector('[data-radar-target="industryDisplay"]')
+        
+        console.log('Wizard panels:', { inputPanel, stepsPanel, industryDisplay })
+        
+        if (inputPanel && stepsPanel && industryDisplay) {
+            // Hide input panel and show steps panel
+            inputPanel.style.display = 'none'
+            stepsPanel.style.display = 'block'
+            
+            // Update industry display
+            industryDisplay.textContent = industry
+            
+            console.log('Wizard started successfully')
+        } else {
+            console.error('Wizard panels not found!')
+        }
     }
     </script>
