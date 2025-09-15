@@ -614,11 +614,23 @@ function checkEmailUniqueness(email, input, errorElement, website) {
       
       // Mostrar mensaje específico según el estado del usuario
       if (data.confirmed === false) {
-        console.log('Usuario no confirmado, mostrando mensaje de advertencia');
-        errorElement.textContent = 'Usuario ya creado, pero aún no has validado tu correo';
+        console.log('Usuario no confirmado, redirigiendo a confirmación');
+        errorElement.textContent = 'Usuario ya creado, pero aún no has validado tu correo. Redirigiendo...';
         errorElement.className = 'validation-message warning';
         input.classList.remove('error');
         input.classList.add('warning');
+        
+        // Mostrar contador y redirigir a la página de confirmación
+        let countdown = 3;
+        const countdownInterval = setInterval(() => {
+          errorElement.textContent = `Usuario ya creado, pero aún no has validado tu correo. Redirigiendo en ${countdown}...`;
+          countdown--;
+          
+          if (countdown < 0) {
+            clearInterval(countdownInterval);
+            window.location.href = '/users/confirmation/new';
+          }
+        }, 1000);
       } else {
         console.log('Usuario confirmado, mostrando mensaje de error');
         errorElement.textContent = 'Este email ya está registrado en el sistema';
