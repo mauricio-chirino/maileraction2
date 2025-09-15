@@ -18,6 +18,11 @@ Rails.application.routes.draw do
   # Resource routes with UUID support
   resources :campaigns, param: :uuid
   resources :prospects, param: :uuid
+  
+  # Devise integration routes for n8n webhooks
+  post 'devise_integration/create_user', to: 'devise_integration#create_user'
+  post 'devise_integration/reset_password', to: 'devise_integration#reset_password'
+  post 'devise_integration/resend_confirmation', to: 'devise_integration#resend_confirmation'
 
   # Render dynamic PWA files from app/views/pwa/* (remember to link manifest in application.html.erb)
   # get "manifest" => "rails/pwa#manifest", as: :pwa_manifest
