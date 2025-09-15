@@ -283,6 +283,12 @@ function validateEmail(input) {
   const email = input.value.trim();
   const errorElement = document.getElementById(input.id + '_error');
   
+  // Verificar que el elemento de error existe
+  if (!errorElement) {
+    console.error('Elemento de error no encontrado para:', input.id);
+    return false;
+  }
+  
   // Regex para validar email
   const emailRegex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
   
@@ -311,6 +317,12 @@ function validateEmail(input) {
 function validateWebsite(input) {
   const website = input.value.trim();
   const errorElement = document.getElementById(input.id + '_error');
+  
+  // Verificar que el elemento de error existe
+  if (!errorElement) {
+    console.error('Elemento de error no encontrado para:', input.id);
+    return false;
+  }
   
   // Regex más robusto para validar URL de sitio web
   const websiteRegex = /^https?:\/\/(www\.)?[a-zA-Z0-9]([a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?(\.[a-zA-Z0-9]([a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?)*\.[a-zA-Z]{2,}(\/.*)?$/;
@@ -394,6 +406,12 @@ function validateEmailWithDomain(input) {
   const errorElement = document.getElementById(input.id + '_error');
   const websiteInput = document.getElementById('user_website');
   const website = websiteInput ? websiteInput.value.trim() : '';
+  
+  // Verificar que el elemento de error existe
+  if (!errorElement) {
+    console.error('Elemento de error no encontrado para:', input.id);
+    return false;
+  }
   
   // Regex para validar email
   const emailRegex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
