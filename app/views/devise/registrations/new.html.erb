@@ -19,7 +19,7 @@
 
       <div class="form-group">
         <%= f.label :email, "Correo Electrónico", class: "form-label" %>
-        <%= f.email_field :email, autocomplete: "email", class: "form-input", placeholder: "Debe ser un correo que pertenezca al dominio de tu sitio web", id: "user_email", onblur: "validateEmailWithDomain(this)" %>
+        <%= f.email_field :email, autocomplete: "email", class: "form-input", placeholder: "nombre@empresa.dominio", id: "user_email", onblur: "validateEmailWithDomain(this)" %>
         <div class="validation-message" id="email_error"></div>
       </div>
 
