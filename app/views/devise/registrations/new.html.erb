@@ -12,20 +12,15 @@
       <%= render "devise/shared/error_messages", resource: resource %>
 
       <div class="form-group">
-        <%= f.label :email, "Correo Electrónico", class: "form-label" %>
-        <%= f.email_field :email, autofocus: true, autocomplete: "email", class: "form-input", placeholder: "tu@email.com", id: "user_email", onblur: "validateEmail(this)" %>
-        <div class="validation-message" id="email_error"></div>
-      </div>
-
-      <div class="form-group">
         <%= f.label :website, "Sitio Web de tu Empresa", class: "form-label" %>
-        <%= f.url_field :website, autocomplete: "url", class: "form-input", placeholder: "El sitio web que queremos analizar para encontrar prospectos" %>
+        <%= f.url_field :website, autofocus: true, autocomplete: "url", class: "form-input", placeholder: "El sitio web que queremos analizar para encontrar prospectos", id: "user_website", onblur: "validateWebsite(this)" %>
+        <div class="validation-message" id="website_error"></div>
       </div>
 
       <div class="form-group">
-        <%= f.label :domain_email, "Correo del Dominio", class: "form-label" %>
-        <%= f.email_field :domain_email, autocomplete: "email", class: "form-input", placeholder: "Debe ser un correo que pertenezca al dominio de tu sitio web", id: "user_domain_email", onblur: "validateEmail(this)" %>
-        <div class="validation-message" id="domain_email_error"></div>
+        <%= f.label :email, "Correo Electrónico", class: "form-label" %>
+        <%= f.email_field :email, autocomplete: "email", class: "form-input", placeholder: "Debe ser un correo que pertenezca al dominio de tu sitio web", id: "user_email", onblur: "validateEmailWithDomain(this)" %>
+        <div class="validation-message" id="email_error"></div>
       </div>
 
       <div class="form-group">
@@ -271,5 +266,88 @@ function validateEmail(input) {
     errorElement.className = 'validation-message success';
     return true;
   }
+}
+
+function validateWebsite(input) {
+  const website = input.value.trim();
+  const errorElement = document.getElementById(input.id + '_error');
+  
+  // Regex para validar URL
+  const websiteRegex = /^https?:\/\/(www\.)?[-a-zA-Z0-9@:%._\+~#=]{1,256}\.[a-zA-Z0-9()]{1,6}\b([-a-zA-Z0-9()@:%_\+.~#?&//=]*)$/;
+  
+  if (website === '') {
+    input.classList.remove('error', 'success');
+    errorElement.textContent = '';
+    errorElement.className = 'validation-message';
+    return false;
+  }
+  
+  if (!websiteRegex.test(website)) {
+    input.classList.remove('success');
+    input.classList.add('error');
+    errorElement.textContent = 'Por favor ingresa una URL válida (ej: https://www.ejemplo.com)';
+    errorElement.className = 'validation-message error';
+    return false;
+  } else {
+    input.classList.remove('error');
+    input.classList.add('success');
+    errorElement.textContent = '✓ Sitio web válido';
+    errorElement.className = 'validation-message success';
+    return true;
+  }
+}
+
+function validateEmailWithDomain(input) {
+  const email = input.value.trim();
+  const errorElement = document.getElementById(input.id + '_error');
+  const websiteInput = document.getElementById('user_website');
+  const website = websiteInput ? websiteInput.value.trim() : '';
+  
+  // Regex para validar email
+  const emailRegex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
+  
+  if (email === '') {
+    input.classList.remove('error', 'success');
+    errorElement.textContent = '';
+    errorElement.className = 'validation-message';
+    return false;
+  }
+  
+  if (!emailRegex.test(email)) {
+    input.classList.remove('success');
+    input.classList.add('error');
+    errorElement.textContent = 'Por favor ingresa un email válido';
+    errorElement.className = 'validation-message error';
+    return false;
+  }
+  
+  // Validar que el email pertenezca al dominio del sitio web
+  if (website) {
+    try {
+      const websiteUrl = new URL(website);
+      const websiteDomain = websiteUrl.hostname.replace(/^www\./, '');
+      const emailDomain = email.split('@')[1];
+      
+      if (websiteDomain !== emailDomain) {
+        input.classList.remove('success');
+        input.classList.add('error');
+        errorElement.textContent = `El email debe pertenecer al dominio ${websiteDomain}`;
+        errorElement.className = 'validation-message error';
+        return false;
+      }
+    } catch (e) {
+      input.classList.remove('success');
+      input.classList.add('error');
+      errorElement.textContent = 'Primero ingresa un sitio web válido';
+      errorElement.className = 'validation-message error';
+      return false;
+    }
+  }
+  
+  input.classList.remove('error');
+  input.classList.add('success');
+  errorElement.textContent = '✓ Email válido';
+  errorElement.className = 'validation-message success';
+  return true;
 }
 </script>

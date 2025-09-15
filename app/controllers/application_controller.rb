@@ -8,7 +8,7 @@ class ApplicationController < ActionController::Base
   protected
   
   def configure_permitted_parameters
-    devise_parameter_sanitizer.permit(:sign_up, keys: [:website, :domain_email])
-    devise_parameter_sanitizer.permit(:account_update, keys: [:website, :domain_email])
+    devise_parameter_sanitizer.permit(:sign_up, keys: [:website])
+    devise_parameter_sanitizer.permit(:account_update, keys: [:website])
   end
 end
