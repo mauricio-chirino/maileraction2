@@ -272,13 +272,22 @@ function validateWebsite(input) {
   const website = input.value.trim();
   const errorElement = document.getElementById(input.id + '_error');
   
-  // Regex para validar URL
-  const websiteRegex = /^https?:\/\/(www\.)?[-a-zA-Z0-9@:%._\+~#=]{1,256}\.[a-zA-Z0-9()]{1,6}\b([-a-zA-Z0-9()@:%_\+.~#?&//=]*)$/;
+  // Regex más robusto para validar URL de sitio web
+  const websiteRegex = /^https?:\/\/(www\.)?[a-zA-Z0-9]([a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?(\.[a-zA-Z0-9]([a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?)*\.[a-zA-Z]{2,}(\/.*)?$/;
   
   if (website === '') {
     input.classList.remove('error', 'success');
     errorElement.textContent = '';
     errorElement.className = 'validation-message';
+    return false;
+  }
+  
+  // Validaciones adicionales
+  if (!website.startsWith('http://') && !website.startsWith('https://')) {
+    input.classList.remove('success');
+    input.classList.add('error');
+    errorElement.textContent = 'La URL debe comenzar con http:// o https://';
+    errorElement.className = 'validation-message error';
     return false;
   }
   
@@ -288,13 +297,46 @@ function validateWebsite(input) {
     errorElement.textContent = 'Por favor ingresa una URL válida (ej: https://www.ejemplo.com)';
     errorElement.className = 'validation-message error';
     return false;
-  } else {
-    input.classList.remove('error');
-    input.classList.add('success');
-    errorElement.textContent = '✓ Sitio web válido';
-    errorElement.className = 'validation-message success';
-    return true;
   }
+  
+  // Validar que tenga al menos un punto en el dominio
+  try {
+    const url = new URL(website);
+    const hostname = url.hostname;
+    
+    if (!hostname.includes('.')) {
+      input.classList.remove('success');
+      input.classList.add('error');
+      errorElement.textContent = 'El dominio debe tener al menos un punto (ej: ejemplo.com)';
+      errorElement.className = 'validation-message error';
+      return false;
+    }
+    
+    // Validar que no sea solo números
+    const domainParts = hostname.split('.');
+    const hasValidDomain = domainParts.some(part => /[a-zA-Z]/.test(part));
+    
+    if (!hasValidDomain) {
+      input.classList.remove('success');
+      input.classList.add('error');
+      errorElement.textContent = 'El dominio debe contener al menos una letra';
+      errorElement.className = 'validation-message error';
+      return false;
+    }
+    
+  } catch (e) {
+    input.classList.remove('success');
+    input.classList.add('error');
+    errorElement.textContent = 'Por favor ingresa una URL válida (ej: https://www.ejemplo.com)';
+    errorElement.className = 'validation-message error';
+    return false;
+  }
+  
+  input.classList.remove('error');
+  input.classList.add('success');
+  errorElement.textContent = '✓ Sitio web válido';
+  errorElement.className = 'validation-message success';
+  return true;
 }
 
 function validateEmailWithDomain(input) {
