@@ -276,6 +276,22 @@
 .password-toggle:hover .eye-icon {
   color: #374151;
 }
+
+/* Estilos para estado de advertencia */
+.form-input.warning {
+  border-color: #ffc107;
+  background-color: #fff8e1;
+}
+
+.validation-message.warning {
+  color: #856404;
+  background-color: #fff3cd;
+  border: 1px solid #ffeaa7;
+  padding: 8px 12px;
+  border-radius: 4px;
+  margin-top: 5px;
+  font-size: 14px;
+}
 </style>
 
 <script>
@@ -588,18 +604,27 @@ function checkEmailUniqueness(email, input, errorElement, website) {
     if (data.exists) {
       input.classList.remove('success');
       input.classList.add('error');
-      errorElement.textContent = 'Este email ya está registrado en el sistema';
-      errorElement.className = 'validation-message error';
+      
+      // Mostrar mensaje específico según el estado del usuario
+      if (data.confirmed === false) {
+        errorElement.textContent = 'Usuario ya creado, pero aún no has validado tu correo';
+        errorElement.className = 'validation-message warning';
+        input.classList.remove('error');
+        input.classList.add('warning');
+      } else {
+        errorElement.textContent = 'Este email ya está registrado en el sistema';
+        errorElement.className = 'validation-message error';
+      }
     } else {
       // Solo mostrar éxito si el dominio también es válido
-      if (website && !input.classList.contains('error')) {
+      if (website && !input.classList.contains('error') && !input.classList.contains('warning')) {
         try {
           const websiteUrl = new URL(website);
           const websiteDomain = websiteUrl.hostname.replace(/^www\./, '');
           const emailDomain = email.split('@')[1];
           
           if (websiteDomain === emailDomain) {
-            input.classList.remove('error');
+            input.classList.remove('error', 'warning');
             input.classList.add('success');
             errorElement.textContent = '✓ Email válido y disponible';
             errorElement.className = 'validation-message success';

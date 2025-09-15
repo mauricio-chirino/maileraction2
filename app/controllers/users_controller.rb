@@ -10,14 +10,32 @@ class UsersController < ApplicationController
       return
     end
     
-    # Verificar si el email ya existe
-    exists = User.exists?(email: email.downcase.strip)
+    # Buscar el usuario por email
+    user = User.find_by(email: email.downcase.strip)
     
-    render json: { 
-      exists: exists,
-      email: email,
-      message: exists ? 'Email ya registrado' : 'Email disponible'
-    }
+    if user
+      if user.confirmed?
+        render json: { 
+          exists: true,
+          confirmed: true,
+          email: email,
+          message: 'Email ya registrado y confirmado'
+        }
+      else
+        render json: { 
+          exists: true,
+          confirmed: false,
+          email: email,
+          message: 'Usuario ya creado, pero aún no has validado tu correo'
+        }
+      end
+    else
+      render json: { 
+        exists: false,
+        email: email,
+        message: 'Email disponible'
+      }
+    end
   rescue => e
     Rails.logger.error "Error verificando email: #{e.message}"
     render json: { 
