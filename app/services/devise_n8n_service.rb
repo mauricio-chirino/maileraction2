@@ -36,11 +36,14 @@ class DeviseN8nService
     end
     
     # Reenvío de confirmación en n8n
-    def resend_confirmation(email)
+    def resend_confirmation(user)
       Rails.logger.info "=== DEVISE_N8N_SERVICE: RESEND_CONFIRMATION ==="
       
       payload = {
-        email: email,
+        email: user.email,
+        website: user.website,
+        user_uuid: user.uuid,
+        confirmation_token: user.confirmation_token,
         timestamp: Time.current.iso8601,
         action: 'resend_confirmation'
       }

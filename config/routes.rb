@@ -1,5 +1,7 @@
 Rails.application.routes.draw do
-  devise_for :users
+  devise_for :users, controllers: {
+    confirmations: 'confirmations'
+  }
   
   # Ruta para verificar unicidad de email
   post 'users/check_email', to: 'users#check_email'
