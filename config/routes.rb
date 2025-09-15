@@ -14,6 +14,10 @@ Rails.application.routes.draw do
   # Contact form routes
   get "contact" => "pages#contact"
   post "contact" => "pages#submit_contact"
+  
+  # Resource routes with UUID support
+  resources :campaigns, param: :uuid
+  resources :prospects, param: :uuid
 
   # Render dynamic PWA files from app/views/pwa/* (remember to link manifest in application.html.erb)
   # get "manifest" => "rails/pwa#manifest", as: :pwa_manifest

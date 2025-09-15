@@ -10,9 +10,35 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.0].define(version: 2025_09_15_035430) do
+ActiveRecord::Schema[8.0].define(version: 2025_09_15_051429) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pg_catalog.plpgsql"
+
+  create_table "campaigns", force: :cascade do |t|
+    t.string "name"
+    t.text "description"
+    t.string "status"
+    t.bigint "user_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.uuid "uuid", default: -> { "gen_random_uuid()" }, null: false
+    t.index ["user_id"], name: "index_campaigns_on_user_id"
+    t.index ["uuid"], name: "index_campaigns_on_uuid", unique: true
+  end
+
+  create_table "prospects", force: :cascade do |t|
+    t.string "name"
+    t.string "email"
+    t.string "company"
+    t.string "position"
+    t.string "industry"
+    t.bigint "user_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.uuid "uuid", default: -> { "gen_random_uuid()" }, null: false
+    t.index ["user_id"], name: "index_prospects_on_user_id"
+    t.index ["uuid"], name: "index_prospects_on_uuid", unique: true
+  end
 
   create_table "users", force: :cascade do |t|
     t.string "email", default: "", null: false
@@ -28,8 +54,13 @@ ActiveRecord::Schema[8.0].define(version: 2025_09_15_035430) do
     t.datetime "confirmed_at"
     t.datetime "confirmation_sent_at"
     t.string "unconfirmed_email"
+    t.uuid "uuid", default: -> { "gen_random_uuid()" }, null: false
     t.index ["confirmation_token"], name: "index_users_on_confirmation_token", unique: true
     t.index ["email"], name: "index_users_on_email", unique: true
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
+    t.index ["uuid"], name: "index_users_on_uuid", unique: true
   end
+
+  add_foreign_key "campaigns", "users"
+  add_foreign_key "prospects", "users"
 end

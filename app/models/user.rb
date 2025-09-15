@@ -1,4 +1,6 @@
 class User < ApplicationRecord
+  include UuidIdentifiable
+  
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable, :trackable and :omniauthable
   devise :database_authenticatable, :registerable,
@@ -12,6 +14,10 @@ class User < ApplicationRecord
 
   # Validación personalizada para verificar que el email pertenece al dominio del sitio web
   validate :email_matches_domain
+
+  # Relaciones
+  has_many :campaigns, dependent: :destroy
+  has_many :prospects, dependent: :destroy
 
   private
 
