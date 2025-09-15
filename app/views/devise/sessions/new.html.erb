@@ -1,7 +1,9 @@
 <div class="auth-container">
   <div class="auth-card">
     <div class="auth-header">
-      <%= image_tag "logo.png", alt: "MailerAction Logo", style: "width:60px;height:60px" %>
+      <%= link_to root_path do %>
+        <%= image_tag "logo.png", alt: "MailerAction Logo", style: "width:60px;height:60px" %>
+      <% end %>
       <h2>Iniciar Sesión</h2>
       <p>Accede a tu cuenta de MailerAction</p>
     </div>
@@ -62,6 +64,15 @@
 .auth-header {
   text-align: center;
   margin-bottom: 30px;
+}
+
+.auth-header a {
+  display: inline-block;
+  transition: transform 0.3s ease;
+}
+
+.auth-header a:hover {
+  transform: scale(1.05);
 }
 
 .auth-header h2 {
