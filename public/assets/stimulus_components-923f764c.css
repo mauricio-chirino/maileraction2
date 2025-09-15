@@ -78,7 +78,8 @@
   color: white;
   padding: 80px 0;
   margin: 60px 0;
-  border-radius: 20px;
+  width: 100%;
+  box-sizing: border-box;
 }
 
 /* Radar Wizard Container */
@@ -89,6 +90,86 @@
   max-width: 1200px;
   margin: 0 auto;
   min-height: 600px;
+  padding: 20px;
+  box-sizing: border-box;
+}
+
+/* Radar Demo Responsive */
+@media (max-width: 1024px) {
+  .radar-demo {
+    padding: 60px 0;
+    margin: 40px 0;
+  }
+}
+
+@media (max-width: 768px) {
+  .radar-demo {
+    padding: 40px 0;
+    margin: 30px 0;
+  }
+  
+  .radar-demo .container {
+    padding: 0 15px;
+  }
+  
+  .radar-demo .section-header {
+    text-align: center;
+    margin-bottom: 30px;
+  }
+  
+  .radar-demo .section-title {
+    font-size: 24px;
+    margin-bottom: 10px;
+  }
+  
+  .radar-demo .section-description {
+    font-size: 14px;
+  }
+}
+
+@media (max-width: 480px) {
+  .radar-demo {
+    padding: 30px 0;
+    margin: 20px 0;
+  }
+  
+  .radar-demo .container {
+    padding: 0 10px;
+  }
+  
+  .radar-demo .section-header {
+    margin-bottom: 20px;
+  }
+  
+  .radar-demo .section-title {
+    font-size: 20px;
+    margin-bottom: 8px;
+  }
+  
+  .radar-demo .section-description {
+    font-size: 13px;
+  }
+  
+  .radar-actions {
+    text-align: center;
+    margin-top: 30px;
+  }
+  
+  .radar-actions .btn {
+    width: 100%;
+    margin: 10px 0;
+    padding: 12px 20px;
+    font-size: 14px;
+  }
+}
+
+/* Large Desktop */
+@media (min-width: 1440px) {
+  .radar-wizard-container {
+    max-width: 1400px;
+    gap: 50px;
+    padding: 30px;
+  }
 }
 
 /* Wizard Input Panel */
@@ -1087,6 +1168,52 @@
   font-weight: 600;
 }
 
+/* Tablet Responsive */
+@media (max-width: 1024px) {
+  .radar-wizard-container {
+    gap: 30px;
+    min-height: 500px;
+    padding: 15px;
+    max-width: 100%;
+  }
+  
+  .wizard-input-panel,
+  .wizard-steps-panel {
+    padding: 30px;
+  }
+  
+  .input-header {
+    margin-bottom: 30px;
+  }
+  
+  .logo-section h3 {
+    font-size: 20px;
+  }
+  
+  .input-label {
+    font-size: 16px;
+    margin-bottom: 20px;
+  }
+  
+  .wizard-input {
+    padding: 14px 16px;
+    font-size: 16px;
+  }
+  
+  .wizard-search-btn {
+    padding: 14px 24px;
+    font-size: 16px;
+  }
+}
+
+/* Medium Tablets */
+@media (max-width: 900px) {
+  .radar-wizard-container {
+    gap: 25px;
+    padding: 12px;
+  }
+}
+
 /* Responsive Design */
 @media (max-width: 768px) {
   .radar-container {
@@ -1145,25 +1272,219 @@
   /* Radar Wizard Responsive */
   .radar-wizard-container {
     grid-template-columns: 1fr;
-    gap: 30px;
+    gap: 20px;
+    min-height: auto;
+    padding: 10px;
+    max-width: 100%;
   }
   
   .wizard-input-panel,
   .wizard-steps-panel {
-    padding: 30px;
+    padding: 20px;
+  }
+  
+  .input-header {
+    margin-bottom: 20px;
+  }
+  
+  .logo-section {
+    flex-direction: column;
+    text-align: center;
+    gap: 10px;
+  }
+  
+  .logo-section h3 {
+    font-size: 18px;
+  }
+  
+  .step-indicator {
+    margin-top: 15px;
+  }
+  
+  .input-content {
+    text-align: center;
+  }
+  
+  .input-label {
+    font-size: 14px;
+    margin-bottom: 15px;
+  }
+  
+  .wizard-input {
+    width: 100%;
+    margin-bottom: 20px;
+  }
+  
+  .wizard-search-btn {
+    width: 100%;
   }
   
   .wizard-step {
     padding: 15px;
+    flex-direction: column;
+    text-align: center;
   }
   
   .step-indicator-circle {
     width: 40px;
     height: 40px;
+    margin-bottom: 10px;
+  }
+  
+  .step-content {
+    margin-left: 0;
+  }
+  
+  .step-title {
+    flex-direction: column;
+    gap: 5px;
   }
   
   .step-visual {
     min-height: 60px;
+    padding: 10px;
+    margin-top: 15px;
+  }
+  
+  .profile-preview {
+    flex-direction: column;
+    align-items: center;
+  }
+  
+  .profile-info {
+    margin-left: 0;
+    margin-top: 10px;
+  }
+  
+  .context-radar {
+    width: 100px;
+    height: 100px;
+  }
+  
+  .emotional-card {
+    padding: 15px;
+  }
+  
+  .validation-panel {
+    padding: 15px;
+  }
+  
+  .ready-panel {
+    padding: 15px;
+  }
+  
+  .outreach-btn {
+    padding: 12px 20px;
+    font-size: 14px;
+  }
+  
+  .wizard-input {
+    padding: 12px;
+    font-size: 14px;
+  }
+  
+  .wizard-search-btn {
+    padding: 12px 20px;
+    font-size: 14px;
+  }
+}
+
+/* Extra Small Devices */
+@media (max-width: 480px) {
+  .radar-wizard-container {
+    gap: 15px;
+    padding: 8px;
+    max-width: 100%;
+  }
+  
+  .wizard-input-panel,
+  .wizard-steps-panel {
+    padding: 15px;
+    border-radius: 15px;
+  }
+  
+  .input-header {
+    margin-bottom: 15px;
+  }
+  
+  .logo-section {
+    gap: 8px;
+  }
+  
+  .logo-section h3 {
+    font-size: 16px;
+  }
+  
+  .step-indicator {
+    margin-top: 10px;
+  }
+  
+  .step-number {
+    font-size: 12px;
+  }
+  
+  .input-label {
+    font-size: 12px;
+    margin-bottom: 12px;
+  }
+  
+  .wizard-input {
+    padding: 10px;
+    font-size: 14px;
+    margin-bottom: 15px;
+  }
+  
+  .wizard-search-btn {
+    padding: 10px 16px;
+    font-size: 14px;
+  }
+  
+  .wizard-step {
+    padding: 10px;
+  }
+  
+  .step-indicator-circle {
+    width: 35px;
+    height: 35px;
+  }
+  
+  .step-title {
+    font-size: 14px;
+  }
+  
+  .step-description {
+    font-size: 12px;
+  }
+  
+  .wizard-input {
+    padding: 10px;
+    font-size: 14px;
+  }
+  
+  .wizard-search-btn {
+    padding: 10px 16px;
+    font-size: 14px;
+  }
+  
+  .outreach-btn {
+    padding: 10px 16px;
+    font-size: 13px;
+  }
+  
+  .context-radar {
+    width: 80px;
+    height: 80px;
+  }
+  
+  .emotional-card {
+    padding: 10px;
+  }
+  
+  .validation-panel {
+    padding: 10px;
+  }
+  
+  .ready-panel {
     padding: 10px;
   }
 }
