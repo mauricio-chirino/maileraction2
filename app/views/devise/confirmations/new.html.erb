@@ -11,8 +11,7 @@
 
       <div class="form-group">
         <%= f.label :email, "Correo Electrónico", class: "form-label" %>
-        <%= f.email_field :email, autofocus: true, autocomplete: "email", class: "form-input", placeholder: "tu@email.com", value: (resource.pending_reconfirmation? ? resource.unconfirmed_email : resource.email) %>
-        <small class="form-help">Ingresa el email con el que te registraste</small>
+        <%= f.email_field :email, autofocus: true, autocomplete: "email", class: "form-input", placeholder: "Ingresa el email con el que te registraste", value: (resource.pending_reconfirmation? ? resource.unconfirmed_email : resource.email) %>
       </div>
 
       <div class="form-actions">
