@@ -1,16 +1,17 @@
 import { Controller } from "@hotwired/stimulus"
 
 export default class extends Controller {
-  static targets = ["industryInput", "searchBtn", "inputSection", "progressSection", "industryDisplay", "step1", "step2", "step3", "status1", "status2", "status3", "progress", "progressText", "result", "data"]
+  static targets = ["industryInput", "searchBtn", "inputPanel", "stepsPanel", "industryDisplay", "wizardStep1", "wizardStep2", "wizardStep3", "wizardStep4", "wizardStep5", "stepCircle1", "stepCircle2", "stepCircle3", "stepCircle4", "stepCircle5", "visual1", "visual2", "visual3", "visual4", "visual5", "affinityBar", "sendAnimation"]
   static values = { 
     demoMode: { type: Boolean, default: true },
-    scanDuration: { type: Number, default: 5000 }
+    scanDuration: { type: Number, default: 8000 }
   }
 
   connect() {
     console.log('Radar controller connected')
     this.setupDemoData()
     this.currentIndustry = ""
+    this.currentStep = 0
   }
 
   disconnect() {
@@ -81,94 +82,201 @@ export default class extends Controller {
     ]
   }
 
-  startScan() {
-    if (!this.hasIndustryInputTarget || !this.hasProgressTarget) return
+  startWizard() {
+    if (!this.hasIndustryInputTarget) return
 
     const industry = this.industryInputTarget.value.trim()
     if (industry.length < 3) return
 
-    console.log('Starting radar scan for industry:', industry)
+    console.log('Starting radar wizard for industry:', industry)
     
     this.currentIndustry = industry
     
-    // Hide input section and show progress section
-    this.inputSectionTarget.style.display = 'none'
-    this.progressSectionTarget.style.display = 'block'
+    // Hide input panel and show steps panel
+    this.inputPanelTarget.style.display = 'none'
+    this.stepsPanelTarget.style.display = 'block'
     
     // Update industry display
     this.industryDisplayTarget.textContent = industry
     
-    // Reset progress
-    this.resetProgress()
+    // Reset wizard state
+    this.resetWizard()
     
-    // Start scanning process
-    this.startProgressSteps()
+    // Start wizard process
+    this.startWizardSteps()
   }
 
-  resetProgress() {
-    // Reset all steps
-    this.step1Target.classList.remove('active', 'completed')
-    this.step2Target.classList.remove('active', 'completed')
-    this.step3Target.classList.remove('active', 'completed')
+  resetWizard() {
+    // Reset all wizard steps
+    for (let i = 1; i <= 5; i++) {
+      const stepTarget = this[`wizardStep${i}Target`]
+      const circleTarget = this[`stepCircle${i}Target`]
+      
+      if (stepTarget) stepTarget.classList.remove('active', 'completed')
+      if (circleTarget) circleTarget.classList.remove('active', 'completed')
+    }
     
-    // Reset status indicators
-    this.status1Target.innerHTML = ''
-    this.status2Target.innerHTML = ''
-    this.status3Target.innerHTML = ''
+    // Reset affinity bar
+    if (this.hasAffinityBarTarget) {
+      this.affinityBarTarget.style.width = '0%'
+    }
     
-    // Reset progress bar
-    this.progressTarget.style.width = '0%'
-    this.progressTextTarget.textContent = '0%'
+    this.currentStep = 0
   }
 
-  startProgressSteps() {
-    // Step 1: Apollo.io
+  startWizardSteps() {
+    // Step 1: Perfil inicial (Apollo.io)
     setTimeout(() => {
-      this.activateStep(1)
-      this.updateProgress(33)
+      this.activateWizardStep(1)
+      this.animateProfilePreview()
     }, 500)
     
-    // Step 2: Tavily
+    // Step 2: Contexto inteligente (Tavily)
     setTimeout(() => {
-      this.completeStep(1)
-      this.activateStep(2)
-      this.updateProgress(66)
+      this.completeWizardStep(1)
+      this.activateWizardStep(2)
+      this.animateContextRadar()
     }, 2000)
     
-    // Step 3: Apify
+    // Step 3: Personalización emocional
     setTimeout(() => {
-      this.completeStep(2)
-      this.activateStep(3)
-      this.updateProgress(100)
+      this.completeWizardStep(2)
+      this.activateWizardStep(3)
+      this.animateEmotionalCard()
     }, 3500)
     
-    // Complete scan
+    // Step 4: Validación
     setTimeout(() => {
-      this.completeStep(3)
-      this.completeScan()
-    }, 4500)
-  }
-
-  activateStep(stepNumber) {
-    const stepTarget = this[`step${stepNumber}Target`]
-    const statusTarget = this[`status${stepNumber}Target`]
+      this.completeWizardStep(3)
+      this.activateWizardStep(4)
+      this.animateValidation()
+    }, 5000)
     
-    stepTarget.classList.add('active')
-    statusTarget.innerHTML = '<lord-icon src="https://cdn.lordicon.com/ggihhudh.json" trigger="loop" delay="2000" stroke="light" style="width:20px;height:20px"></lord-icon>'
+    // Step 5: Listo para contactar
+    setTimeout(() => {
+      this.completeWizardStep(4)
+      this.activateWizardStep(5)
+      this.animateReadyState()
+    }, 6500)
   }
 
-  completeStep(stepNumber) {
-    const stepTarget = this[`step${stepNumber}Target`]
-    const statusTarget = this[`status${stepNumber}Target`]
+  activateWizardStep(stepNumber) {
+    const stepTarget = this[`wizardStep${stepNumber}Target`]
+    const circleTarget = this[`stepCircle${stepNumber}Target`]
     
-    stepTarget.classList.remove('active')
-    stepTarget.classList.add('completed')
-    statusTarget.innerHTML = '<lord-icon src="https://cdn.lordicon.com/mfgntcqv.json" trigger="hover" stroke="light" style="width:20px;height:20px"></lord-icon>'
+    if (stepTarget) stepTarget.classList.add('active')
+    if (circleTarget) circleTarget.classList.add('active')
+    
+    this.currentStep = stepNumber
   }
 
-  updateProgress(percentage) {
-    this.progressTarget.style.width = percentage + '%'
-    this.progressTextTarget.textContent = percentage + '%'
+  completeWizardStep(stepNumber) {
+    const stepTarget = this[`wizardStep${stepNumber}Target`]
+    const circleTarget = this[`stepCircle${stepNumber}Target`]
+    
+    if (stepTarget) {
+      stepTarget.classList.remove('active')
+      stepTarget.classList.add('completed')
+    }
+    if (circleTarget) {
+      circleTarget.classList.remove('active')
+      circleTarget.classList.add('completed')
+    }
+  }
+
+  // Animation methods for each step
+  animateProfilePreview() {
+    if (!this.hasVisual1Target) return
+    
+    const visual = this.visual1Target
+    const placeholders = visual.querySelectorAll('.name-placeholder, .title-placeholder, .company-placeholder')
+    
+    placeholders.forEach((placeholder, index) => {
+      setTimeout(() => {
+        placeholder.classList.add('animate-in')
+      }, index * 200)
+    })
+  }
+
+  animateContextRadar() {
+    if (!this.hasVisual2Target) return
+    
+    const visual = this.visual2Target
+    const radarRing = visual.querySelector('.radar-ring')
+    const contextIcons = visual.querySelectorAll('.context-icons lord-icon')
+    
+    if (radarRing) {
+      radarRing.classList.add('scanning')
+    }
+    
+    contextIcons.forEach((icon, index) => {
+      setTimeout(() => {
+        icon.style.opacity = '1'
+        icon.style.transform = 'scale(1)'
+      }, index * 300)
+    })
+  }
+
+  animateEmotionalCard() {
+    if (!this.hasVisual3Target) return
+    
+    const visual = this.visual3Target
+    const emojiSection = visual.querySelector('.emoji-section')
+    const toneIndicator = visual.querySelector('.tone-indicator')
+    const ctaPreview = visual.querySelector('.cta-preview')
+    
+    setTimeout(() => emojiSection.classList.add('animate-in'), 200)
+    setTimeout(() => toneIndicator.classList.add('animate-in'), 400)
+    setTimeout(() => ctaPreview.classList.add('animate-in'), 600)
+  }
+
+  animateValidation() {
+    if (!this.hasVisual4Target) return
+    
+    const visual = this.visual4Target
+    const checkmarks = visual.querySelectorAll('.checkmarks lord-icon')
+    const affinityBar = this.affinityBarTarget
+    
+    checkmarks.forEach((checkmark, index) => {
+      setTimeout(() => {
+        checkmark.classList.add('animate-in')
+      }, index * 200)
+    })
+    
+    // Animate affinity bar
+    setTimeout(() => {
+      if (affinityBar) {
+        affinityBar.style.width = '92%'
+      }
+    }, 800)
+  }
+
+  animateReadyState() {
+    if (!this.hasVisual5Target) return
+    
+    const visual = this.visual5Target
+    const outreachBtn = visual.querySelector('.outreach-btn')
+    
+    setTimeout(() => {
+      outreachBtn.classList.add('animate-in')
+    }, 300)
+  }
+
+  initiateOutreach() {
+    console.log('Initiating outreach...')
+    
+    // Show send animation
+    if (this.hasSendAnimationTarget) {
+      this.sendAnimationTarget.classList.add('sending')
+    }
+    
+    // Simulate sending
+    setTimeout(() => {
+      alert('¡Outreach iniciado! El mensaje emocionalmente resonante ha sido enviado al prospecto.')
+      
+      // Reset wizard
+      this.resetScanUI()
+    }, 2000)
   }
 
   completeScan() {
@@ -289,19 +397,16 @@ export default class extends Controller {
   }
 
   resetScanUI() {
-    // Show input section and hide others
-    this.inputSectionTarget.style.display = 'block'
-    this.progressSectionTarget.style.display = 'none'
-    this.resultTarget.style.display = 'none'
+    // Show input panel and hide steps panel
+    this.inputPanelTarget.style.display = 'block'
+    this.stepsPanelTarget.style.display = 'none'
     
     // Clear input
     this.industryInputTarget.value = ''
     this.validateInput()
     
-    // Clear results
-    if (this.hasDataTarget) {
-      this.dataTarget.innerHTML = ''
-    }
+    // Reset wizard state
+    this.resetWizard()
   }
 
   contactProspect() {

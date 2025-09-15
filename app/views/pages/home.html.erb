@@ -269,7 +269,7 @@ tu mensaje.
                 <p class="section-description">Estas son algunas de las cosas que podemos hacer por tu empresa</p>
             </div>
             <div class="services-grid">
-                <div class="service-card" data-controller="effects" data-effects-target="card" data-action="click->radar#startScan">
+                <div id="radar-card" class="service-card" data-controller="effects" data-effects-target="card" data-action="click->radar#startScan">
                     <lord-icon src="https://cdn.lordicon.com/ggihhudh.json" trigger="loop" delay="2000" stroke="light" style="width:50px;height:50px" data-effects-target="icon"></lord-icon>
                     <h3>Radar Inteligente de Prospección</h3>
                     <p>Podemos identificar automáticamente clientes potenciales<br>con alta probabilidad de conversión<br>usando nuestro modelo de IA.</p>
@@ -300,100 +300,174 @@ tu mensaje.
         </div>
     </section>
 
-    <!-- Radar Demo Section -->
-    <section class="radar-demo" data-controller="radar" data-radar-demo-mode-value="true">
+    <!-- demo servicios -->
+    <section id="demo-servicios" class="radar-demo" data-controller="radar" data-radar-demo-mode-value="true" style="display: none;">
         <div class="container">
             <div class="section-header">
                 <h2 class="section-title">Radar Inteligente en Acción</h2>
-                <p class="section-description">Ingresa el rubro de tu empresa y descubre prospectos ideales en tiempo real</p>
+                <p class="section-description">Descubre cómo construimos el perfil perfecto en segundos</p>
             </div>
             
-            <!-- Radar Input Section -->
-            <div class="radar-input-section" data-radar-target="inputSection">
-                <div class="input-container">
-                    <div class="input-group">
-                        <lord-icon src="https://cdn.lordicon.com/ggihhudh.json" trigger="loop" delay="2000" stroke="light" style="width:30px;height:30px"></lord-icon>
+            <div class="radar-wizard-container">
+                <!-- Left Panel: Input Section -->
+                <div class="wizard-input-panel" data-radar-target="inputPanel">
+                    <div class="input-header">
+                        <div class="logo-section">
+                            <lord-icon src="https://cdn.lordicon.com/ggihhudh.json" trigger="loop" delay="2000" stroke="light" style="width:40px;height:40px"></lord-icon>
+                            <h3>MailerAction</h3>
+                        </div>
+                        <div class="step-indicator">
+                            <span class="step-number">Paso 1</span>
+                        </div>
+                    </div>
+                    
+                    <div class="input-content">
+                        <label class="input-label">RUBRO O INDUSTRIA</label>
                         <input type="text" 
-                               class="form-control radar-input" 
-                               placeholder="Ej: Tecnología, Salud, Finanzas, Retail, Educación..."
+                               class="wizard-input" 
+                               placeholder="Ej: Tecnología, Salud, Finanzas..."
                                data-radar-target="industryInput"
                                data-action="keyup->radar#validateInput">
-                        <button class="btn btn-primary radar-search-btn" 
-                                data-action="click->radar#startScan"
+                        <button class="wizard-search-btn" 
+                                data-action="click->radar#startWizard"
                                 data-radar-target="searchBtn"
                                 disabled>
-                            <lord-icon src="https://cdn.lordicon.com/ggihhudh.json" trigger="loop" delay="2000" stroke="light" style="width:20px;height:20px"></lord-icon>
-                            Buscar Prospectos
+                            Buscar
                         </button>
                     </div>
-                    <div class="input-help">
-                        <p>Ingresa el rubro o industria donde deseas encontrar clientes potenciales</p>
-                    </div>
                 </div>
-            </div>
-            
-            <!-- Radar Progress Section -->
-            <div class="radar-progress-section" data-radar-target="progressSection" style="display: none;">
-                <div class="progress-container">
-                    <div class="progress-header">
-                        <h3>Escaneando prospectos en <span data-radar-target="industryDisplay"></span>...</h3>
-                        <p>Analizando datos de Apollo.io, Tavily y Apify</p>
+                
+                <!-- Right Panel: Wizard Steps -->
+                <div class="wizard-steps-panel" data-radar-target="stepsPanel" style="display: none;">
+                    <div class="wizard-header">
+                        <h3>Proceso de Construcción del Perfil</h3>
+                        <p>Escaneando prospectos en <span data-radar-target="industryDisplay"></span></p>
                     </div>
                     
-                    <div class="progress-steps">
-                        <div class="progress-step" data-radar-target="step1">
-                            <div class="step-icon">
-                                <lord-icon src="https://cdn.lordicon.com/ggihhudh.json" trigger="loop" delay="2000" stroke="light" style="width:24px;height:24px"></lord-icon>
+                    <div class="wizard-steps">
+                        <!-- Paso 1: Perfil inicial -->
+                        <div class="wizard-step" data-radar-target="wizardStep1">
+                            <div class="step-indicator-circle" data-radar-target="stepCircle1">
+                                <lord-icon src="https://cdn.lordicon.com/dxjqoygy.json" trigger="loop" delay="2000" stroke="light" style="width:24px;height:24px"></lord-icon>
                             </div>
-                            <div class="step-text">
-                                <h4>Apollo.io</h4>
-                                <p>Extrayendo perfiles B2B</p>
+                            <div class="step-content">
+                                <div class="step-title">
+                                    <span class="step-number">Paso 1</span>
+                                    <span class="step-name">Perfil inicial</span>
+                                </div>
+                                <div class="step-description">Se selecciona un perfil B2B desde Apollo con datos enriquecidos</div>
+                                <div class="step-visual" data-radar-target="visual1">
+                                    <div class="profile-preview">
+                                        <div class="avatar-placeholder"></div>
+                                        <div class="profile-info">
+                                            <div class="name-placeholder"></div>
+                                            <div class="title-placeholder"></div>
+                                            <div class="company-placeholder"></div>
+                                        </div>
+                                    </div>
+                                </div>
                             </div>
-                            <div class="step-status" data-radar-target="status1"></div>
                         </div>
                         
-                        <div class="progress-step" data-radar-target="step2">
-                            <div class="step-icon">
+                        <!-- Paso 2: Contexto inteligente -->
+                        <div class="wizard-step" data-radar-target="wizardStep2">
+                            <div class="step-indicator-circle" data-radar-target="stepCircle2">
                                 <lord-icon src="https://cdn.lordicon.com/ggihhudh.json" trigger="loop" delay="2000" stroke="light" style="width:24px;height:24px"></lord-icon>
                             </div>
-                            <div class="step-text">
-                                <h4>Tavily</h4>
-                                <p>Analizando contexto digital</p>
+                            <div class="step-content">
+                                <div class="step-title">
+                                    <span class="step-number">Paso 2</span>
+                                    <span class="step-name">Contexto inteligente</span>
+                                </div>
+                                <div class="step-description">Tavily analiza noticias, redes y actividad reciente del prospecto</div>
+                                <div class="step-visual" data-radar-target="visual2">
+                                    <div class="context-radar">
+                                        <div class="radar-center"></div>
+                                        <div class="radar-ring"></div>
+                                        <div class="context-icons">
+                                            <lord-icon src="https://cdn.lordicon.com/ggihhudh.json" trigger="loop" delay="2000" stroke="light" style="width:16px;height:16px"></lord-icon>
+                                            <lord-icon src="https://cdn.lordicon.com/ggihhudh.json" trigger="loop" delay="2000" stroke="light" style="width:16px;height:16px"></lord-icon>
+                                            <lord-icon src="https://cdn.lordicon.com/ggihhudh.json" trigger="loop" delay="2000" stroke="light" style="width:16px;height:16px"></lord-icon>
+                                        </div>
+                                    </div>
+                                </div>
                             </div>
-                            <div class="step-status" data-radar-target="status2"></div>
                         </div>
                         
-                        <div class="progress-step" data-radar-target="step3">
-                            <div class="step-icon">
+                        <!-- Paso 3: Personalización emocional -->
+                        <div class="wizard-step" data-radar-target="wizardStep3">
+                            <div class="step-indicator-circle" data-radar-target="stepCircle3">
                                 <lord-icon src="https://cdn.lordicon.com/ggihhudh.json" trigger="loop" delay="2000" stroke="light" style="width:24px;height:24px"></lord-icon>
                             </div>
-                            <div class="step-text">
-                                <h4>Apify</h4>
-                                <p>Enriqueciendo datos</p>
+                            <div class="step-content">
+                                <div class="step-title">
+                                    <span class="step-number">Paso 3</span>
+                                    <span class="step-name">Personalización emocional</span>
+                                </div>
+                                <div class="step-description">Se construye una ficha con tono, intereses y motivadores clave</div>
+                                <div class="step-visual" data-radar-target="visual3">
+                                    <div class="emotional-card">
+                                        <div class="emoji-section">😊 🎯 💼</div>
+                                        <div class="tone-indicator">
+                                            <span class="tone-label">Tono:</span>
+                                            <span class="tone-value">Profesional</span>
+                                        </div>
+                                        <div class="cta-preview">CTA Sugerido</div>
+                                    </div>
+                                </div>
                             </div>
-                            <div class="step-status" data-radar-target="status3"></div>
+                        </div>
+                        
+                        <!-- Paso 4: Validación -->
+                        <div class="wizard-step" data-radar-target="wizardStep4">
+                            <div class="step-indicator-circle" data-radar-target="stepCircle4">
+                                <lord-icon src="https://cdn.lordicon.com/ggihhudh.json" trigger="loop" delay="2000" stroke="light" style="width:24px;height:24px"></lord-icon>
+                            </div>
+                            <div class="step-content">
+                                <div class="step-title">
+                                    <span class="step-number">Paso 4</span>
+                                    <span class="step-name">Validación</span>
+                                </div>
+                                <div class="step-description">Se muestra cómo el perfil cumple con criterios ideales para outreach</div>
+                                <div class="step-visual" data-radar-target="visual4">
+                                    <div class="validation-panel">
+                                        <div class="checkmarks">
+                                            <lord-icon src="https://cdn.lordicon.com/mfgntcqv.json" trigger="hover" stroke="light" style="width:20px;height:20px"></lord-icon>
+                                            <lord-icon src="https://cdn.lordicon.com/mfgntcqv.json" trigger="hover" stroke="light" style="width:20px;height:20px"></lord-icon>
+                                            <lord-icon src="https://cdn.lordicon.com/mfgntcqv.json" trigger="hover" stroke="light" style="width:20px;height:20px"></lord-icon>
+                                        </div>
+                                        <div class="affinity-bar">
+                                            <div class="affinity-fill" data-radar-target="affinityBar"></div>
+                                        </div>
+                                        <div class="affinity-score">92% Afinidad</div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <!-- Paso 5: Listo para contactar -->
+                        <div class="wizard-step" data-radar-target="wizardStep5">
+                            <div class="step-indicator-circle" data-radar-target="stepCircle5">
+                                <lord-icon src="https://cdn.lordicon.com/ggihhudh.json" trigger="loop" delay="2000" stroke="light" style="width:24px;height:24px"></lord-icon>
+                            </div>
+                            <div class="step-content">
+                                <div class="step-title">
+                                    <span class="step-number">Paso 5</span>
+                                    <span class="step-name">Listo para contactar</span>
+                                </div>
+                                <div class="step-description">El prospecto está listo para recibir un mensaje emocionalmente resonante</div>
+                                <div class="step-visual" data-radar-target="visual5">
+                                    <div class="ready-panel">
+                                        <button class="outreach-btn" data-action="click->radar#initiateOutreach">
+                                            <lord-icon src="https://cdn.lordicon.com/ggihhudh.json" trigger="loop" delay="2000" stroke="light" style="width:20px;height:20px"></lord-icon>
+                                            Iniciar outreach
+                                        </button>
+                                        <div class="send-animation" data-radar-target="sendAnimation"></div>
+                                    </div>
+                                </div>
+                            </div>
                         </div>
                     </div>
-                    
-                    <div class="overall-progress">
-                        <div class="progress-bar-container">
-                            <div class="progress-bar" data-radar-target="progress"></div>
-                        </div>
-                        <div class="progress-text">
-                            <span data-radar-target="progressText">0%</span>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            
-            <!-- Radar Results Section -->
-            <div class="radar-results" data-radar-target="result" style="display: none;">
-                <div class="results-header">
-                    <h3>Prospectos Identificados</h3>
-                    <p>Perfiles enriquecidos con datos contextuales</p>
-                </div>
-                <div class="profile-data" data-radar-target="data">
-                    <!-- Profile data will be populated here -->
                 </div>
             </div>
             
