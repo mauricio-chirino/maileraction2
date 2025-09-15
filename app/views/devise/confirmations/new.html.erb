@@ -13,7 +13,8 @@
 
       <div class="form-group">
         <%= f.label :email, "Correo Electrónico", class: "form-label" %>
-        <%= f.email_field :email, autofocus: true, autocomplete: "email", class: "form-input", placeholder: "Ingresa el email con el que te registraste", value: (resource.pending_reconfirmation? ? resource.unconfirmed_email : resource.email) %>
+        <%= f.email_field :email, autofocus: true, autocomplete: "email", class: "form-input", placeholder: "Ingresa el email con el que te registraste", value: (resource.pending_reconfirmation? ? resource.unconfirmed_email : resource.email), id: "user_email", onblur: "validateEmail(this)" %>
+        <div class="validation-message" id="email_error"></div>
       </div>
 
       <div class="form-actions">
@@ -193,4 +194,57 @@
     font-size: 1.3rem;
   }
 }
+
+.validation-message {
+  margin-top: 5px;
+  font-size: 0.85rem;
+  font-weight: 500;
+}
+
+.validation-message.error {
+  color: #ef4444;
+}
+
+.validation-message.success {
+  color: #10b981;
+}
+
+.form-input.error {
+  border-color: #ef4444;
+}
+
+.form-input.success {
+  border-color: #10b981;
+}
 </style>
+
+<script>
+function validateEmail(input) {
+  const email = input.value.trim();
+  const errorElement = document.getElementById(input.id + '_error');
+  
+  // Regex para validar email
+  const emailRegex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
+  
+  if (email === '') {
+    input.classList.remove('error', 'success');
+    errorElement.textContent = '';
+    errorElement.className = 'validation-message';
+    return false;
+  }
+  
+  if (!emailRegex.test(email)) {
+    input.classList.remove('success');
+    input.classList.add('error');
+    errorElement.textContent = 'Por favor ingresa un email válido';
+    errorElement.className = 'validation-message error';
+    return false;
+  } else {
+    input.classList.remove('error');
+    input.classList.add('success');
+    errorElement.textContent = '✓ Email válido';
+    errorElement.className = 'validation-message success';
+    return true;
+  }
+}
+</script>
