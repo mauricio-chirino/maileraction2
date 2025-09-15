@@ -273,8 +273,11 @@ tu mensaje.
                     <lord-icon src="https://cdn.lordicon.com/ggihhudh.json" trigger="loop" delay="2000" stroke="light" style="width:50px;height:50px" data-effects-target="icon"></lord-icon>
                     <h3>Radar Inteligente de Prospección</h3>
                     <p>Podemos identificar automáticamente clientes potenciales<br>con alta probabilidad de conversión<br>usando nuestro modelo de IA.</p>
-                    <button class="btn btn-primary mt-3" data-effects-target="button" data-action="click->radar#showDemo" style="background: #6366f1; color: white; padding: 12px 24px; border: none; border-radius: 8px; cursor: pointer; font-weight: 600;">
+                    <button class="btn btn-primary mt-3" data-action="click->radar#showDemo" style="background: #6366f1; color: white; padding: 12px 24px; border: none; border-radius: 8px; cursor: pointer; font-weight: 600;">
                         Probar Demo
+                    </button>
+                    <button onclick="testRadar()" style="background: #ef4444; color: white; padding: 12px 24px; border: none; border-radius: 8px; cursor: pointer; font-weight: 600; margin-left: 10px;">
+                        Test Directo
                     </button>
                 </div>
                 <div class="service-card" data-controller="effects" data-effects-target="card">
@@ -1089,3 +1092,26 @@ tu mensaje.
         }
     }
     </style>
+
+    <script>
+    function testRadar() {
+        console.log('=== TEST DIRECTO ===')
+        console.log('Función testRadar llamada')
+        
+        const demoSection = document.getElementById('demo-servicios')
+        console.log('Demo section:', demoSection)
+        
+        if (demoSection) {
+            console.log('Mostrando sección demo...')
+            demoSection.style.display = 'block'
+            demoSection.style.backgroundColor = 'yellow'
+            demoSection.scrollIntoView({ behavior: 'smooth' })
+            console.log('Sección demo mostrada')
+        } else {
+            console.error('Sección demo no encontrada!')
+            alert('Sección demo no encontrada!')
+        }
+        
+        console.log('=== FIN TEST DIRECTO ===')
+    }
+    </script>
