@@ -14,22 +14,6 @@ export default class extends Controller {
     this.currentStep = 0
   }
 
-  showDemo() {
-    console.log('Showing radar demo...')
-    
-    // Show the demo section
-    const demoSection = document.getElementById('demo-servicios')
-    if (demoSection) {
-      demoSection.style.display = 'block'
-      
-      // Scroll to demo section
-      demoSection.scrollIntoView({ 
-        behavior: 'smooth',
-        block: 'start'
-      })
-    }
-  }
-
   disconnect() {
     this.clearTimers()
   }
