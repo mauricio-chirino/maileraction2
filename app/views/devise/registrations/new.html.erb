@@ -324,6 +324,16 @@ function validateWebsite(input) {
       return false;
     }
     
+    // Validar que cada parte del dominio tenga al menos 3 caracteres
+    const invalidDomainParts = domainParts.filter(part => part.length < 3);
+    if (invalidDomainParts.length > 0) {
+      input.classList.remove('success');
+      input.classList.add('error');
+      errorElement.textContent = 'Cada parte del dominio debe tener al menos 3 caracteres (ej: ejemplo.com)';
+      errorElement.className = 'validation-message error';
+      return false;
+    }
+    
   } catch (e) {
     input.classList.remove('success');
     input.classList.add('error');
