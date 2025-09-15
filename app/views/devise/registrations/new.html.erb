@@ -431,12 +431,7 @@ function validateEmailWithDomain(input) {
     return false;
   }
   
-  // Verificar unicidad del email (solo si es válido)
-  if (emailRegex.test(email)) {
-    checkEmailUniqueness(email, input, errorElement);
-  }
-  
-  // Validar que el email pertenezca al dominio del sitio web
+  // Validar que el email pertenezca al dominio del sitio web PRIMERO
   if (website) {
     try {
       const websiteUrl = new URL(website);
@@ -457,6 +452,11 @@ function validateEmailWithDomain(input) {
       errorElement.className = 'validation-message error';
       return false;
     }
+  }
+  
+  // Si el dominio es válido, entonces verificar unicidad del email
+  if (emailRegex.test(email)) {
+    checkEmailUniqueness(email, input, errorElement, website);
   }
   
   input.classList.remove('error');
@@ -573,7 +573,7 @@ function togglePassword(inputId) {
 }
 
 // Función para verificar unicidad del email
-function checkEmailUniqueness(email, input, errorElement) {
+function checkEmailUniqueness(email, input, errorElement, website) {
   // Hacer una petición AJAX para verificar si el email ya existe
   fetch('/users/check_email', {
     method: 'POST',
@@ -591,12 +591,22 @@ function checkEmailUniqueness(email, input, errorElement) {
       errorElement.textContent = 'Este email ya está registrado en el sistema';
       errorElement.className = 'validation-message error';
     } else {
-      // Solo mostrar éxito si no hay otros errores
-      if (!input.classList.contains('error')) {
-        input.classList.remove('error');
-        input.classList.add('success');
-        errorElement.textContent = '✓ Email disponible';
-        errorElement.className = 'validation-message success';
+      // Solo mostrar éxito si el dominio también es válido
+      if (website && !input.classList.contains('error')) {
+        try {
+          const websiteUrl = new URL(website);
+          const websiteDomain = websiteUrl.hostname.replace(/^www\./, '');
+          const emailDomain = email.split('@')[1];
+          
+          if (websiteDomain === emailDomain) {
+            input.classList.remove('error');
+            input.classList.add('success');
+            errorElement.textContent = '✓ Email válido y disponible';
+            errorElement.className = 'validation-message success';
+          }
+        } catch (e) {
+          // No cambiar el estado si hay error en el dominio
+        }
       }
     }
   })
