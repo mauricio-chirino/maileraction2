@@ -32,7 +32,7 @@
           <%= f.password_field :password, autocomplete: "new-password", class: "form-input password-input", placeholder: "••••••••", id: "user_password" %>
           <% end %>
           <span class="password-toggle" onclick="togglePassword('user_password')">
-            <i class="eye-icon" id="eye_user_password">👁️</i>
+            <i class="bi bi-eye eye-icon" id="eye_user_password"></i>
           </span>
         </div>
       </div>
@@ -42,7 +42,7 @@
         <div class="password-input-container">
           <%= f.password_field :password_confirmation, autocomplete: "new-password", class: "form-input password-input", placeholder: "••••••••", id: "user_password_confirmation" %>
           <span class="password-toggle" onclick="togglePassword('user_password_confirmation')">
-            <i class="eye-icon" id="eye_user_password_confirmation">👁️</i>
+            <i class="bi bi-eye eye-icon" id="eye_user_password_confirmation"></i>
           </span>
         </div>
       </div>
@@ -492,10 +492,10 @@ function togglePassword(inputId) {
   
   if (passwordInput.type === 'password') {
     passwordInput.type = 'text';
-    eyeIcon.textContent = '🙈';
+    eyeIcon.className = 'bi bi-eye-slash eye-icon';
   } else {
     passwordInput.type = 'password';
-    eyeIcon.textContent = '👁️';
+    eyeIcon.className = 'bi bi-eye eye-icon';
   }
 }
 </script>
