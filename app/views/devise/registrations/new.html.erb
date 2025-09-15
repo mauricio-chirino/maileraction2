@@ -402,4 +402,47 @@ function validateEmailWithDomain(input) {
   errorElement.className = 'validation-message success';
   return true;
 }
+
+// Manejar errores del servidor
+document.addEventListener('DOMContentLoaded', function() {
+  // Verificar si hay errores de validación del servidor
+  const emailField = document.getElementById('user_email');
+  const emailError = document.getElementById('email_error');
+  const websiteField = document.getElementById('user_website');
+  
+  // Buscar mensajes de error específicos en la página
+  const errorMessages = document.querySelectorAll('.error-messages ul li');
+  
+  errorMessages.forEach(function(errorMsg) {
+    const errorText = errorMsg.textContent.trim();
+    
+    // Si es un error de dominio de email
+    if (errorText.includes('debe pertenecer al dominio del sitio web')) {
+      // Extraer el dominio del mensaje
+      const domainMatch = errorText.match(/\(([^)]+)\)/);
+      const domain = domainMatch ? domainMatch[1] : '';
+      
+      // Mostrar mensaje específico en el campo de email
+      emailField.classList.add('error');
+      emailError.textContent = `El email debe pertenecer al dominio ${domain}`;
+      emailError.className = 'validation-message error';
+      
+      // Enfocar el campo de email
+      emailField.focus();
+      
+      // Ocultar el mensaje después de 7 segundos
+      setTimeout(function() {
+        emailError.textContent = '';
+        emailError.className = 'validation-message';
+        emailField.classList.remove('error');
+      }, 7000);
+      
+      // Ocultar el mensaje de error genérico
+      const errorContainer = errorMsg.closest('.error-messages');
+      if (errorContainer) {
+        errorContainer.style.display = 'none';
+      }
+    }
+  });
+});
 </script>
