@@ -15,16 +15,19 @@ export default class extends Controller {
   }
 
   showDemo() {
-    console.log('Showing radar demo...')
-    console.log('Radar controller connected:', this.element)
+    console.log('=== RADAR CONTROLLER DEBUG ===')
+    console.log('showDemo method called!')
+    console.log('Controller element:', this.element)
+    console.log('Controller targets:', this.targets)
     
-    // Show the demo section
+    // Test if we can find the demo section
     const demoSection = document.getElementById('demo-servicios')
-    console.log('Demo section found:', demoSection)
+    console.log('Demo section element:', demoSection)
     
     if (demoSection) {
+      console.log('Demo section found, showing...')
       demoSection.style.display = 'block'
-      console.log('Demo section displayed')
+      demoSection.style.backgroundColor = 'red' // Temporary visual indicator
       
       // Scroll to demo section
       demoSection.scrollIntoView({ 
@@ -33,8 +36,11 @@ export default class extends Controller {
       })
       console.log('Scrolled to demo section')
     } else {
-      console.error('Demo section not found!')
+      console.error('Demo section NOT found!')
+      alert('Demo section not found!')
     }
+    
+    console.log('=== END RADAR CONTROLLER DEBUG ===')
   }
 
   disconnect() {
