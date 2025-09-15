@@ -2,7 +2,7 @@ module UuidIdentifiable
   extend ActiveSupport::Concern
 
   included do
-    before_create :generate_uuid
+    before_validation :generate_uuid, on: :create
     validates :uuid, presence: true, uniqueness: true
   end
 

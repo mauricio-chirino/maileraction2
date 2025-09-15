@@ -20,8 +20,8 @@ class User < ApplicationRecord
   has_many :prospects, dependent: :destroy
 
   # Callbacks para integración con n8n
-  after_create :notify_n8n_user_created
-  after_update :notify_n8n_user_confirmed, if: :saved_change_to_confirmed_at?
+  after_commit :notify_n8n_user_created, on: :create
+  after_commit :notify_n8n_user_confirmed, on: :update, if: :saved_change_to_confirmed_at?
 
   private
 
