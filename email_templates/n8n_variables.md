@@ -5,10 +5,10 @@
 Las siguientes variables deben ser reemplazadas en los templates de email:
 
 ### Variables del Usuario
-- `{{user_name}}` - Nombre del usuario (extraído del email)
-- `{{user_email}}` - Email del usuario
-- `{{user_website}}` - Sitio web de la empresa
-- `{{user_uuid}}` - UUID único del usuario
+- `{{name}}` - Nombre del usuario
+- `{{email}}` - Email del usuario
+- `{{website}}` - Sitio web de la empresa
+- `{{uuid}}` - UUID único del usuario
 - `{{registration_date}}` - Fecha de registro (formato legible)
 
 ### Variables del Sistema
@@ -28,6 +28,7 @@ Las siguientes variables deben ser reemplazadas en los templates de email:
 
 ```json
 {
+  "name": "Marco Chirino",
   "email": "mchirino@aniracloud.com",
   "website": "http://aniracloud.com",
   "user_uuid": "37ade7ab-b338-4380-8e9a-ae13f0efc34f",
@@ -40,29 +41,26 @@ Las siguientes variables deben ser reemplazadas en los templates de email:
 ## Configuración en n8n
 
 ### 1. Extraer Variables del Payload
-- `user_email` = `{{$json.email}}`
-- `user_website` = `{{$json.website}}`
-- `user_uuid` = `{{$json.user_uuid}}`
+- `name` = `{{$json.name}}`
+- `email` = `{{$json.email}}`
+- `website` = `{{$json.website}}`
+- `uuid` = `{{$json.user_uuid}}`
 - `confirmation_token` = `{{$json.confirmation_token}}`
 
 ### 2. Generar Variables Adicionales
-- `user_name` = Extraer nombre del email (antes del @)
 - `registration_date` = Formatear timestamp actual
 - `confirmation_url` = Construir URL completa con token
 
 ### 3. Configurar Email
 - **Asunto**: "Confirma tu cuenta - MailerAction"
 - **Remitente**: "MailerAction <noreply@maileraction.com>"
-- **Destinatario**: `{{user_email}}`
+- **Destinatario**: `{{email}}`
 - **Template HTML**: Usar confirmation_email.html
 - **Template Texto**: Usar confirmation_email.txt
 
 ## Ejemplo de Implementación en n8n
 
 ```javascript
-// Extraer nombre del email
-const user_name = $json.email.split('@')[0];
-
 // Generar URL de confirmación
 const confirmation_url = `https://maileraction.com/users/confirmation?confirmation_token=${$json.confirmation_token}`;
 
@@ -74,10 +72,10 @@ const registration_date = new Date().toLocaleDateString('es-ES', {
 });
 
 return {
-  user_name,
-  user_email: $json.email,
-  user_website: $json.website,
-  user_uuid: $json.user_uuid,
+  name: $json.name,
+  email: $json.email,
+  website: $json.website,
+  uuid: $json.user_uuid,
   confirmation_token: $json.confirmation_token,
   confirmation_url,
   registration_date,

@@ -1,16 +1,17 @@
 ¡BIENVENIDO A MAILERACTION!
 =====================================
 
-Hola {{user_name}},
+Hola {{name}},
 
 Gracias por registrarte en MailerAction. Para completar tu registro y acceder a todas nuestras funcionalidades de prospección inteligente, necesitas confirmar tu dirección de correo electrónico.
 
 📋 INFORMACIÓN DE TU CUENTA
 ----------------------------
-Email: {{user_email}}
-Sitio web: {{user_website}}
+Nombre: {{name}}
+Email: {{email}}
+Sitio web: {{website}}
 Fecha de registro: {{registration_date}}
-ID de usuario: {{user_uuid}}
+ID de usuario: {{uuid}}
 
 ✅ CONFIRMAR MI CUENTA
 ----------------------

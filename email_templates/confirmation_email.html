@@ -204,7 +204,7 @@
         <!-- Content -->
         <div class="content">
             <div class="greeting">
-                Hola {{user_name}},
+                Hola {{name}},
             </div>
             
             <div class="message">
@@ -215,12 +215,16 @@
             <div class="user-info">
                 <h3>📋 Información de tu cuenta</h3>
                 <div class="info-item">
+                    <span class="info-label">Nombre:</span>
+                    <span class="info-value">{{name}}</span>
+                </div>
+                <div class="info-item">
                     <span class="info-label">Email:</span>
-                    <span class="info-value">{{user_email}}</span>
+                    <span class="info-value">{{email}}</span>
                 </div>
                 <div class="info-item">
                     <span class="info-label">Sitio web:</span>
-                    <span class="info-value">{{user_website}}</span>
+                    <span class="info-value">{{website}}</span>
                 </div>
                 <div class="info-item">
                     <span class="info-label">Fecha de registro:</span>
@@ -228,7 +232,7 @@
                 </div>
                 <div class="info-item">
                     <span class="info-label">ID de usuario:</span>
-                    <span class="info-value">{{user_uuid}}</span>
+                    <span class="info-value">{{uuid}}</span>
                 </div>
             </div>
             

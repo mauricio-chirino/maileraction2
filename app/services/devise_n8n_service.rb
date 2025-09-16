@@ -10,6 +10,7 @@ class DeviseN8nService
       Rails.logger.info "=== DEVISE_N8N_SERVICE: CREATE_USER ==="
       
       payload = {
+        name: user_data[:name],
         email: user_data[:email],
         website: user_data[:website],
         password: user_data[:password],
@@ -39,14 +40,15 @@ class DeviseN8nService
     def resend_confirmation(user)
       Rails.logger.info "=== DEVISE_N8N_SERVICE: RESEND_CONFIRMATION ==="
       
-      payload = {
-        email: user.email,
-        website: user.website,
-        user_uuid: user.uuid,
-        confirmation_token: user.confirmation_token,
-        timestamp: Time.current.iso8601,
-        action: 'resend_confirmation'
-      }
+        payload = {
+          name: user.name,
+          email: user.email,
+          website: user.website,
+          user_uuid: user.uuid,
+          confirmation_token: user.confirmation_token,
+          timestamp: Time.current.iso8601,
+          action: 'resend_confirmation'
+        }
       
       send_to_n8n(payload, 'RESEND_CONFIRMATION')
     end
@@ -56,6 +58,7 @@ class DeviseN8nService
       Rails.logger.info "=== DEVISE_N8N_SERVICE: CONFIRM_EMAIL ==="
       
       payload = {
+        name: user.name,
         email: user.email,
         website: user.website,
         user_uuid: user.uuid,

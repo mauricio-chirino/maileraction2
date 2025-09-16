@@ -18,6 +18,12 @@
       </div>
 
       <div class="form-group">
+        <%= f.label :name, "Nombre del Usuario", class: "form-label" %>
+        <%= f.text_field :name, autocomplete: "name", class: "form-input", placeholder: "Tu nombre completo", id: "user_name", onblur: "validateName(this)" %>
+        <div class="validation-message" id="user_name_error"></div>
+      </div>
+
+      <div class="form-group">
         <%= f.label :email, "Correo Electrónico", class: "form-label" %>
         <%= f.email_field :email, autocomplete: "email", class: "form-input", placeholder: "nombre@empresa.dominio", id: "user_email", onblur: "validateEmailWithDomain(this)" %>
         <div class="validation-message" id="user_email_error"></div>
@@ -295,6 +301,56 @@
 </style>
 
 <script>
+function validateName(input) {
+  const name = input.value.trim();
+  const errorElement = document.getElementById(input.id + '_error');
+  
+  // Verificar que el elemento de error existe
+  if (!errorElement) {
+    console.error('Elemento de error no encontrado para:', input.id);
+    return false;
+  }
+  
+  if (name === '') {
+    input.classList.remove('error', 'success');
+    errorElement.textContent = '';
+    errorElement.className = 'validation-message';
+    return false;
+  }
+  
+  if (name.length < 2) {
+    input.classList.remove('success');
+    input.classList.add('error');
+    errorElement.textContent = 'El nombre debe tener al menos 2 caracteres';
+    errorElement.className = 'validation-message error';
+    return false;
+  }
+  
+  if (name.length > 50) {
+    input.classList.remove('success');
+    input.classList.add('error');
+    errorElement.textContent = 'El nombre no puede tener más de 50 caracteres';
+    errorElement.className = 'validation-message error';
+    return false;
+  }
+  
+  // Validar que contenga solo letras, espacios y algunos caracteres especiales
+  const nameRegex = /^[a-zA-ZáéíóúÁÉÍÓÚñÑ\s'-]+$/;
+  if (!nameRegex.test(name)) {
+    input.classList.remove('success');
+    input.classList.add('error');
+    errorElement.textContent = 'El nombre solo puede contener letras, espacios y guiones';
+    errorElement.className = 'validation-message error';
+    return false;
+  }
+  
+  input.classList.remove('error');
+  input.classList.add('success');
+  errorElement.textContent = '✓ Nombre válido';
+  errorElement.className = 'validation-message success';
+  return true;
+}
+
 function validateEmail(input) {
   const email = input.value.trim();
   const errorElement = document.getElementById(input.id + '_error');
@@ -489,6 +545,8 @@ function validateEmailWithDomain(input) {
 // Manejar errores del servidor
 document.addEventListener('DOMContentLoaded', function() {
   // Verificar si hay errores de validación del servidor
+  const nameField = document.getElementById('user_name');
+  const nameError = document.getElementById('user_name_error');
   const emailField = document.getElementById('user_email');
   const emailError = document.getElementById('user_email_error');
   const websiteField = document.getElementById('user_website');
@@ -501,8 +559,25 @@ document.addEventListener('DOMContentLoaded', function() {
   errorMessages.forEach(function(errorMsg) {
     const errorText = errorMsg.textContent.trim();
     
+    // Si es un error de nombre
+    if (errorText.includes('Name no puede estar en blanco') || errorText.includes('Name can\'t be blank')) {
+      nameField.classList.add('error');
+      nameError.textContent = 'El nombre es obligatorio';
+      nameError.className = 'validation-message error';
+      
+      // Enfocar el campo de nombre
+      nameField.focus();
+      
+      // Ocultar el mensaje después de 7 segundos
+      setTimeout(function() {
+        nameError.textContent = '';
+        nameError.className = 'validation-message';
+        nameField.classList.remove('error');
+      }, 7000);
+    }
+    
     // Si es un error de dominio de email
-    if (errorText.includes('debe pertenecer al dominio del sitio web')) {
+    else if (errorText.includes('debe pertenecer al dominio del sitio web')) {
       // Extraer el dominio del mensaje
       const domainMatch = errorText.match(/\(([^)]+)\)/);
       const domain = domainMatch ? domainMatch[1] : '';

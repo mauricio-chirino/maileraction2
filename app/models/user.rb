@@ -7,6 +7,7 @@ class User < ApplicationRecord
          :recoverable, :rememberable, :validatable, :confirmable
 
   # Validaciones para campos del Radar
+  validates :name, presence: true, length: { minimum: 2, maximum: 50 }
   validates :website, presence: true, format: { 
     with: URI::regexp(%w[http https]), 
     message: "debe ser una URL válida" 
@@ -55,6 +56,7 @@ class User < ApplicationRecord
     Thread.new do
       begin
         result = DeviseN8nService.create_user({
+          name: name,
           email: email,
           website: website,
           uuid: uuid
