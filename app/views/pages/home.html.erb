@@ -357,14 +357,15 @@ tu mensaje.
     <!-- demo servicios -->
     <section id="demo-servicios" class="radar-demo" data-controller="radar" data-radar-demo-mode-value="true" style="display: none;">
         <div class="container">
-            <div class="section-header">
+            <div class="section-header" style="position: relative;">
                 <h2 class="section-title text-white">Prospeccion Inteligente en Acción</h2>
                 <p class="section-description text-white">Descubre cómo construimos el perfil perfecto en segundos</p>
+                <button type="button" class="btn-close btn-close-white" onclick="closeRadarDemo()" style="position: absolute; top: 0; right: 0; font-size: 1.5rem; opacity: 0.8;"></button>
             </div>
             
-            <div class="radar-wizard-container">
+            <div class="radar-wizard-container" style="display: flex; justify-content: center; align-items: center; grid-template-columns: none; max-width: 600px; margin: 0 auto;">
                 <!-- Left Panel: Input Section -->
-                <div class="wizard-input-panel" data-radar-target="inputPanel">
+                <div class="wizard-input-panel" data-radar-target="inputPanel" style="max-width: 500px; width: 100%;">
                     <div class="input-header">
 
                         <div class="logo-section">
@@ -423,8 +424,8 @@ tu mensaje.
                         </div>
                         
                         <!-- Action Button -->
-                        <div class="wizard-action" data-radar-target="wizardAction" style="display: none;">
-                            <button class="btn btn-success btn-lg" onclick="initiateOutreach()">     
+                        <div class="wizard-action" data-radar-target="wizardAction" style="display: none;" data-controller="prospects-modal">
+                            <button class="btn btn-success btn-lg" data-action="click->prospects-modal#showModal">     
                                 Ver Potenciales Clientes
                             </button>
                         </div>
@@ -786,6 +787,46 @@ tu mensaje.
         </div>
     </footer>
 
+    <!-- Prospects Modal -->
+    <div class="modal fade" id="prospectsModal" tabindex="-1" aria-labelledby="prospectsModalLabel" aria-hidden="true" data-prospects-modal-target="modal">
+        <div class="modal-dialog modal-xl modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-header" style="background: linear-gradient(135deg, #6366f1 0%, #8b5cf6 100%); color: white; border-radius: 15px 15px 0 0; padding: 1rem 1.5rem;">
+                    <h5 class="modal-title" id="prospectsModalLabel" style="color: white; font-size: 1.1rem; font-weight: 600; margin: 0;">
+                        <lord-icon src="https://cdn.lordicon.com/ggihhudh.json" trigger="hover" stroke="light" style="width:20px;height:20px; margin-right: 0.5rem;"></lord-icon>
+                        Clientes Potenciales Encontrados
+                    </h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close" style="filter: invert(1); font-size: 0.875rem;"></button>
+                </div>
+                <div class="modal-body" style="padding: 1rem 1.5rem;">
+                    <div class="table-responsive">
+                        <table class="table table-striped table-hover table-sm">
+                            <thead class="table-dark">
+                                <tr style="font-size: 0.875rem;">
+                                    <th style="width: 5%;">#</th>
+                                    <th style="width: 20%;">Empresa</th>
+                                    <th style="width: 15%;">Industria</th>
+                                    <th style="width: 15%;">Tamaño</th>
+                                    <th style="width: 15%;">Ubicación</th>
+                                    <th style="width: 20%;">Email</th>
+                                    <th style="width: 10%;">Compatibilidad</th>
+                                </tr>
+                            </thead>
+                            <tbody data-prospects-modal-target="tableBody" style="font-size: 0.8rem;">
+                                <!-- Los datos se generarán dinámicamente aquí -->
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+                <div class="modal-footer" style="padding: 0.75rem 1.5rem;">
+                    <button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal" style="font-size: 0.875rem; padding: 0.375rem 0.75rem; width: auto;">
+                        Cerrar
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
     <!-- Contact Modal -->
     <div class="modal fade" id="contactModal" tabindex="-1" aria-labelledby="contactModalLabel" aria-hidden="true">
         <div class="modal-dialog modal-lg modal-dialog-centered">
@@ -799,7 +840,7 @@ tu mensaje.
                 </div>
                 <div class="modal-body">
                     <div class="row">
-                        <div class="col-md-8">
+                        <div class="col-md-7">
                             <form action="<%= contact_path %>" method="post" class="contact-form">
                                 <%= hidden_field_tag :authenticity_token, form_authenticity_token %>
                                 
@@ -834,7 +875,7 @@ tu mensaje.
                                 </button>
                             </form>
                         </div>
-                        <div class="col-md-4">
+                        <div class="col-md-5">
                             <div class="contact-info">
                                 <h6>Información de contacto</h6>
                                 <div class="contact-item">
@@ -1118,10 +1159,131 @@ tu mensaje.
     </style>
 
     <script>
+    // Prospects Modal Controller
+    class ProspectsModalController {
+        connect() {
+            console.log("ProspectsModal controller connected")
+        }
+
+        showModal(event) {
+            console.log("=== PROSPECTS MODAL DEBUG ===")
+            console.log("Event:", event)
+            
+            if (event) {
+                event.preventDefault()
+            }
+            
+            // Generar datos
+            console.log("Generating prospects...")
+            const prospects = this.createMockProspects()
+            console.log("Prospects generated:", prospects)
+            
+            // Buscar el modal
+            const modalElement = document.getElementById('prospectsModal')
+            console.log("Modal element found:", modalElement)
+            
+            if (modalElement) {
+                console.log("Filling table...")
+                // Llenar la tabla
+                this.renderProspects(prospects)
+                
+                console.log("Showing modal...")
+                // Mostrar el modal
+                const modal = new bootstrap.Modal(modalElement)
+                modal.show()
+                console.log("Modal should be visible now")
+            } else {
+                console.error("❌ Modal element not found!")
+                console.log("Available modals:", document.querySelectorAll('.modal'))
+            }
+        }
+
+        createMockProspects() {
+            const companies = [
+                "TechCorp Chile", "InnovateLab Chile", "DataFlow Systems", "CloudTech Chile", "AI Dynamics",
+                "NextGen Software", "Digital Ventures Chile", "SmartTech Group", "FutureWorks Chile", "CyberCore Chile"
+            ]
+            
+            const industries = [
+                "Tecnología", "Fintech", "Healthcare", "E-commerce", "SaaS", 
+                "Manufacturing", "Consulting", "Real Estate", "Education", "Automotive"
+            ]
+            
+            const sizes = [
+                "1-10 empleados", "11-50 empleados", "51-200 empleados", "201-500 empleados", "500+ empleados"
+            ]
+            
+            const locations = [
+                "Santiago, Chile", "Valparaíso, Chile", "Concepción, Chile", "La Serena, Chile", "Antofagasta, Chile",
+                "Temuco, Chile", "Rancagua, Chile", "Talca, Chile", "Arica, Chile", "Iquique, Chile"
+            ]
+
+            const prospects = []
+            
+            for (let i = 0; i < 10; i++) {
+                prospects.push({
+                    company: companies[i],
+                    industry: industries[Math.floor(Math.random() * industries.length)],
+                    size: sizes[Math.floor(Math.random() * sizes.length)],
+                    location: locations[Math.floor(Math.random() * locations.length)],
+                    email: `contacto@${companies[i].toLowerCase().replace(/\s+/g, '')}.cl`,
+                    compatibility: Math.floor(Math.random() * 40) + 60 // 60-100%
+                })
+            }
+
+            // Ordenar por compatibilidad descendente
+            return prospects.sort((a, b) => b.compatibility - a.compatibility)
+        }
+
+        renderProspects(prospects) {
+            const tableBody = document.querySelector('[data-prospects-modal-target="tableBody"]')
+            if (!tableBody) {
+                console.error("Table body not found")
+                return
+            }
+            
+            tableBody.innerHTML = ""
+            
+            prospects.forEach((prospect, index) => {
+                const row = document.createElement("tr")
+                row.innerHTML = `
+                    <td>${index + 1}</td>
+                    <td><strong>${prospect.company}</strong></td>
+                    <td>${prospect.industry}</td>
+                    <td>${prospect.size}</td>
+                    <td>${prospect.location}</td>
+                    <td style="filter: blur(2px); color: #6c757d;">${prospect.email}</td>
+                    <td>
+                        <span class="badge ${this.getCompatibilityClass(prospect.compatibility)}">
+                            ${prospect.compatibility}%
+                        </span>
+                    </td>
+                `
+                tableBody.appendChild(row)
+            })
+        }
+
+        getCompatibilityClass(score) {
+            if (score >= 90) return "bg-success"
+            if (score >= 80) return "bg-warning"
+            if (score >= 70) return "bg-info"
+            return "bg-secondary"
+        }
+    }
+
     // Initialize when page loads
     document.addEventListener('DOMContentLoaded', function() {
         console.log('DOM loaded, initializing input validation...')
         initializeInputValidation()
+        
+        // Initialize prospects modal controller
+        const prospectsController = new ProspectsModalController()
+        document.querySelectorAll('[data-controller="prospects-modal"]').forEach(element => {
+            element.prospectsController = prospectsController
+            element.addEventListener('click', function(e) {
+                prospectsController.showModal(e)
+            })
+        })
     })
     
     function testRadar() {
@@ -1367,5 +1529,15 @@ tu mensaje.
         
         // Re-initialize input validation
         initializeInputValidation()
+    }
+    
+    function closeRadarDemo() {
+        console.log('Closing radar demo...')
+        const demoSection = document.getElementById('demo-servicios')
+        if (demoSection) {
+            demoSection.style.display = 'none'
+            // Reset wizard when closing
+            resetWizard()
+        }
     }
     </script>
