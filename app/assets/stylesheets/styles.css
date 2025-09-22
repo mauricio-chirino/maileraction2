@@ -591,7 +591,7 @@
         }
 
         .result-number {
-            font-size: 3.5rem;
+            font-size: 2.5rem;
             font-weight: 900;
             background: linear-gradient(135deg, #667eea 0%, #764ba2 50%, #f093fb 100%);
             -webkit-background-clip: text;
