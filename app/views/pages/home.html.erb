@@ -355,43 +355,46 @@ tu mensaje.
     </section>
 
     <!-- demo servicios -->
-    <section id="demo-servicios" class="radar-demo" data-controller="radar" data-radar-demo-mode-value="true" style="display: none;">
+    <section id="demo-servicios" class="radar-demo" data-controller="radar" data-radar-demo-mode-value="true" style="display: none; background: linear-gradient(135deg, #f8fafc 0%, #e2e8f0 100%); color: #1e293b;">
         <div class="container">
             <div class="section-header" style="position: relative;">
-                <h2 class="section-title text-white">Prospeccion Inteligente en Acción</h2>
-                <p class="section-description text-white">Descubre cómo construimos el perfil perfecto en segundos</p>
-                <button type="button" class="btn-close btn-close-white" onclick="closeRadarDemo()" style="position: absolute; top: 0; right: 0; font-size: 1.5rem; opacity: 0.8;"></button>
+                <h2 class="section-title" style="color: #1e293b;">Prospeccion Inteligente en Acción</h2>
+                <p class="section-description" style="color: #64748b;">Descubre cómo construimos el perfil perfecto en segundos</p>
+                <button type="button" class="btn-close" onclick="closeRadarDemo()" style="position: absolute; top: 0; right: 0; font-size: 1.5rem; opacity: 0.8; color: #6c757d;"></button>
             </div>
             
             <div class="radar-wizard-container" style="display: flex; justify-content: center; align-items: center; grid-template-columns: none; max-width: 600px; margin: 0 auto;">
                 <!-- Left Panel: Input Section -->
-                <div class="wizard-input-panel" data-radar-target="inputPanel" style="max-width: 500px; width: 100%;">
+                <div class="wizard-input-panel" data-radar-target="inputPanel" style="max-width: 500px; width: 100%; background: white; color: #1e293b; padding: 2rem; border-radius: 15px; box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);">
                     <div class="input-header">
 
                         <div class="logo-section">
                             <lord-icon src="https://cdn.lordicon.com/vgxjrbxm.json" trigger="loop" delay="2000" stroke="bold" style="width:40px;height:40px"></lord-icon>
-                            <h3>MailerAction</h3>
+                            <h3 style="color: #1e293b;">MailerAction</h3>
                         </div>
                     </div>
                     
                     <div class="input-content">
-                        <label class="input-label">RUBRO O INDUSTRIA</label>
+                        <label class="input-label" style="color: #1e293b;">RUBRO O INDUSTRIA</label>
                         <input type="text" 
                                class="wizard-input" 
                                placeholder="Ej: Tecnología, Salud, Finanzas..."
                                data-radar-target="industryInput"
-                               data-action="keyup->radar#validateInput">
-                        <button class="wizard-search-btn" 
+                               data-action="keyup->radar#validateInput"
+                               style="background-color: #f8fafc; color: #1e293b; border: 2px solid #e2e8f0; border-radius: 8px; padding: 0.75rem 1rem; font-size: 1rem; width: 100%;">
+                        <button class="btn btn-primary mt-3" 
                                 data-action="click->radar#startWizard"
                                 data-radar-target="searchBtn"
+                                data-effects-target="button"
                                 disabled>
+                            <lord-icon src="https://cdn.lordicon.com/ggihhudh.json" trigger="loop" delay="2000" stroke="light" style="width:20px;height:20px"></lord-icon>
                             Buscar
                         </button>
                     </div>
                 </div>
                 
                 <!-- Right Panel: Progress Bar -->
-                <div class="wizard-steps-panel" data-radar-target="stepsPanel" style="display: none;">
+                <div class="wizard-steps-panel" data-radar-target="stepsPanel" style="display: none; background: #e2e8f0; padding: 2rem; border-radius: 15px; box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);">
                     <div class="wizard-header">
                         <h3>Proceso de Construcción del Perfil</h3>
                         <p>Escaneando prospectos en <span data-radar-target="industryDisplay"></span></p>
@@ -400,32 +403,33 @@ tu mensaje.
                     <div class="wizard-progress-container">
                         <!-- Progress Bar -->
                         <div class="progress mb-4" role="progressbar" aria-label="Progreso del Radar" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100" data-radar-target="progressBar">
-                            <div class="progress-bar progress-bar-striped progress-bar-animated" style="width: 0%" data-radar-target="progressFill"></div>
+                            <div class="progress-bar progress-bar-striped progress-bar-animated bg-primary" style="width: 0%; background: linear-gradient(135deg, var(--primary-color) 0%, var(--secondary-color) 100%) !important;" data-radar-target="progressFill"></div>
                         </div>
                         
                         <!-- Current Step Info -->
-                        <div class="current-step-info" data-radar-target="currentStepInfo">
+                        <div class="current-step-info" data-radar-target="currentStepInfo" style="background: rgba(255, 255, 255, 0.2);">
                             <div class="step-icon" data-radar-target="stepIcon">
                                 <lord-icon src="https://cdn.lordicon.com/dxjqoygy.json" trigger="loop" delay="2000" stroke="light" style="width:40px;height:40px"></lord-icon>
                             </div>
                             <div class="step-details">
-                                <h4 class="step-title" data-radar-target="stepTitle">Iniciando proceso...</h4>
-                                <p class="step-description" data-radar-target="stepDescription">Preparando el análisis de prospectos</p>
+                                <h4 class="step-title" data-radar-target="stepTitle" style="color: #484a4c;">Iniciando proceso...</h4>
+                                <p class="step-description" data-radar-target="stepDescription" style="color: #696e72;">Preparando el análisis de prospectos</p>
                             </div>
                         </div>
                         
                         <!-- Step Labels -->
                         <div class="step-labels">
-                            <div class="step-label" data-radar-target="stepLabel1">Perfil inicial</div>
-                            <div class="step-label" data-radar-target="stepLabel2">Contexto inteligente</div>
-                            <div class="step-label" data-radar-target="stepLabel3">Empatia</div>
-                            <div class="step-label" data-radar-target="stepLabel4">Validación</div>
-                            <div class="step-label" data-radar-target="stepLabel5">Contactar</div>
+                            <div class="step-label" data-radar-target="stepLabel1" style="color: black;">Perfil inicial</div>
+                            <div class="step-label" data-radar-target="stepLabel2" style="color: black;">Contexto inteligente</div>
+                            <div class="step-label" data-radar-target="stepLabel3" style="color: black;">Empatia</div>
+                            <div class="step-label" data-radar-target="stepLabel4" style="color: black;">Validación</div>
+                            <div class="step-label" data-radar-target="stepLabel5" style="color: black;">Contactar</div>
                         </div>
                         
                         <!-- Action Button -->
                         <div class="wizard-action" data-radar-target="wizardAction" style="display: none;" data-controller="prospects-modal">
-                            <button class="btn btn-success btn-lg" data-action="click->prospects-modal#showModal">     
+                            <button class="btn btn-primary mt-3" data-action="click->prospects-modal#showModal" data-effects-target="button">
+                                <lord-icon src="https://cdn.lordicon.com/ggihhudh.json" trigger="loop" delay="2000" stroke="light" style="width:20px;height:20px"></lord-icon>
                                 Ver Potenciales Clientes
                             </button>
                         </div>
@@ -434,7 +438,7 @@ tu mensaje.
             </div>
             
             <div class="radar-actions">
-                <button class="btn btn-outline-secondary btn-lg" data-bs-toggle="modal" data-bs-target="#contactModal" style="color: white;">
+                <button class="btn btn-outline-secondary btn-lg" data-bs-toggle="modal" data-bs-target="#contactModal" style="color: black;">
                     
                     Solicitar Demo Personalizado
                 </button>
@@ -514,7 +518,7 @@ tu mensaje.
     style="width:60px;height:60px">
 </lord-icon>
                     </div>
-                    <div class="result-number">500M+</div>
+                    <div class="result-number">500M</div>
                     <div class="result-label">Perfiles Analizados</div>
                     <p class="result-description">
                         Más de 500 millones de perfiles procesados por nuestros 
@@ -1155,6 +1159,19 @@ tu mensaje.
             padding: 12px 16px;
             font-size: 13px;
         }
+    }
+    </style>
+
+    <style>
+    .wizard-input::placeholder {
+        color: #94a3b8 !important;
+        opacity: 1;
+    }
+    
+    .wizard-input:focus {
+        outline: none;
+        border-color: #6366f1 !important;
+        box-shadow: 0 0 0 3px rgba(99, 102, 241, 0.1);
     }
     </style>
 
