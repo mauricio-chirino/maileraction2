@@ -53,7 +53,11 @@ class DeviseIntegrationController < ApplicationController
         render json: { 
           success: true, 
           message: 'Usuario creado exitosamente',
-          data: JSON.parse(response.body) rescue response.body
+          data: begin
+            JSON.parse(response.body)
+          rescue
+            response.body
+          end
         }
       else
         Rails.logger.error "Error en n8n: #{response.code} - #{response.body}"
@@ -121,7 +125,11 @@ class DeviseIntegrationController < ApplicationController
         render json: { 
           success: true, 
           message: 'Instrucciones de reset enviadas',
-          data: JSON.parse(response.body) rescue response.body
+          data: begin
+            JSON.parse(response.body)
+          rescue
+            response.body
+          end
         }
       else
         Rails.logger.error "Error en n8n: #{response.code} - #{response.body}"
@@ -189,7 +197,11 @@ class DeviseIntegrationController < ApplicationController
         render json: { 
           success: true, 
           message: 'Instrucciones de confirmación reenviadas',
-          data: JSON.parse(response.body) rescue response.body
+          data: begin
+            JSON.parse(response.body)
+          rescue
+            response.body
+          end
         }
       else
         Rails.logger.error "Error en n8n: #{response.code} - #{response.body}"
