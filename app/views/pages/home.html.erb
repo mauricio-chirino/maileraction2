@@ -34,7 +34,9 @@
                                     <li><%= link_to "Mi Perfil", edit_user_registration_path, class: "dropdown-item" %></li>
                                     <li><hr class="dropdown-divider"></li>
                                     <li>
-                                        <%= button_to "Cerrar Sesión", destroy_user_session_path, method: :delete, class: "dropdown-item border-0 bg-transparent w-100 text-start", style: "padding: 0.5rem 1rem;" %>
+                                        <%= form_with url: destroy_user_session_path, method: :delete, local: true, class: "d-inline" do |form| %>
+                                            <%= form.submit "Cerrar Sesión", class: "dropdown-item border-0 bg-transparent w-100 text-start", style: "padding: 0.5rem 1rem; cursor: pointer;" %>
+                                        <% end %>
                                     </li>
                                 </ul>
                             </li>
