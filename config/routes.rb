@@ -19,6 +19,7 @@ Rails.application.routes.draw do
   # Contact form routes
   get "contact" => "pages#contact"
   post "contact" => "pages#submit_contact"
+  post "submit_contact" => "pages#submit_contact"
   
   # Resource routes with UUID support
   resources :campaigns, param: :uuid
