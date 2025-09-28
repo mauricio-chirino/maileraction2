@@ -7,7 +7,7 @@
     
     <div class="contact-content">
       <div class="contact-form-container">
-        <form action="<%= contact_path %>" method="post" class="contact-form" id="contactForm" data-controller="contact" data-contact-target="form">
+        <form action="/submit_contact" method="post" class="contact-form" id="contactForm" data-controller="contact" data-contact-target="form">
           <%= hidden_field_tag :authenticity_token, form_authenticity_token %>
           
           <!-- Success/Error Messages -->
