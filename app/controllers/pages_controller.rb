@@ -32,21 +32,14 @@ class PagesController < ApplicationController
 
     # Enviar a n8n webhook
     begin
-      Rails.logger.info "=== GENERANDO TOKEN JWT ==="
-      # Generar token JWT compatible con la validación existente de n8n
-      token = JwtService.generate_n8n_token
-      Rails.logger.info "Token generado exitosamente"
-      
       Rails.logger.info "=== ENVIANDO A N8N ==="
-      Rails.logger.info "Token: #{token}"
       Rails.logger.info "Datos: #{contact_data.to_json}"
       
       response = HTTParty.post(
         'https://n8n.aniracloud.com/n8n/webhook/submit/7b9e1f4a-3c2d-4e6f-9a1d-8f2c3e7a9d1b',
         body: contact_data.to_json,
         headers: { 
-          'Content-Type' => 'application/json',
-          'Authorization' => "Bearer #{token}"
+          'Content-Type' => 'application/json'
         }
       )
       
